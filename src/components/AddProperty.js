@@ -230,7 +230,7 @@ const AddProperty = ({ onAddProperty }) => {
           <div className="flex flex-col">
           <label className="font-semibold text-gray-600 mb-2">deposit:</label>
           <input
-            type="text"
+            type="number"
             name="deposit"
             value={property.deposit}
             onChange={handleChange}
