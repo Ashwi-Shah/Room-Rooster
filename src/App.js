@@ -196,7 +196,6 @@ import Footer from './components/Footer';
 import AddProperty from './components/AddProperty';
 import Signup from './components/Signup'; 
 import Login from './components/Login';
-// import NotFound from './components/NotFound';
 import './tailwind.css';
 
 const App = () => {
@@ -228,6 +227,11 @@ const App = () => {
     fetchProperties();
   }, []);
 
+  const handleSignup = () => {
+    setIsAuthenticated(true);
+    setName("User"); // You can set the user's name based on the signup response
+  };
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
@@ -253,9 +257,8 @@ const App = () => {
             <Route path="/contact" element={<ScrollingSection />} />
             <Route path="/service" element={<ScrollingSection />} />
             <Route path="/add-property" element={<AddProperty />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
             <Route path="/login" element={<Login />} />
-            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </main>
       </div>

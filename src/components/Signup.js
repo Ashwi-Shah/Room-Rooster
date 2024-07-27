@@ -108,7 +108,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = ({ onSignup }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -134,29 +134,30 @@ const Signup = () => {
     e.preventDefault();
     const { name, email, password } = formData;
     let formErrors = {};
-  
+
     if (!name) formErrors.name = 'Name is required';
     if (!email) formErrors.email = 'Email is required';
     else if (!validateEmail(email)) formErrors.email = 'Invalid email address';
     if (!password) formErrors.password = 'Password is required';
-  
+
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
-  
+
     try {
-      const response = await fetch('https://room-rooster.vercel.app/register', { // Ensure the URL is correct
-        method: 'POST', // Correct method
+      const response = await fetch('https://room-rooster.vercel.app/register', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-  
+
       if (response.ok) {
         const responseData = await response.json();
         console.log('Signup successful:', responseData);
+        if (onSignup) onSignup(); // Call the onSignup prop function if provided
         navigate('/'); // Redirect on success
       } else {
         console.error('Failed to signup:', response.statusText);
@@ -167,7 +168,6 @@ const Signup = () => {
       setErrors({ general: 'An unexpected error occurred. Please try again.' });
     }
   };
-  
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10">
