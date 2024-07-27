@@ -1,14 +1,21 @@
+// Signup.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
-    confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  const validateEmail = (email) => {
+    // Simple email validation regex
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,65 +25,54 @@ const Signup = () => {
     });
   };
 
-  const validateForm = () => {
-    const { email, password, confirmPassword } = formData;
-    const errors = {};
-
-    if (!email) {
-      errors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = 'Email address is invalid';
-    }
-
-    if (!password) {
-      errors.password = 'Password is required';
-    } else if (password.length < 6) {
-      errors.password = 'Password must be at least 6 characters';
-    }
-
-    if (password !== confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match';
-    }
-
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    const { name, email, password } = formData;
+    let formErrors = {};
+
+    if (!name) formErrors.name = 'Name is required';
+    if (!email) formErrors.email = 'Email is required';
+    else if (!validateEmail(email)) formErrors.email = 'Invalid email address';
+    if (!password) formErrors.password = 'Password is required';
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
 
     try {
       const response = await fetch('https://room-rooster.vercel.app/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        navigate('/login'); // Redirect to login page on successful signup
+        navigate('/'); // Redirect to home on success
       } else {
-        console.error('Error signing up:', response.statusText);
+        console.error('Failed to signup');
       }
     } catch (error) {
-      console.error('Error signing up:', error);
+      console.error('Error:', error);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
-      <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+    <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10">
+      <h2 className="text-2xl font-bold text-gray-700 mb-6 text-center">Sign Up</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">name:</label>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Name:</label>
           <input
-            type="name"
+            type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`p-3 border border-gray-300 rounded-md `}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
         </div>
         <div className="flex flex-col">
           <label className="font-semibold text-gray-600 mb-2">Email:</label>
@@ -85,9 +81,9 @@ const Signup = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`p-3 border border-gray-300 rounded-md ${errors.email ? 'border-red-500' : ''}`}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
         </div>
         <div className="flex flex-col">
           <label className="font-semibold text-gray-600 mb-2">Password:</label>
@@ -96,11 +92,11 @@ const Signup = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className={`p-3 border border-gray-300 rounded-md ${errors.password ? 'border-red-500' : ''}`}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
-          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
         </div>
-        <button type="submit" className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
+        <button type="submit" className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800">
           Sign Up
         </button>
       </form>
