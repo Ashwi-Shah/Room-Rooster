@@ -118,7 +118,6 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    // Simple email validation regex
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
@@ -147,7 +146,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch('/register', { // Use relative path
+      const response = await fetch('https://room-rooster.vercel.app/register', { // Ensure correct endpoint
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -155,18 +154,15 @@ const Signup = () => {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Signup successful:', responseData);
+        navigate('/'); // Redirect to home on success
+      } else {
         const errorData = await response.json();
         console.error('Failed to signup:', errorData);
         setErrors({ general: 'Failed to sign up. Please try again.' });
-        return;
       }
-
-      // Optionally handle response data
-      const responseData = await response.json();
-      console.log('Signup successful:', responseData);
-
-      navigate('/'); // Redirect to home on success
     } catch (error) {
       console.error('Error:', error);
       setErrors({ general: 'An unexpected error occurred. Please try again.' });
