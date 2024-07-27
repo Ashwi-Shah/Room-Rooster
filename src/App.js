@@ -115,8 +115,8 @@ import PropertyTypes from './components/PropertyTypes';
 import PropertyListing from './components/PropertyListing';
 import Footer from './components/Footer';
 import AddProperty from './components/AddProperty';
-// import Signup from './components/Signup'; 
-// import Login from './components/Login';
+import Signup from './components/Signup'; 
+import Login from './components/Login';
 // import NotFound from './components/NotFound';
 import './tailwind.css';
 
@@ -174,9 +174,9 @@ const App = () => {
             <Route path="/contact" element={<ScrollingSection />} />
             <Route path="/service" element={<ScrollingSection />} />
             <Route path="/add-property" element={<AddProperty />} />
-            {/* <Route path="/signup" element={<Signup />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="*" element={<NotFound />} /> */}
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </main>
       </div>
