@@ -107,8 +107,9 @@
 // export default Signup;
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from '../axios'; // Import the axios instance
 
-const Signup = ({ onSignup }) => {
+const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -146,27 +147,16 @@ const Signup = ({ onSignup }) => {
     }
 
     try {
-      const response = await fetch('https://room-rooster.vercel.app/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-        mode: 'cors'
-      });
+      const response = await axios.post('/register', formData);
 
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('Signup successful:', responseData);
-        if (onSignup) onSignup(); // Call the onSignup prop function if provided
-        navigate('/'); // Redirect on success
+      if (response.status === 200) {
+        navigate('/'); // Redirect to home on success
       } else {
-        console.error('Failed to signup:', response.statusText);
-        setErrors({ general: 'Failed to sign up. Please try again.' });
+        console.error('Failed to signup');
       }
     } catch (error) {
-      console.error('Error:', error);
-      setErrors({ general: 'An unexpected error occurred. Please try again.' });
+      console.error('Error:', error.response ? error.response.data : error.message);
+      setErrors({ general: 'Failed to signup. Please try again later.' });
     }
   };
 
