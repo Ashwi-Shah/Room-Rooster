@@ -147,7 +147,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch('https://room-rooster.vercel.app/register', {
+      const response = await fetch('/register', { // Use relative path
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
