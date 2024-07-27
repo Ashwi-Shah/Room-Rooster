@@ -7,7 +7,13 @@ const PropertyListing = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/details`);
+                const response = await fetch('https://room-rooster.vercel.app/details', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    mode: 'cors',
+                });
                 if (response.ok) {
                     const data = await response.json();
                     setDetails(data);
@@ -17,7 +23,7 @@ const PropertyListing = () => {
             } catch (error) {
                 console.error("Error fetching properties:", error);
             }
-        };
+        };        
         
 
         fetchProperties();
