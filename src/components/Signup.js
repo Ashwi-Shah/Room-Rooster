@@ -146,7 +146,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch('https://room-rooster.vercel.app/register', { // Ensure correct endpoint
+      const response = await fetch('16', { // Ensure correct endpoint
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
