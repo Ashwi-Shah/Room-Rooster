@@ -17,8 +17,8 @@ const AddProperty = ({ onAddProperty }) => {
     Perferredfor: "",
     ageofconstruction: "",
     info: "",
-    Availability:"",
-    deposit:""
+    Availability: "",
+    deposit: ""
   });
 
   const navigate = useNavigate();
@@ -60,8 +60,6 @@ const AddProperty = ({ onAddProperty }) => {
       formData.append(key, property[key]);
     });
 
-    console.log("Submitting form with data:", Array.from(formData.entries()));
-
     try {
       const response = await fetch("https://room-rooster.vercel.app/details", {
         method: "POST",
@@ -71,13 +69,17 @@ const AddProperty = ({ onAddProperty }) => {
       if (response.ok) {
         const newProperty = await response.json();
         console.log("Property added successfully:", newProperty);
-        onAddProperty(newProperty);
-        navigate("/"); // Navigate back to home page after adding property
+        if (onAddProperty) {
+          onAddProperty(newProperty);
+        }
+        navigate("/"); // Redirect to home page after adding property
       } else {
         console.error("Error adding property:", response.statusText);
+        // Optionally handle unsuccessful responses here
       }
     } catch (error) {
       console.error("Error adding property:", error);
+      // Optionally handle errors here
     }
   };
   return (
