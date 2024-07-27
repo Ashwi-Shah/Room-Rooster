@@ -2,3 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+.animate__fadeInSlow {
+    animation-duration: 4s; /* Change the duration as needed */
+  }
+
+  .animate__fadeInSlower {
+    animation-duration: 3s; /* Change the duration as needed */
+  }
+
+.underline-from-center {
+    @apply relative overflow-hidden;
+  }
+  
+  .underline-from-center::after {
+    content: '';
+    @apply absolute w-0 h-0.5 bottom-0 left-1/2 bg-[#F0ECE3] transition-all duration-300 ease-out;
+  }
+  
+  .underline-from-center:hover::after {
+    @apply w-full left-0 bg-[#C7B198];
+  }
