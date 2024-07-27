@@ -143,12 +143,12 @@ const CustomNavbar = ({ isAuthenticated, setIsAuthenticated, name }) => {
                         <img className="w-8 h-8" src="/img/icon-deal.png" alt="Icon" />
                     </Link>
                 </div>
-                <div className="hidden xl:flex flex-grow justify-end items-center space-x-6 font-serif xl2:flex xl2:space-x-6">
+                <div className="hidden xl:flex flex-grow justify-end items-center space-x-6 font-serif">
                     <Link to="/" className="text-[#F0ECE3] text-lg uppercase font-semibold underline-from-center hover:text-[#C7B198]">Home</Link>
                     <Link to="/about" className="text-[#F0ECE3] text-lg uppercase font-semibold underline-from-center hover:text-[#C7B198]">About</Link>
                     <Link to="/contact" className="text-[#F0ECE3] text-lg uppercase font-semibold underline-from-center hover:text-[#C7B198]">Contact</Link>
                     <Link to="/service" className="text-[#F0ECE3] text-lg uppercase font-semibold underline-from-center hover:text-[#C7B198]">Service</Link>
-                    <Link to="/add-property" className="hidden xl:flex text-[#F0ECE3] bg-[#596E79] px-4 py-2 rounded-lg text-xl hover:bg-[#F0ECE3] hover:text-[#596E79] transition duration-300">Add Property</Link>
+                    <Link to="/add-property" className="text-[#F0ECE3] bg-[#596E79] px-4 py-2 rounded-lg text-xl hover:bg-[#F0ECE3] hover:text-[#596E79] transition duration-300">Add Property</Link>
                 </div>
                 <div className="relative flex items-center space-x-4">
                     <button  
