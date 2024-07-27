@@ -67,6 +67,17 @@ const Signup = () => {
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
       <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">name:</label>
+          <input
+            type="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className={`p-3 border border-gray-300 rounded-md `}
+          />
+          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+        </div>
         <div className="flex flex-col">
           <label className="font-semibold text-gray-600 mb-2">Email:</label>
           <input
@@ -88,17 +99,6 @@ const Signup = () => {
             className={`p-3 border border-gray-300 rounded-md ${errors.password ? 'border-red-500' : ''}`}
           />
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Confirm Password:</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className={`p-3 border border-gray-300 rounded-md ${errors.confirmPassword ? 'border-red-500' : ''}`}
-          />
-          {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
         </div>
         <button type="submit" className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
           Sign Up
