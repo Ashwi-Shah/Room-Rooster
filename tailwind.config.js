@@ -10,7 +10,7 @@ module.exports = {
                 'md': '576px',   
                 'lg': '768px', 
                 'xl': '992px', 
-                '2xl': '1024px', 
+                // '2xl': '1024px', 
                 '3xl': '1280px', 
                 '4xl': '1536px', 
                 '5xl': '1920px', 
@@ -47,6 +47,7 @@ module.exports = {
                     '0%': { opacity: '0' },
                     '100%': { opacity: '1' },
                 },
+                
             },
             animation: {
                 scrollBackground: 'scrollBackground 60s linear infinite',
