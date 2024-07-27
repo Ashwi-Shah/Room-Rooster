@@ -143,7 +143,7 @@ const CustomNavbar = ({ isAuthenticated, setIsAuthenticated, name }) => {
                         <img className="w-8 h-8" src="/img/icon-deal.png" alt="Icon" />
                     </Link>
                 </div>
-                <div className="hidden xl:flex flex-grow justify-end items-center space-x-6 font-serif">
+                <div className="hidden lg:flex flex-grow justify-end items-center space-x-6 font-serif">
                     <Link to="/" className="text-[#F0ECE3] text-lg uppercase font-semibold underline-from-center hover:text-[#C7B198]">Home</Link>
                     <Link to="/about" className="text-[#F0ECE3] text-lg uppercase font-semibold underline-from-center hover:text-[#C7B198]">About</Link>
                     <Link to="/contact" className="text-[#F0ECE3] text-lg uppercase font-semibold underline-from-center hover:text-[#C7B198]">Contact</Link>
