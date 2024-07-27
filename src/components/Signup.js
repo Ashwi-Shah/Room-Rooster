@@ -25,7 +25,8 @@ const Signup = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+ // Signup.js
+const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password } = formData;
     let formErrors = {};
@@ -41,7 +42,7 @@ const Signup = () => {
     }
   
     try {
-      const response = await fetch('https://room-rooster.vercel.app/register', {
+      const response = await fetch('/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,15 +53,13 @@ const Signup = () => {
       if (response.ok) {
         navigate('/'); // Redirect to home on success
       } else {
-        const errorData = await response.json();
-        console.error('Failed to signup:', errorData);
+        console.error('Failed to signup');
       }
     } catch (error) {
       console.error('Error:', error);
     }
   };
   
-
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10">
       <h2 className="text-2xl font-bold text-gray-700 mb-6 text-center">Sign Up</h2>
