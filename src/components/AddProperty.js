@@ -16,7 +16,9 @@ const AddProperty = ({ onAddProperty }) => {
     FurnishedStatus: "",
     Perferredfor: "",
     ageofconstruction: "",
-    info: ""
+    info: "",
+    Availability:"",
+    deposit:""
   });
 
   const navigate = useNavigate();
@@ -67,6 +69,8 @@ const AddProperty = ({ onAddProperty }) => {
     formData.append("Perferredfor", property.Perferredfor);
     formData.append("ageofconstruction", property.ageofconstruction);
     formData.append("info", property.info);
+    formData.append("Availability", property.Availability);
+    formData.append("deposit", property.deposit);
 
     try {
       const response = await fetch("https://room-rooster.vercel.app/details", {
@@ -221,6 +225,20 @@ const AddProperty = ({ onAddProperty }) => {
             onChange={handleChange}
             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
+              <input
+            type="text"
+            name="Availability"
+            value={property.Availability}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />  
+            <input
+          type="text"
+          name="deposit"
+          value={property.deposit}
+          onChange={handleChange}
+          className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+        />
         </div>
         <button type="submit" className="mt-6 w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
           Add Property

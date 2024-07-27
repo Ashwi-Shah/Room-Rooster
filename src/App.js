@@ -39,7 +39,7 @@
 // };
 
 // export default App;
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CustomNavbar from './components/Navbar';
 import ScrollingSection from './components/ScrollingSection';
@@ -56,6 +56,25 @@ import './tailwind.css';
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [name, setName] = useState("Guest");
+  const [properties, setProperties] = useState([]);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await fetch('https://room-rooster.vercel.app/details');
+        if (response.ok) {
+          const data = await response.json();
+          setProperties(data);
+        } else {
+          console.error("Failed to fetch properties");
+        }
+      } catch (error) {
+        console.error("Error fetching properties:", error);
+      }
+    };
+
+    fetchProperties();
+  }, []);
 
   return (
     <Router>
@@ -68,7 +87,7 @@ const App = () => {
                 <ScrollingSection />
                 <AdvanceSearch />
                 <PropertyTypes />
-                <PropertyListing />
+                <PropertyListing properties={properties} />
                 <Footer />
               </>
             } />
@@ -78,7 +97,7 @@ const App = () => {
             <Route path="/add-property" element={<AddProperty />} />
             {/* <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="*" element={<NotFound />} />  */}
+            <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </main>
       </div>

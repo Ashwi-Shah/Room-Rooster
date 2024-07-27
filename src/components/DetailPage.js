@@ -74,6 +74,12 @@ const DetailPage = () => {
                 <div className="bg-gray-200 p-2 rounded-lg">
                   <p><strong>Additional Info:</strong> {property.info}</p>
                 </div>
+                <div className="bg-gray-200 p-2 rounded-lg">
+                  <p><strong>Availability:</strong> {property.Availability}</p>
+                </div>
+                <div className="bg-gray-200 p-2 rounded-lg">
+                  <p><strong>deposit:</strong> {property.deposit}</p>
+                </div>
               </div>
             </div>
             <div className="flex gap-4">
