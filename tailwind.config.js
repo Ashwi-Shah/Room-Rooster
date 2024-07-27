@@ -9,11 +9,12 @@ module.exports = {
                 'sm': '300px', 
                 'md': '576px',   
                 'lg': '768px', 
-                'xl': '992px',  
-                '2xl': '1280px', 
-                '3xl': '1536px', 
-                '4xl': '1920px', 
-                '5xl': '2000px',
+                'xl': '992px', 
+                '2xl': '1024px', 
+                '3xl': '1280px', 
+                '4xl': '1536px', 
+                '5xl': '1920px', 
+                '6xl': '2000px',
               },
             keyframes: {
                 scrollBackground: {
