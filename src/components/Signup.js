@@ -134,33 +134,32 @@ const Signup = () => {
     e.preventDefault();
     const { name, email, password } = formData;
     let formErrors = {};
-
+  
     if (!name) formErrors.name = 'Name is required';
     if (!email) formErrors.email = 'Email is required';
     else if (!validateEmail(email)) formErrors.email = 'Invalid email address';
     if (!password) formErrors.password = 'Password is required';
-
+  
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
-
+  
     try {
-      const response = await fetch('16', { // Ensure correct endpoint
-        method: 'POST',
+      const response = await fetch('https://room-rooster.vercel.app/register', { // Ensure the URL is correct
+        method: 'POST', // Correct method
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const responseData = await response.json();
         console.log('Signup successful:', responseData);
-        navigate('/'); // Redirect to home on success
+        navigate('/'); // Redirect on success
       } else {
-        const errorData = await response.json();
-        console.error('Failed to signup:', errorData);
+        console.error('Failed to signup:', response.statusText);
         setErrors({ general: 'Failed to sign up. Please try again.' });
       }
     } catch (error) {
@@ -168,6 +167,7 @@ const Signup = () => {
       setErrors({ general: 'An unexpected error occurred. Please try again.' });
     }
   };
+  
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10">
