@@ -147,7 +147,7 @@ const Signup = ({ setIsAuthenticated, setName }) => {
     }
 
     try {
-      const response = await fetch('https://room-rooster.vercel.app/register', {
+      const response = await fetch('https://room-rooster-kappa.vercel.app/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
