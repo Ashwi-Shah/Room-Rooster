@@ -146,7 +146,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faPhone, faEnvelope, faGreaterThanEqual } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faPhone, faBath, faBed, faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 
 
 const PropertyListing = () => {
@@ -185,10 +185,10 @@ const PropertyListing = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {properties.map((detail) => (
-          <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+          <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform">
             <div className="relative overflow-hidden">
               <a href="#">
-                <img className="w-full h-48 object-cover" src={detail.image || "default-image-url.jpg"} alt={detail.name} />
+                <img className="w-full h-48 object-cover hover:scale-105" src={detail.image || "default-image-url.jpg"} alt={detail.name} />
               </a>
               <div className="absolute bottom-0 left-0 bg-[#596E79] text-[#F0ECE3] text-xs font-semibold uppercase py-1 px-8 rounded-tr-lg">
                 {detail.name}
@@ -203,7 +203,7 @@ const PropertyListing = () => {
               <FontAwesomeIcon icon={faPhone} />{detail.phoneNumber}
               </p>
               <button
-                className="bg-[#596E79] text-[#F0ECE3] py-2 px-4 rounded hover:border-2 hover:text-[#596E79] hover:bg-transparent"
+                className="bg-[#596E79] text-[#F0ECE3] py-2 px-4 rounded hover:border-2 hover:border-[#596E79] hover:text-[#596E79] hover:bg-transparent"
                 onClick={() => handleDetailsClick(detail._id)}
               >
                 Details
@@ -211,13 +211,13 @@ const PropertyListing = () => {
             </div>
             <div className="flex border-t border-dashed border-gray-700 bg-[#e9e5db]">
               <small className="flex-1 text-center border-r border-dashed border-gray-700 py-2 text-gray-600 font-bold">
-              <FontAwesomeIcon icon="fa-solid fa-ruler-combined" />{detail.sqft} Sqft
+              <FontAwesomeIcon icon={faRulerCombined} />{detail.sqft} Sqft
               </small>
               <small className="flex-1 text-center border-r border-dashed border-gray-700 py-2 text-gray-600 font-bold">
-              <FontAwesomeIcon icon="fa-solid fa-bed" />{detail.bed} Bed
+              <FontAwesomeIcon icon={faBed} />{detail.bed} Bed
               </small>
               <small className="flex-1 text-center py-2 text-gray-600 font-bold">
-              <FontAwesomeIcon icon="fa-solid fa-bath" />{detail.bath} Bath
+              <FontAwesomeIcon icon={faBath} />{detail.bath} Bath
               </small>
             </div>
           </div>
