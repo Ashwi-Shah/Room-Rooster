@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    background-color: #f0ece3;
+}
 /* animations */
 .animate__fadeInSlow {
     animation-duration: 4s; 
@@ -54,6 +57,11 @@
     @media (min-width: 992px) {
         .property-type-container{
             max-width: 945px;
+        }
+    }
+    @media (min-width: 1024px) {
+        .property-type-container{
+            max-width: 1000px;
         }
     }
     @media (min-width: 1280px) {
