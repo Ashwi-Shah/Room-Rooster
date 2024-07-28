@@ -203,7 +203,7 @@ const PropertyListing = () => {
               <FontAwesomeIcon icon={faPhone} />{detail.phoneNumber}
               </p>
               <button
-                className="bg-[#596E79] text-[#F0ECE3] py-2 px-4 rounded hover:border-2 hover:text-[#596E79]"
+                className="bg-[#596E79] text-[#F0ECE3] py-2 px-4 rounded hover:border-2 hover:text-[#596E79] hover:bg-transparent"
                 onClick={() => handleDetailsClick(detail._id)}
               >
                 Details
