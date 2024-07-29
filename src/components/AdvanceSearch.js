@@ -94,7 +94,7 @@ const AdvanceSearch = () => {
   }, []);
 
   return (
-    <section id="aa-advance-search" className="mt-10 px-4">
+    <section id="aa-advance-search" className=" -mt-12 px-4">
       <div className="container mx-auto max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div ref={(el) => elementsRef.current.push(el)}>

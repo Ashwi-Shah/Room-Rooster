@@ -211,7 +211,7 @@ const ScrollingSection = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-cover animate-[scrollBackground_60s_linear_infinite] z-0"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-1"></div>
       <div
-        className="relative flex flex-col justify-center h-full opacity-0"
+        className="relative flex flex-col justify-center h-5/6 opacity-0"
         ref={contentRef}
       >
         <h1 className="text-2xl font-serif sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-black text-[#F0ECE3]">Welcome to Our Website</h1>
