@@ -203,7 +203,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faBars } from '@fortawesome/free-solid-svg-icons';
 import 'tailwindcss/tailwind.css'; // Ensure this line is here to import Tailwind CSS
-import logo from '../assets/img/logo1.png';
+import logo from '../assets/img/logo.png';
 
 const CustomNavbar = ({ isAuthenticated, setIsAuthenticated, name }) => {
     const [showDropdown, setShowDropdown] = useState(false);
