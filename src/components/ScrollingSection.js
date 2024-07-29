@@ -209,7 +209,7 @@ const ScrollingSection = () => {
   return (
     <section className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden text-[#F0ECE3] text-center">
       <div className="absolute top-0 left-0 w-full h-full bg-cover animate-[scrollBackground_60s_linear_infinite] z-0"></div>
-      <div className="absolute top-0 left-0 w-full h-5/6 bg-black/40 z-1"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-1"></div>
       <div
         className="relative flex flex-col justify-center h-full opacity-0"
         ref={contentRef}
