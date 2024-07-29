@@ -125,10 +125,10 @@ const DetailPage = () => {
 
   return (
     <div className="pt-[125px] px-4">
-      <div className="max-w-4xl mx-auto p-4 border border-gray-300 rounded-lg shadow-lg bg-white">
+      <div className="max-w-4xl mx-auto p-4 border border-gray-300 rounded-lg shadow-lg bg-[#596E79]">
         <div className="relative mb-4">
-          <h1 className="text-2xl font-bold text-red-600">₹{property.price} /month</h1>
-          <h2 className="text-xl font-semibold text-gray-800 absolute top-0 right-0">{property.name}</h2>
+          <h1 className="text-2xl font-bold text-[#F0ECE4]">₹{property.price} /month</h1>
+          <h2 className="text-xl font-semibold text-[#F0ECE4] absolute top-0 right-0">{property.name}</h2>
           <p className="text-gray-600">{property.description}</p>
         </div>
         <div className="flex gap-4">
@@ -151,28 +151,28 @@ const DetailPage = () => {
                   <p><strong>Bath:</strong> {property.bath}</p>
                 </div>
               </div>
-              <p className="text-gray-600">
+              <p className="text-[#F0ECE4]">
                 <i className="fa-solid fa-phone mr-2"></i><strong>Contact:</strong> {property.phoneNumber}
               </p>
-              <p className="text-gray-600">
+              <p className="text-[#F0ECE4]">
                 <i className="fas fa-user mr-2"></i><strong>Owner:</strong> {property.ownername}
               </p>
-              <p className="text-gray-600">
+              <p className="text-[#F0ECE4]">
                 <i className="fas fa-couch mr-2"></i><strong>Furnished Status:</strong> {property.FurnishedStatus}
               </p>
-              <p className="text-gray-600">
+              <p className="text-[#F0ECE4]">
                 <i className="fas fa-home mr-2"></i><strong>Preferred For:</strong> {property.PreferredFor}
               </p>
-              <p className="text-gray-600">
+              <p className="text-[#F0ECE4]">
                 <i className="fas fa-building mr-2"></i><strong>Age of Construction:</strong> {property.ageofconstruction}
               </p>
-              <p className="text-gray-600">
+              <p className="text-[#F0ECE4]">
                 <i className="fas fa-info-circle mr-2"></i><strong>Additional Info:</strong> {property.info}
               </p>
             </div>
             <div className="flex justify-end gap-2">
-              <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Contact Owner</button>
-              <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Make an Offer</button>
+              <button className="bg-[#F0ECE4] text-[#596E79] py-2 px-4 rounded hover:bg-green-600">Contact Owner</button>
+              <button className="bg-[#F0ECE4] text-[#596E79] py-2 px-4 rounded hover:bg-blue-600">Make an Offer</button>
             </div>
           </div>
         </div>
