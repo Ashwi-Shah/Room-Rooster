@@ -135,26 +135,26 @@ const Signup = ({ setIsAuthenticated, setName }) => {
     e.preventDefault();
     const { name, email, password } = formData;
     let formErrors = {};
-
+  
     if (!name) formErrors.name = 'Name is required';
     if (!email) formErrors.email = 'Email is required';
     else if (!validateEmail(email)) formErrors.email = 'Invalid email address';
     if (!password) formErrors.password = 'Password is required';
-
+  
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
-
+  
     try {
-      const response = await fetch('https://room-rooster.vercel.app/signup', { // Use correct backend URL
+      const response = await fetch('https://room-rooster.vercel.app/signup', { // Backend URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const result = await response.json();
         setIsAuthenticated(true);
