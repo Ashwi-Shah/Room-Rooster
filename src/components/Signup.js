@@ -213,4 +213,4 @@ const Signup = ({ setIsAuthenticated, setName }) => {
   );
 };
 
-export default Signup;
+export default Signup;   
