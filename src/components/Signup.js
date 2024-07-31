@@ -168,6 +168,7 @@ const Signup = ({ setIsAuthenticated, setName }) => {
     }
   };
 
+  
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10">
       <h2 className="text-2xl font-bold text-gray-700 mb-6 text-center">Sign Up</h2>
