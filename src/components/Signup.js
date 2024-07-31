@@ -147,7 +147,7 @@ const Signup = ({ setIsAuthenticated, setName }) => {
     }
   
     try {
-      const response = await fetch('https://backend-cyan-one.vercel.app/register', { 
+      const response = await fetch('https://cors-anywhere.herokuapp.com/https://backend-cyan-one.vercel.app/register', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
