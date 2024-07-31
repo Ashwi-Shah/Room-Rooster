@@ -147,7 +147,7 @@ const Signup = ({ setIsAuthenticated, setName }) => {
     }
   
     try {
-      const response = await fetch('https://room-rooster.vercel.app/signup', { // Backend URL
+      const response = await fetch('https://backend-cyan-one.vercel.app/register', { // Backend URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
