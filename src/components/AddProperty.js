@@ -9,7 +9,7 @@ const AddProperty = ({ onAddProperty }) => {
     phoneNumber: "",
     location:"",
     description: "",
-    image: [],
+    images: [],
     sqft: "",
     bed: "",
     bath: "",
@@ -22,6 +22,7 @@ const AddProperty = ({ onAddProperty }) => {
     deposit: ""
   });
 
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -90,12 +91,13 @@ const AddProperty = ({ onAddProperty }) => {
         }
         navigate("/"); // Redirect to home page after adding property
       } else {
-        console.error("Error adding property:", response.statusText);
-        // Optionally handle unsuccessful responses here
+        const errorData = await response.json();
+        setError(`Error: ${response.statusText} - ${errorData.message}`);
+        console.error("Error adding property:", errorData);
       }
     } catch (error) {
+      setError("An unexpected error occurred. Please try again later.");
       console.error("Error adding property:", error);
-      // Optionally handle errors here
     }
   };
   return (
