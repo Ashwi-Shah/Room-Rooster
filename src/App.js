@@ -144,6 +144,7 @@ const App = () => {
             <Route path="/about" element={<InfoPage />} />
             <Route path="/contact" element={<InfoPage />} />
             <Route path="/service" element={<InfoPage />} />
+            <Route path="/" element={<PropertyListing />} />
             <Route path="/add-property" element={<AddProperty />} />
             <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} setName={setName} />} />
             <Route path="/login" element={<Login />} />
