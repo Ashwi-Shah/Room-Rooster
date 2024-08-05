@@ -124,7 +124,7 @@ const AddProperty = ({ onAddProperty }) => {
           <label className="font-semibold text-gray-600 mb-2">Location:</label>
           <input
             type="text"
-            name="name"
+            name="location"
             value={property.location}
             onChange={handleChange}
             required
