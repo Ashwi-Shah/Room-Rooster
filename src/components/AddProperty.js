@@ -7,6 +7,7 @@ const AddProperty = ({ onAddProperty }) => {
     name: "",
     price: "",
     phoneNumber: "",
+    location:"",
     description: "",
     image: null,
     sqft: "",
@@ -121,6 +122,17 @@ const AddProperty = ({ onAddProperty }) => {
         </div>
         <div className="flex flex-col">
           <label className="font-semibold text-gray-600 mb-2">Location:</label>
+          <input
+            type="text"
+            name="name"
+            value={property.location}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Address:</label>
           <textarea
             name="description"
             value={property.description}

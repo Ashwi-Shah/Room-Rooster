@@ -129,7 +129,7 @@ const DetailPage = () => {
         <div className="relative mb-4">
           <h1 className="text-2xl font-bold text-[#F0ECE4]">₹{property.price} /month</h1>
           <h2 className="text-xl font-semibold text-[#F0ECE4] absolute top-0 right-0">{property.name}</h2>
-          <p className="text-[#FOECE3]">{property.description}</p>
+          <p className="text-[#FOECE3]">{property.location}</p>
         </div>
         <div className="flex gap-4">
           <div className="flex-1">
@@ -168,6 +168,9 @@ const DetailPage = () => {
               </p>
               <p className="text-[#F0ECE4] my-3">
                 <i className="fas fa-info-circle mr-2"></i><strong>Additional Info:</strong> {property.info}
+              </p>
+              <p className="text-[#F0ECE4] my-3">
+                <i className="fas fa-info-circle mr-2"></i><strong>Address:</strong> {property.description}
               </p>
             </div>
             <div className="flex justify-end gap-2">

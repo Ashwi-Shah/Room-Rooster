@@ -197,7 +197,7 @@ const PropertyListing = () => {
             <div className="p-4 bg-[#e9e5db]">
               <h5 className="text-xl font-bold text-gray-700 mb-3">₹{detail.price} /month</h5>
               <p className="text-gray-600 mb-2 flex items-center">
-              <FontAwesomeIcon icon={faLocationDot} />{detail.description}
+              <FontAwesomeIcon icon={faLocationDot} />{detail.location}
               </p>
               <p className="text-gray-600 mb-2 flex items-center">
               <FontAwesomeIcon icon={faPhone} />{detail.phoneNumber}
