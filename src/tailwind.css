@@ -85,16 +85,12 @@ body{
         }
     }
 
-    /* Custom Tailwind CSS styles for slider */
-.slider {
-    transition: opacity 0.3s ease-in-out;
+/* Add this to your global CSS file */
+.group-hover\:opacity-100:hover .slick-slide {
+    opacity: 1 !important;
   }
   
-  .group-hover .slider {
+  .group-hover\:pointer-events-auto:hover .slick-slide {
     pointer-events: auto;
-  }
-  
-  .group:hover .slider {
-    opacity: 1;
   }
   

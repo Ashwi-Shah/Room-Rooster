@@ -120,10 +120,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
+import 'tailwindcss/tailwind.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import 'tailwindcss/tailwind.css';
 import { faLocationDot, faPhone, faBath, faBed, faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 
 const PropertyListing = () => {
@@ -186,17 +186,19 @@ const PropertyListing = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
         {properties.map((detail) => (
-          <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform group">
+          <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden group relative">
             <div className="relative overflow-hidden group-hover:opacity-100">
-              <Slider {...sliderSettings} className="group-hover:pointer-events-auto pointer-events-none transition-all duration-300 ease-in-out">
+              <Slider {...sliderSettings} className="w-full h-48 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                 {detail.images && detail.images.length > 0 ? (
                   detail.images.map((img, index) => (
                     <div key={index}>
-                      <img className="w-full h-48 object-cover" src={img} alt={`property-img-${index}`} />
+                      <img className="w-full h-full object-cover" src={img} alt={`property-img-${index}`} />
                     </div>
                   ))
                 ) : (
-                  <img className="w-full h-48 object-cover" src="default-image-url.jpg" alt="default" />
+                  <div className="w-full h-full flex items-center justify-center bg-gray-300">
+                    <img className="w-full h-full object-cover" src="default-image-url.jpg" alt="default" />
+                  </div>
                 )}
               </Slider>
               <div className="absolute bottom-0 left-0 bg-[#596E79] text-[#F0ECE3] text-xs font-semibold uppercase py-1 px-8 rounded-tr-lg">

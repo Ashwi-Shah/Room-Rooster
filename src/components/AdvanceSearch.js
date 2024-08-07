@@ -97,8 +97,19 @@ const AdvanceSearch = () => {
     <section id="aa-advance-search" className="mt-10 px-4">
       <div className="container mx-auto max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div ref={(el) => elementsRef.current.push(el)}>
+          {/* <div ref={(el) => elementsRef.current.push(el)}>
             <input type="text" placeholder="Keywords" className="w-full h-12 border border-[#596E79] rounded-lg px-4 text-xl bg-[#596E79] text-[#F0ECE3] placeholder-[#F0ECE3]" />
+          </div> */}
+          <div ref={(el) => elementsRef.current.push(el)}>
+            <select className="w-full h-12 border border-[#596E79] rounded-lg px-4 text-xl bg-[#596E79] text-[#F0ECE3]">
+              <option value="">Select Property Type</option>
+              <option value="Ahmedabad">Villa</option>
+              <option value="Surat">Flat</option>
+              <option value="Vadodara">Garden</option>
+              <option value="Rajkot">Pool</option>
+              <option value="Gandhinagar">Cottage</option>
+              {/* Add more locations as needed */}
+            </select>
           </div>
           <div ref={(el) => elementsRef.current.push(el)}>
             <select className="w-full h-12 border border-[#596E79] rounded-lg px-4 text-xl bg-[#596E79] text-[#F0ECE3]">
