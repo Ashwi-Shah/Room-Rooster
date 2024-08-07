@@ -85,13 +85,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPhone, faBath, faBed, faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 
 const PropertyListing = () => {
   const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -103,9 +105,13 @@ const PropertyListing = () => {
           setProperties(data);
         } else {
           console.error('Failed to fetch properties');
+          setError('Failed to fetch properties');
         }
       } catch (error) {
         console.error('Error fetching properties:', error);
+        setError('Error fetching properties');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -124,6 +130,14 @@ const PropertyListing = () => {
     slidesToScroll: 1,
   };
 
+  if (loading) {
+    return <div className="container mx-auto py-12 text-center">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="container mx-auto py-12 text-center text-red-500">{error}</div>;
+  }
+
   return (
     <div className="container mx-auto py-12">
       <div className="text-center mb-12">
@@ -137,11 +151,15 @@ const PropertyListing = () => {
           <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform">
             <div className="relative overflow-hidden">
               <Slider {...settings}>
-                {detail.images && detail.images.map((img, index) => (
-                  <div key={index}>
-                    <img className="w-full h-48 object-cover" src={URL.createObjectURL(img)} alt={`property-img-${index}`} />
-                  </div>
-                ))}
+                {detail.images && detail.images.length > 0 ? (
+                  detail.images.map((img, index) => (
+                    <div key={index}>
+                      <img className="w-full h-48 object-cover" src={img} alt={`property-img-${index}`} />
+                    </div>
+                  ))
+                ) : (
+                  <img className="w-full h-48 object-cover" src="default-image-url.jpg" alt="default" />
+                )}
               </Slider>
               <div className="absolute bottom-0 left-0 bg-[#596E79] text-[#F0ECE3] text-xs font-semibold uppercase py-1 px-8 rounded-tr-lg">
                 {detail.name}
