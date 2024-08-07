@@ -89,22 +89,32 @@ const AddProperty = ({ onAddProperty }) => {
       });
   
       if (response.ok) {
-        const newProperty = await response.json();
-        console.log("Property added successfully:", newProperty);
-        if (onAddProperty) {
-          onAddProperty(newProperty);
+        // Check if response is JSON
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const newProperty = await response.json();
+          console.log("Property added successfully:", newProperty);
+          if (onAddProperty) {
+            onAddProperty(newProperty);
+          }
+          navigate("/"); // Redirect to home page after adding property
+        } else {
+          // Handle unexpected content type
+          const text = await response.text();
+          console.error("Unexpected response:", text);
+          setError("Unexpected response from the server.");
         }
-        navigate("/"); // Redirect to home page after adding property
       } else {
-        const errorData = await response.json();
-        setError(`Error: ${response.statusText} - ${errorData.message}`);
-        console.error("Error adding property:", errorData);
+        const text = await response.text(); // Use text() to handle non-JSON responses
+        console.error("Error adding property:", text);
+        setError(`Error: ${response.statusText} - ${text}`);
       }
     } catch (error) {
       setError("An unexpected error occurred. Please try again later.");
       console.error("Error adding property:", error);
     }
   };
+  
   
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10 transition-shadow duration-300 hover:shadow-2xl">
