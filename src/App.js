@@ -90,7 +90,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import InfoPage from './components/InfoPage'; // Import the new component
 import DetailPage from './components/DetailPage'; // Import the DetailPage component
-import ResultsPage from './ResultsPage';
+import ResultsPage from './components/ResultsPage';
 import './tailwind.css';
 
 const App = () => {

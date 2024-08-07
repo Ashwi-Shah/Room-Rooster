@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation
-import Slider from 'react-slick'; // Assuming you're using a slider
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useLocation and useNavigate
+import Slider from 'react-slick'; // Import Slider
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPhone, faRulerCombined, faBed, faBath } from '@fortawesome/free-solid-svg-icons';
 
+// Define sliderSettings
+const sliderSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  arrows: true,
+};
+
 const ResultsPage = () => {
   const [properties, setProperties] = useState([]);
-  const location = useLocation(); // Initialize useLocation
+  const location = useLocation();
+  const navigate = useNavigate(); // Initialize useNavigate
   const query = new URLSearchParams(location.search);
   const propertyType = query.get('propertyType');
   const locationParam = query.get('location');
@@ -24,6 +37,11 @@ const ResultsPage = () => {
 
     fetchProperties();
   }, [propertyType, locationParam]);
+
+  // Define handleDetailsClick
+  const handleDetailsClick = (id) => {
+    navigate(`/property/${id}`); // Adjust the path as needed
+  };
 
   return (
     <div className="container mx-auto py-12">
