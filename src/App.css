@@ -1,0 +1,8 @@
+.slider {
+    pointer-events: none; /* Disable interaction */
+  }
+  
+  .group:hover .slider {
+    pointer-events: auto; /* Enable interaction on hover */
+  }
+  

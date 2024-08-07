@@ -38,12 +38,14 @@
 //     navigate(`/details/${id}`);
 //   };
 
-//   const settings = {
+//   const sliderSettings = {
 //     dots: true,
 //     infinite: true,
 //     speed: 500,
 //     slidesToShow: 1,
 //     slidesToScroll: 1,
+//     autoplay: true,
+//     autoplaySpeed: 3000,
 //   };
 
 //   if (loading) {
@@ -66,7 +68,7 @@
 //         {properties.map((detail) => (
 //           <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform">
 //             <div className="relative overflow-hidden">
-//               <Slider {...settings}>
+//               <Slider {...sliderSettings}>
 //                 {detail.images && detail.images.length > 0 ? (
 //                   detail.images.map((img, index) => (
 //                     <div key={index}>
@@ -118,6 +120,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
+import './App.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -161,7 +164,7 @@ const PropertyListing = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
   };
 
@@ -184,8 +187,8 @@ const PropertyListing = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
         {properties.map((detail) => (
           <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform">
-            <div className="relative overflow-hidden">
-              <Slider {...sliderSettings}>
+            <div className="relative overflow-hidden group">
+              <Slider {...sliderSettings} className="slider">
                 {detail.images && detail.images.length > 0 ? (
                   detail.images.map((img, index) => (
                     <div key={index}>
