@@ -211,7 +211,7 @@ const PropertyListing = () => {
           <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform">
             <div className="relative overflow-hidden">
               <a href="#">
-                <img className="w-full h-48 object-cover hover:scale-105" src={detail.image || "default-image-url.jpg"} alt={detail.name} />
+                <img className="w-full h-48 object-cover hover:scale-105" src={detail.images || "default-image-url.jpg"} alt={detail.name} />
               </a>
               <div className="absolute bottom-0 left-0 bg-[#596E79] text-[#F0ECE3] text-xs font-semibold uppercase py-1 px-8 rounded-tr-lg">
                 {detail.name}
