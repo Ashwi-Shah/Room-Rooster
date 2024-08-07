@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 
-const propertyTypes = ["Apartment", "House", "Condo", "Villa"];
-const locations = ["New York", "Los Angeles", "Chicago", "Houston"];
+const propertyTypes = ["Villa", "Flat", "Apartment", "Cottage"];
+const locations = ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"];
 
 const AddProperty = ({ onAddProperty }) => {
   const [property, setProperty] = useState({

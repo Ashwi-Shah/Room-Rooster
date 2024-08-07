@@ -140,8 +140,7 @@ const AdvanceSearch = () => {
               <option value="">Select Property Type</option>
               <option value="Villa">Villa</option>
               <option value="Flat">Flat</option>
-              <option value="Garden">Garden</option>
-              <option value="Pool">Pool</option>
+              <option value="Apartment">Apartment</option>
               <option value="Cottage">Cottage</option>
               {/* Add more property types as needed */}
             </select>
