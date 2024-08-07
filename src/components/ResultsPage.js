@@ -123,7 +123,7 @@ const ResultPage = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch('https://room-rooster.vercel.app/details');
+        const response = await fetch(`https://room-rooster.vercel.app/search?query=${encodeURIComponent(query)}`);
         if (response.ok) {
           const data = await response.json();
           setProperties(data);
@@ -140,16 +140,11 @@ const ResultPage = () => {
     };
 
     fetchProperties();
-  }, []);
+  }, [query]);
 
   const handleDetailsClick = (id) => {
     navigate(`/details/${id}`);
   };
-
-  const filteredProperties = properties.filter(property => 
-    property.name.toLowerCase().includes(query.toLowerCase()) ||
-    property.location.toLowerCase().includes(query.toLowerCase())
-  );
 
   const sliderSettings = {
     dots: true,
@@ -178,7 +173,7 @@ const ResultPage = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
-        {filteredProperties.map((detail) => (
+        {properties.map((detail) => (
           <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform">
             <div className="relative overflow-hidden">
               <Slider {...sliderSettings}>
