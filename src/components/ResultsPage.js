@@ -1,60 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // Import useLocation
+import Slider from 'react-slick'; // Assuming you're using a slider
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faPhone, faBath, faBed, faRulerCombined } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faPhone, faRulerCombined, faBed, faBath } from '@fortawesome/free-solid-svg-icons';
 
-const PropertyListing = () => {
+const ResultsPage = () => {
   const [properties, setProperties] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const location = useLocation(); // Initialize useLocation
+  const query = new URLSearchParams(location.search);
+  const propertyType = query.get('propertyType');
+  const locationParam = query.get('location');
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch('https://room-rooster.vercel.app/details');
-        if (response.ok) {
-          const data = await response.json();
-          setProperties(data);
-        } else {
-          console.error('Failed to fetch properties');
-          setError('Failed to fetch properties');
-        }
+        const response = await fetch(`https://room-rooster.vercel.app/search?propertyType=${propertyType}&location=${locationParam}`);
+        const data = await response.json();
+        setProperties(data);
       } catch (error) {
         console.error('Error fetching properties:', error);
-        setError('Error fetching properties');
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchProperties();
-  }, []);
-
-  const handleDetailsClick = (id) => {
-    navigate(`/details/${id}`);
-  };
-
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-  };
-
-  if (loading) {
-    return <div className="container mx-auto py-12 text-center">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="container mx-auto py-12 text-center text-red-500">{error}</div>;
-  }
+  }, [propertyType, locationParam]);
 
   return (
     <div className="container mx-auto py-12">
@@ -116,4 +85,4 @@ const PropertyListing = () => {
   );
 };
 
-export default PropertyListing;
+export default ResultsPage;

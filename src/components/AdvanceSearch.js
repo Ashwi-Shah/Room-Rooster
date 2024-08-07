@@ -86,6 +86,7 @@
 
 // export default AdvanceSearch;
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import 'tailwindcss/tailwind.css';
 import 'animate.css/animate.min.css';
 
@@ -93,6 +94,7 @@ const AdvanceSearch = () => {
   const elementsRef = useRef([]);
   const [propertyType, setPropertyType] = useState('');
   const [location, setLocation] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -121,21 +123,8 @@ const AdvanceSearch = () => {
     };
   }, []);
 
-  const handleSearch = async () => {
-    try {
-      const response = await fetch('https://backend-cyan-one.vercel.app/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ propertyType, location }),
-      });
-      const data = await response.json();
-      console.log('Search results:', data);
-      // Handle the search results as needed
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    }
+  const handleSearch = () => {
+    navigate(`/results?propertyType=${propertyType}&location=${location}`);
   };
 
   return (

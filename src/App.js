@@ -90,6 +90,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import InfoPage from './components/InfoPage'; // Import the new component
 import DetailPage from './components/DetailPage'; // Import the DetailPage component
+import ResultsPage from './ResultsPage';
 import './tailwind.css';
 
 const App = () => {
@@ -145,6 +146,7 @@ const App = () => {
             <Route path="/contact" element={<InfoPage />} />
             <Route path="/service" element={<InfoPage />} />
             <Route path="/" element={<PropertyListing />} />
+            <Route path="/results" element={<ResultsPage />} />
             <Route path="/add-property" element={<AddProperty />} />
             <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} setName={setName} />} />
             <Route path="/login" element={<Login />} />
