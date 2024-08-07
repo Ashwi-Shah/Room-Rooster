@@ -1,10 +1,15 @@
 // import React, { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
+// import Slider from 'react-slick';
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faLocationDot, faPhone, faBath, faBed, faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 
 // const PropertyListing = () => {
 //   const [properties, setProperties] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
 //   const navigate = useNavigate();
 
 //   useEffect(() => {
@@ -16,9 +21,13 @@
 //           setProperties(data);
 //         } else {
 //           console.error('Failed to fetch properties');
+//           setError('Failed to fetch properties');
 //         }
 //       } catch (error) {
 //         console.error('Error fetching properties:', error);
+//         setError('Error fetching properties');
+//       } finally {
+//         setLoading(false);
 //       }
 //     };
 
@@ -28,6 +37,22 @@
 //   const handleDetailsClick = (id) => {
 //     navigate(`/details/${id}`);
 //   };
+
+//   const settings = {
+//     dots: true,
+//     infinite: true,
+//     speed: 500,
+//     slidesToShow: 1,
+//     slidesToScroll: 1,
+//   };
+
+//   if (loading) {
+//     return <div className="container mx-auto py-12 text-center">Loading...</div>;
+//   }
+
+//   if (error) {
+//     return <div className="container mx-auto py-12 text-center text-red-500">{error}</div>;
+//   }
 
 //   return (
 //     <div className="container mx-auto py-12">
@@ -41,9 +66,17 @@
 //         {properties.map((detail) => (
 //           <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform">
 //             <div className="relative overflow-hidden">
-//               <a href="#">
-//                 <img className="w-full h-48 object-cover hover:scale-105" src={detail.images || "default-image-url.jpg"} alt={detail.name} />
-//               </a>
+//               <Slider {...settings}>
+//                 {detail.images && detail.images.length > 0 ? (
+//                   detail.images.map((img, index) => (
+//                     <div key={index}>
+//                       <img className="w-full h-48 object-cover" src={img} alt={`property-img-${index}`} />
+//                     </div>
+//                   ))
+//                 ) : (
+//                   <img className="w-full h-48 object-cover" src="default-image-url.jpg" alt="default" />
+//                 )}
+//               </Slider>
 //               <div className="absolute bottom-0 left-0 bg-[#596E79] text-[#F0ECE3] text-xs font-semibold uppercase py-1 px-8 rounded-tr-lg">
 //                 {detail.name}
 //               </div>
@@ -122,12 +155,14 @@ const PropertyListing = () => {
     navigate(`/details/${id}`);
   };
 
-  const settings = {
+  const sliderSettings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
   };
 
   if (loading) {
@@ -150,7 +185,7 @@ const PropertyListing = () => {
         {properties.map((detail) => (
           <div key={detail._id} className="bg-gray-200 rounded-lg shadow-lg overflow-hidden transition-transform transform">
             <div className="relative overflow-hidden">
-              <Slider {...settings}>
+              <Slider {...sliderSettings}>
                 {detail.images && detail.images.length > 0 ? (
                   detail.images.map((img, index) => (
                     <div key={index}>
