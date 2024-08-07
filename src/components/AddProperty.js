@@ -38,8 +38,8 @@ const AddProperty = ({ onAddProperty }) => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    if (files.length > 3) {
-      alert("You can upload up to 3 images.");
+    if (files.length > 5) {
+      alert("You can upload up to 5 images.");
       return;
     }
     const resizedImages = [];
