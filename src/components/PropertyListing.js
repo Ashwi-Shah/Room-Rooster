@@ -117,10 +117,11 @@
 // };
 
 // export default PropertyListing;
+
+import 'tailwindcss/tailwind.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
-import 'tailwindcss/tailwind.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -164,7 +165,7 @@ const PropertyListing = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 3000,
   };
 
