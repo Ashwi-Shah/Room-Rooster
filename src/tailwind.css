@@ -84,3 +84,17 @@ body{
             max-width: 1680px;
         }
     }
+
+    /* Custom Tailwind CSS styles for slider */
+.slider {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .group-hover .slider {
+    pointer-events: auto;
+  }
+  
+  .group:hover .slider {
+    opacity: 1;
+  }
+  
