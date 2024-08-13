@@ -77,6 +77,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { FaBed, FaBath, FaCouch } from 'react-icons/fa'; // Importing icons
 
 const DetailPage = () => {
   const { id } = useParams(); // Assuming you are using react-router for dynamic routing
@@ -128,13 +129,22 @@ const DetailPage = () => {
         </div>
 
         <div className="w-full lg:w-1/2">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="font-semibold text-gray-600">{details.beds} Beds</p>
+          <div className="flex space-x-8">
+            <div className="flex items-center">
+              <FaBed className="text-gray-600 mr-2" />
+              <p className="font-semibold text-gray-600">{details.bed} Beds</p>
             </div>
-            <div>
-              <p className="font-semibold text-gray-600">{details.baths} Baths</p>
+            <div className="flex items-center">
+              <FaBath className="text-gray-600 mr-2" />
+              <p className="font-semibold text-gray-600">{details.bath} Baths</p>
             </div>
+            <div className="flex items-center">
+              <FaCouch className="text-gray-600 mr-2" />
+              <p className="font-semibold text-gray-600">{details.FurnishedStatus}</p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4 mt-4">
             <div>
               <p className="font-semibold text-gray-600">Super Built-Up Area</p>
               <p className="text-gray-700">{details.sqft} sqft </p>
@@ -144,16 +154,12 @@ const DetailPage = () => {
               <p className="text-gray-700">{details.Availability}</p>
             </div>
             <div>
-              <p className="font-semibold text-gray-600">Owner Name</p>
+              <p className="font-semibold text-gray-600">ownername</p>
               <p className="text-gray-700">{details.ownername}</p>
             </div>
             <div>
-              <p className="font-semibold text-gray-600">Furnished Status</p>
-              <p className="text-gray-700">{details.furnishedStatus}</p>
-            </div>
-            <div>
               <p className="font-semibold text-gray-600">Age Of Construction</p>
-              <p className="text-gray-700">{details.ageOfConstruction}</p>
+              <p className="text-gray-700">{details.ageOfconstruction}</p>
             </div>
           </div>
         </div>
