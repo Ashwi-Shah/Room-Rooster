@@ -75,7 +75,6 @@
 
 // export default DetailPage;
 
-
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaBed, FaBath, FaCouch } from "react-icons/fa"; // Importing icons
@@ -114,18 +113,18 @@ const DetailPage = () => {
     <div className="pt-[125px] px-4">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
         <div className="mb-4">
-          <h2 className="text-2xl font-bold mb-2">₹{property.name}</h2>
-          <p className="text-lg">
+          <h2 className="text-2xl font-bold mb-2 text-gray-800">₹{property.name}</h2>
+          <p className="text-lg text-gray-600">
             {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
             <span className="text-blue-600">{property.location}</span>
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-6">
           <div>
             <img
               src={mainImage}
               alt="Main Property"
-              className="w-full h-64 object-cover rounded-lg mb-2"
+              className="w-full h-80 object-cover rounded-lg mb-4"
             />
             <div className="flex space-x-2">
               {property.images.slice(0, 3).map((image, index) => (
@@ -133,7 +132,7 @@ const DetailPage = () => {
                   <img
                     src={image}
                     alt={`Property Image ${index + 1}`}
-                    className={`w-1/3 h-24 object-cover rounded-lg cursor-pointer ${
+                    className={`w-20 h-20 object-cover rounded-lg cursor-pointer ${
                       image === mainImage ? "border-2 border-blue-600" : ""
                     }`}
                     onClick={() => setMainImage(image)} // Update the main image when a thumbnail is clicked
@@ -149,62 +148,62 @@ const DetailPage = () => {
               ))}
             </div>
           </div>
-          <div>
-            <div className="mb-4 flex items-center space-x-4">
+          <div className="space-y-4">
+            <div className="flex items-center space-x-4">
               <FaBed className="text-gray-600" size={20} />
-              <span className="text-lg">{property.bed} Beds</span>
+              <span className="text-lg text-gray-800">{property.bed} Beds</span>
             </div>
-            <div className="mb-4 flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
               <FaBath className="text-gray-600" size={20} />
-              <span className="text-lg">{property.bath} Baths</span>
+              <span className="text-lg text-gray-800">{property.bath} Baths</span>
             </div>
-            <div className="mb-4 flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
               <FaCouch className="text-gray-600" size={20} />
-              <span className="text-lg">{property.FurnishedStatus}</span>
+              <span className="text-lg text-gray-800">{property.FurnishedStatus}</span>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Super Built-Up Area</p>
-              <p className="text-lg">{property.sqft} sqft</p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Super Built-Up Area</p>
+              <p className="text-lg text-gray-600">{property.sqft} sqft</p>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Status</p>
-              <p className="text-lg">{property.Availability}</p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Status</p>
+              <p className="text-lg text-gray-600">{property.Availability}</p>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Perferred for:-</p>
-              <p className="text-lg">{property.Perferredfor}</p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Preferred for:</p>
+              <p className="text-lg text-gray-600">{property.Perferredfor}</p>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Age Of Construction</p>
-              <p className="text-lg">{property.ageofconstruction} years</p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Age Of Construction</p>
+              <p className="text-lg text-gray-600">{property.ageofconstruction} years</p>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Amount of Deposit</p>
-              <p className="text-lg">{property.deposit} $</p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Amount of Deposit</p>
+              <p className="text-lg text-gray-600">{property.deposit} $</p>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Owner Name</p>
-              <p className="text-lg">{property.ownername} </p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Owner Name</p>
+              <p className="text-lg text-gray-600">{property.ownername}</p>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Full Address</p>
-              <p className="text-lg">{property.description}</p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Full Address</p>
+              <p className="text-lg text-gray-600">{property.description}</p>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Amount of Rent</p>
-              <p className="text-lg">{property.price} /month</p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Amount of Rent</p>
+              <p className="text-lg text-gray-600">{property.price} /month</p>
             </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Additional Information</p>
-              <p className="text-lg">{property.info} $</p>
+            <div>
+              <p className="text-lg font-semibold text-gray-800">Additional Information</p>
+              <p className="text-lg text-gray-600">{property.info}</p>
             </div>
           </div>
         </div>
         <div className="flex justify-between mt-6">
-          <button className="bg-red-600 text-white px-4 py-2 rounded-lg">
+          <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
             Contact Owner
           </button>
-          <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg">
+          <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
             Make Offer
           </button>
         </div>
