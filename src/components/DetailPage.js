@@ -75,141 +75,69 @@
 
 // export default DetailPage;
 
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from 'react';
 
 const DetailPage = () => {
-  const { id } = useParams();
-  const [property, setProperty] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  useEffect(() => {
-    const fetchProperty = async () => {
-      try {
-        const response = await fetch(`https://room-rooster.vercel.app/details/${id}`);
-        if (response.ok) {
-          const data = await response.json();
-          setProperty(data);
-          setSelectedImage(data.images[0]); // Set the first image as the default selected image
-        } else {
-          console.error("Failed to fetch property details");
-        }
-      } catch (error) {
-        console.error("Error fetching property details:", error);
-      }
-    };
-
-    fetchProperty();
-  }, [id]);
-
-  if (!property) {
-    return <div className="p-4 text-center text-red-600">Property not found</div>;
-  }
-
   return (
-    <div className="pt-[125px] px-4">
-      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-        
-        {/* Header Section */}
-        <div className="px-6 py-4 border-b">
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-3xl font-bold">{property.name}</h2>
-            <p className="text-xl font-semibold">₹{property.price} /month</p>
-          </div>
-          <p className="text-lg text-gray-600">
-            {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
-            <span className="text-blue-500">{property.location}</span>
-          </p>
+    <div className="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg">
+      <div className="flex flex-col lg:flex-row justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">₹13,000</h1>
+          <p className="text-gray-700">2 BHK 750 Sq-ft For Rent in <span className="text-red-500">Lower Parel, Mumbai</span></p>
         </div>
+        <div className="flex space-x-4">
+          <button className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600">Contact Owner</button>
+          <button className="border border-red-500 text-red-500 font-semibold py-2 px-4 rounded-lg hover:bg-red-100">Make Offer</button>
+        </div>
+      </div>
 
-        {/* Image Gallery */}
-        <div className="px-6 py-4">
-          <div className="flex">
-            <div className="w-3/5 pr-4">
-              <img
-                src={selectedImage}
-                alt="Selected Property"
-                className="w-full h-96 object-cover rounded-lg"
-              />
-            </div>
-            <div className="w-2/5 flex flex-col space-y-2">
-              {property.images.slice(0, 3).map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Property Thumbnail ${index + 1}`}
-                  onClick={() => setSelectedImage(image)}
-                  className={`w-full h-28 object-cover cursor-pointer rounded-lg border-2 ${
-                    selectedImage === image ? "border-blue-500" : "border-transparent"
-                  }`}
-                />
-              ))}
-              {property.images.length > 3 && (
-                <div
-                  className="relative w-full h-28 cursor-pointer rounded-lg border-2 border-transparent"
-                  onClick={() => setSelectedImage(property.images[3])}
-                >
-                  <img
-                    src={property.images[3]}
-                    alt="More Photos"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white font-bold text-lg">
-                    +{property.images.length - 3} Photos
-                  </div>
-                </div>
-              )}
+      <div className="flex flex-col lg:flex-row mt-4 space-y-4 lg:space-y-0 lg:space-x-4">
+        <div className="w-full lg:w-1/2">
+          <img src="your-image-url.jpg" alt="Property" className="rounded-lg w-full h-auto" />
+          <div className="grid grid-cols-4 gap-2 mt-2">
+            <img src="image-url-1.jpg" alt="Property" className="rounded-lg" />
+            <img src="image-url-2.jpg" alt="Property" className="rounded-lg" />
+            <img src="image-url-3.jpg" alt="Property" className="rounded-lg" />
+            <div className="relative">
+              <img src="image-url-4.jpg" alt="Property" className="rounded-lg" />
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white font-semibold rounded-lg">+19 Photos</div>
             </div>
           </div>
         </div>
 
-        {/* Details Section */}
-        <div className="px-6 py-4 grid grid-cols-1 md:grid-cols-2 gap-4 border-t">
-          <div>
-            <p className="text-lg">
-              <span className="font-semibold">Beds:</span> {property.bed}
-            </p>
-            <p className="text-lg">
-              <span className="font-semibold">Baths:</span> {property.bath}
-            </p>
-            <p className="text-lg">
-              <span className="font-semibold">Furnished Status:</span>{" "}
-              {property.FurnishedStatus}
-            </p>
-            <p className="text-lg">
-              <span className="font-semibold">Square Footage:</span>{" "}
-              {property.sqft} sqft
-            </p>
+        <div className="w-full lg:w-1/2">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="font-semibold text-gray-600">2 Beds</p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-600">2 Baths</p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-600">Super Built-Up Area</p>
+              <p className="text-gray-700">750 sqft <span className="text-sm">₹17/sqft</span></p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-600">Status</p>
+              <p className="text-gray-700">Immediately</p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-600">Facing</p>
+              <p className="text-gray-700">South</p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-600">Furnished Status</p>
+              <p className="text-gray-700">Semi-Furnished</p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-600">Age Of Construction</p>
+              <p className="text-gray-700">5 to 10 years</p>
+            </div>
           </div>
-          <div>
-            <p className="text-lg">
-              <span className="font-semibold">Age of Construction:</span>{" "}
-              {property.ageofconstruction}
-            </p>
-            <p className="text-lg">
-              <span className="font-semibold">Facing:</span> {property.facing}
-            </p>
-            <p className="text-lg">
-              <span className="font-semibold">Availability:</span> {property.Availability}
-            </p>
-            <p className="text-lg">
-              <span className="font-semibold">Deposit:</span> ₹{property.deposit}
-            </p>
-          </div>
-        </div>
-
-        {/* Footer Section */}
-        <div className="px-6 py-4 border-t flex justify-between items-center">
-          <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-            Contact Owner
-          </button>
-          <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
-            Make Offer
-          </button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default DetailPage;
