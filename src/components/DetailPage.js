@@ -82,6 +82,7 @@ import { useParams } from "react-router-dom";
 const DetailPage = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
+  const [mainImage, setMainImage] = useState(""); // State to manage the main image
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -90,6 +91,7 @@ const DetailPage = () => {
         if (response.ok) {
           const data = await response.json();
           setProperty(data);
+          setMainImage(data.images[0]); // Set the initial main image
         } else {
           console.error("Failed to fetch property details");
         }
@@ -118,22 +120,22 @@ const DetailPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
             <img
-              src={property.images[0]}
+              src={mainImage}
               alt="Main Property"
               className="w-full h-64 object-cover rounded-lg mb-2"
             />
             <div className="flex space-x-2">
-              {property.images.slice(1, 4).map((image, index) => (
+              {property.images.map((image, index) => (
                 <img
                   key={index}
                   src={image}
                   alt={`Property Image ${index + 1}`}
-                  className="w-1/4 h-24 object-cover rounded-lg"
+                  className={`w-1/4 h-24 object-cover rounded-lg cursor-pointer ${
+                    image === mainImage ? "border-2 border-blue-600" : ""
+                  }`}
+                  onClick={() => setMainImage(image)} // Update the main image when a thumbnail is clicked
                 />
               ))}
-              <div className="relative w-1/4 h-24 rounded-lg bg-gray-200 flex items-center justify-center">
-                <span className="text-sm text-gray-500">+{property.images.length - 4} Photos</span>
-              </div>
             </div>
           </div>
           <div>
