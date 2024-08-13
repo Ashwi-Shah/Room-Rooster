@@ -82,6 +82,7 @@ import { FaBed, FaBath, FaCouch } from 'react-icons/fa'; // Importing icons
 const DetailPage = () => {
   const { id } = useParams(); // Assuming you are using react-router for dynamic routing
   const [details, setDetails] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null); // State to track the selected image
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -89,6 +90,7 @@ const DetailPage = () => {
         const response = await fetch(`https://room-rooster.vercel.app/details/${id}`);
         const data = await response.json();
         setDetails(data);
+        setSelectedImage(data.images[0]); // Set the first image as the default selected image
       } catch (error) {
         console.error('Error fetching details:', error);
       }
@@ -100,6 +102,10 @@ const DetailPage = () => {
   if (!details) {
     return <div>Loading...</div>;
   }
+
+  const handleThumbnailClick = (image) => {
+    setSelectedImage(image); // Update the main image when a thumbnail is clicked
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg">
@@ -116,13 +122,19 @@ const DetailPage = () => {
 
       <div className="flex flex-col lg:flex-row mt-4 space-y-4 lg:space-y-0 lg:space-x-4">
         <div className="w-full lg:w-1/2">
-          <img src={details.images[0]} alt="Property" className="rounded-lg w-full h-auto" />
+          <img src={selectedImage} alt="Property" className="rounded-lg w-full h-auto" />
           <div className="grid grid-cols-4 gap-2 mt-2">
-            {details.images.slice(1, 4).map((image, index) => (
-              <img key={index} src={image} alt={`Property ${index + 1}`} className="rounded-lg" />
+            {details.images.slice(0, 4).map((image, index) => (
+              <img 
+                key={index} 
+                src={image} 
+                alt={`Property ${index + 1}`} 
+                className={`rounded-lg cursor-pointer ${selectedImage === image ? 'border-2 border-red-500' : ''}`}
+                onClick={() => handleThumbnailClick(image)}
+              />
             ))}
-            <div className="relative">
-              <img src={details.images[4]} alt="Property" className="rounded-lg" />
+            <div className="relative cursor-pointer">
+              <img src={details.images[4]} alt="Property" className={`rounded-lg ${selectedImage === details.images[4] ? 'border-2 border-red-500' : ''}`} onClick={() => handleThumbnailClick(details.images[4])} />
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white font-semibold rounded-lg">+{details.images.length - 5} Photos</div>
             </div>
           </div>
@@ -151,10 +163,10 @@ const DetailPage = () => {
             </div>
             <div>
               <p className="font-semibold text-gray-600">Status</p>
-              <p className="text-gray-700">{details.Availability}</p>
+              <p className="text-gray-700">{details.status}</p>
             </div>
             <div>
-              <p className="font-semibold text-gray-600">ownername</p>
+              <p className="font-semibold text-gray-600">Facing</p>
               <p className="text-gray-700">{details.ownername}</p>
             </div>
             <div>
