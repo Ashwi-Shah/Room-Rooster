@@ -240,6 +240,8 @@ const DetailPage = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [mainImage, setMainImage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -250,15 +252,25 @@ const DetailPage = () => {
           setProperty(data);
           setMainImage(data.images[0]);
         } else {
-          console.error("Failed to fetch property details");
+          setError("Failed to fetch property details");
         }
       } catch (error) {
-        console.error("Error fetching property details:", error);
+        setError("Error fetching property details");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProperty();
   }, [id]);
+
+  if (loading) {
+    return <div className="p-4 text-center">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4 text-center text-red-600">{error}</div>;
+  }
 
   if (!property) {
     return <div className="p-4 text-center text-red-600">Property not found</div>;
@@ -290,6 +302,7 @@ const DetailPage = () => {
               src={mainImage}
               alt="Main Property"
               className="w-full h-80 object-cover rounded-lg mb-4"
+              loading="lazy"
             />
             <div className="flex space-x-2">
               {property.images.slice(0, 5).map((image, index) => (
@@ -301,6 +314,7 @@ const DetailPage = () => {
                       image === mainImage ? "border-2 border-blue-600" : ""
                     }`}
                     onClick={() => setMainImage(image)}
+                    loading="lazy"
                   />
                   {index === 2 && extraImagesCount > 0 && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
@@ -360,7 +374,7 @@ const DetailPage = () => {
                 <p className="text-lg font-semibold text-gray-800">Full Address</p>
                 <p className="text-lg text-gray-600">{property.description}</p>
               </div>
-              <div>
+              <div className="col-span-2">
                 <p className="text-lg font-semibold text-gray-800">Additional Information</p>
                 <p className="text-lg text-gray-600">{property.info}</p>
               </div>
