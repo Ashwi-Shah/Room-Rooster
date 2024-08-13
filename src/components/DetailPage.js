@@ -114,7 +114,7 @@ const DetailPage = () => {
     <div className="pt-[125px] px-4">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
         <div className="mb-4">
-          <h2 className="text-2xl font-bold mb-2">₹{property.price}</h2>
+          <h2 className="text-2xl font-bold mb-2">₹{property.name}</h2>
           <p className="text-lg">
             {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
             <span className="text-blue-600">{property.location}</span>
@@ -171,12 +171,32 @@ const DetailPage = () => {
               <p className="text-lg">{property.Availability}</p>
             </div>
             <div className="mb-4">
-              <p className="text-lg font-semibold">Facing</p>
-              <p className="text-lg">{property.Facing}</p>
+              <p className="text-lg font-semibold">Perferred for:-</p>
+              <p className="text-lg">{property.Perferredfor}</p>
             </div>
             <div className="mb-4">
               <p className="text-lg font-semibold">Age Of Construction</p>
               <p className="text-lg">{property.ageofconstruction} years</p>
+            </div>
+            <div className="mb-4">
+              <p className="text-lg font-semibold">Amount of Deposit</p>
+              <p className="text-lg">{property.deposit} $</p>
+            </div>
+            <div className="mb-4">
+              <p className="text-lg font-semibold">Owner Name</p>
+              <p className="text-lg">{property.ownername} </p>
+            </div>
+            <div className="mb-4">
+              <p className="text-lg font-semibold">Full Address</p>
+              <p className="text-lg">{property.description}</p>
+            </div>
+            <div className="mb-4">
+              <p className="text-lg font-semibold">Amount of Rent</p>
+              <p className="text-lg">{property.price} /month</p>
+            </div>
+            <div className="mb-4">
+              <p className="text-lg font-semibold">Additional Information</p>
+              <p className="text-lg">{property.info} $</p>
             </div>
           </div>
         </div>
