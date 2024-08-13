@@ -107,7 +107,7 @@ const DetailPage = () => {
     return <div className="p-4 text-center text-red-600">Property not found</div>;
   }
 
-  const extraImagesCount = property.images.length - 3;
+  const extraImagesCount = property.images.length - 5;
 
   return (
     <div className="pt-[125px] px-4">
@@ -130,7 +130,7 @@ const DetailPage = () => {
               className="w-full h-80 object-cover rounded-lg mb-4"
             />
             <div className="flex space-x-2">
-              {property.images.slice(0, 3).map((image, index) => (
+              {property.images.slice(0, 5).map((image, index) => (
                 <div key={index} className="relative">
                   <img
                     src={image}
