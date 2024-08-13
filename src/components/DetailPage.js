@@ -77,12 +77,12 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { FaBed, FaBath, FaCouch } from "react-icons/fa"; // Importing icons
+import { FaBed, FaBath, FaCouch } from "react-icons/fa";
 
 const DetailPage = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
-  const [mainImage, setMainImage] = useState(""); // State to manage the main image
+  const [mainImage, setMainImage] = useState("");
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -91,7 +91,7 @@ const DetailPage = () => {
         if (response.ok) {
           const data = await response.json();
           setProperty(data);
-          setMainImage(data.images[0]); // Set the initial main image
+          setMainImage(data.images[0]);
         } else {
           console.error("Failed to fetch property details");
         }
@@ -107,24 +107,24 @@ const DetailPage = () => {
     return <div className="p-4 text-center text-red-600">Property not found</div>;
   }
 
-  const extraImagesCount = property.images.length - 3; // Calculate how many extra images there are
+  const extraImagesCount = property.images.length - 3;
 
   return (
     <div className="pt-[125px] px-4">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
-        <div className="mb-4">
-          <h2 className="text-4xl font-bold mb-4 text-gray-800 text-center">₹{property.name}</h2>
-          <p className="text-xl text-gray-600 text-center">
+        <div className="mb-4 text-center">
+          <h2 className="text-2xl font-bold text-gray-800">₹{property.price}</h2>
+          <p className="text-xl text-gray-600">
             {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
             <span className="text-blue-600">{property.location}</span>
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-6">
-          <div className="flex flex-col items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="relative">
             <img
               src={mainImage}
               alt="Main Property"
-              className="w-full h-80 object-cover rounded-lg mb-4"
+              className="w-full h-72 object-cover rounded-lg mb-2"
             />
             <div className="flex space-x-2">
               {property.images.slice(0, 3).map((image, index) => (
@@ -135,7 +135,7 @@ const DetailPage = () => {
                     className={`w-20 h-20 object-cover rounded-lg cursor-pointer ${
                       image === mainImage ? "border-2 border-blue-600" : ""
                     }`}
-                    onClick={() => setMainImage(image)} // Update the main image when a thumbnail is clicked
+                    onClick={() => setMainImage(image)}
                   />
                   {index === 2 && extraImagesCount > 0 && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
@@ -148,54 +148,46 @@ const DetailPage = () => {
               ))}
             </div>
           </div>
-          <div className="space-y-4 text-center">
-            <div className="flex justify-center items-center space-x-2">
+          <div className="space-y-2 text-left">
+            <div className="flex items-center space-x-2">
               <FaBed className="text-gray-600" size={20} />
               <span className="text-lg font-semibold text-gray-800">{property.bed} Beds</span>
             </div>
-            <div className="flex justify-center items-center space-x-2">
+            <div className="flex items-center space-x-2">
               <FaBath className="text-gray-600" size={20} />
               <span className="text-lg font-semibold text-gray-800">{property.bath} Baths</span>
             </div>
-            <div className="flex justify-center items-center space-x-2">
+            <div className="flex items-center space-x-2">
               <FaCouch className="text-gray-600" size={20} />
-              <span className="text-lg font-semibold text-gray-800">{property.FurnishedStatus}</span>
+              <span className="text-lg font-semibold text-gray-800">
+                {property.FurnishedStatus}
+              </span>
             </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Super Built-Up Area</p>
-              <p className="text-lg text-gray-600">{property.sqft} sqft</p>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Super Built-Up Area</p>
+                <p className="text-lg text-gray-600">{property.sqft} sqft</p>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Status</p>
+                <p className="text-lg text-gray-600">{property.Availability}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Status</p>
-              <p className="text-lg text-gray-600">{property.Availability}</p>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Facing</p>
+                <p className="text-lg text-gray-600">{property.facing}</p>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Furnished Status</p>
+                <p className="text-lg text-gray-600">{property.FurnishedStatus}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Preferred for:</p>
-              <p className="text-lg text-gray-600">{property.Perferredfor}</p>
-            </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Age Of Construction</p>
-              <p className="text-lg text-gray-600">{property.ageofconstruction} years</p>
-            </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Amount of Deposit</p>
-              <p className="text-lg text-gray-600">{property.deposit} $</p>
-            </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Owner Name</p>
-              <p className="text-lg text-gray-600">{property.ownername}</p>
-            </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Full Address</p>
-              <p className="text-lg text-gray-600">{property.description}</p>
-            </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Amount of Rent</p>
-              <p className="text-lg text-gray-600">{property.price} /month</p>
-            </div>
-            <div>
-              <p className="text-lg font-semibold text-gray-800">Additional Information</p>
-              <p className="text-lg text-gray-600">{property.info}</p>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Age Of Construction</p>
+                <p className="text-lg text-gray-600">{property.ageofconstruction} years</p>
+              </div>
             </div>
           </div>
         </div>
