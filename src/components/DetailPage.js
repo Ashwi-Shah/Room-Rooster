@@ -113,14 +113,14 @@ const DetailPage = () => {
     <div className="pt-[125px] px-4">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
         <div className="mb-4">
-          <h2 className="text-2xl font-bold mb-2 text-gray-800">₹{property.name}</h2>
-          <p className="text-lg text-gray-600">
+          <h2 className="text-4xl font-bold mb-4 text-gray-800 text-center">₹{property.name}</h2>
+          <p className="text-xl text-gray-600 text-center">
             {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
             <span className="text-blue-600">{property.location}</span>
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-6">
-          <div>
+          <div className="flex flex-col items-center">
             <img
               src={mainImage}
               alt="Main Property"
@@ -148,18 +148,18 @@ const DetailPage = () => {
               ))}
             </div>
           </div>
-          <div className="space-y-4">
-            <div className="flex items-center space-x-4">
+          <div className="space-y-4 text-center">
+            <div className="flex justify-center items-center space-x-2">
               <FaBed className="text-gray-600" size={20} />
-              <span className="text-lg text-gray-800">{property.bed} Beds</span>
+              <span className="text-lg font-semibold text-gray-800">{property.bed} Beds</span>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex justify-center items-center space-x-2">
               <FaBath className="text-gray-600" size={20} />
-              <span className="text-lg text-gray-800">{property.bath} Baths</span>
+              <span className="text-lg font-semibold text-gray-800">{property.bath} Baths</span>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex justify-center items-center space-x-2">
               <FaCouch className="text-gray-600" size={20} />
-              <span className="text-lg text-gray-800">{property.FurnishedStatus}</span>
+              <span className="text-lg font-semibold text-gray-800">{property.FurnishedStatus}</span>
             </div>
             <div>
               <p className="text-lg font-semibold text-gray-800">Super Built-Up Area</p>
