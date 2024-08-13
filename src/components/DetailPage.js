@@ -75,15 +75,37 @@
 
 // export default DetailPage;
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const DetailPage = () => {
+  const { id } = useParams(); // Assuming you are using react-router for dynamic routing
+  const [details, setDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const response = await fetch(`https://room-rooster.vercel.app/details/${id}`);
+        const data = await response.json();
+        setDetails(data);
+      } catch (error) {
+        console.error('Error fetching details:', error);
+      }
+    };
+
+    fetchDetails();
+  }, [id]);
+
+  if (!details) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg">
       <div className="flex flex-col lg:flex-row justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">₹13,000</h1>
-          <p className="text-gray-700">2 BHK 750 Sq-ft For Rent in <span className="text-red-500">Lower Parel, Mumbai</span></p>
+          <h1 className="text-2xl font-bold text-gray-900">₹{details.price}</h1>
+          <p className="text-gray-700">{details.description} in <span className="text-red-500">{details.location}</span></p>
         </div>
         <div className="flex space-x-4">
           <button className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600">Contact Owner</button>
@@ -93,14 +115,14 @@ const DetailPage = () => {
 
       <div className="flex flex-col lg:flex-row mt-4 space-y-4 lg:space-y-0 lg:space-x-4">
         <div className="w-full lg:w-1/2">
-          <img src="your-image-url.jpg" alt="Property" className="rounded-lg w-full h-auto" />
+          <img src={details.images[0]} alt="Property" className="rounded-lg w-full h-auto" />
           <div className="grid grid-cols-4 gap-2 mt-2">
-            <img src="image-url-1.jpg" alt="Property" className="rounded-lg" />
-            <img src="image-url-2.jpg" alt="Property" className="rounded-lg" />
-            <img src="image-url-3.jpg" alt="Property" className="rounded-lg" />
+            {details.images.slice(1, 4).map((image, index) => (
+              <img key={index} src={image} alt={`Property ${index + 1}`} className="rounded-lg" />
+            ))}
             <div className="relative">
-              <img src="image-url-4.jpg" alt="Property" className="rounded-lg" />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white font-semibold rounded-lg">+19 Photos</div>
+              <img src={details.images[4]} alt="Property" className="rounded-lg" />
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white font-semibold rounded-lg">+{details.images.length - 5} Photos</div>
             </div>
           </div>
         </div>
@@ -108,30 +130,30 @@ const DetailPage = () => {
         <div className="w-full lg:w-1/2">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="font-semibold text-gray-600">2 Beds</p>
+              <p className="font-semibold text-gray-600">{details.beds} Beds</p>
             </div>
             <div>
-              <p className="font-semibold text-gray-600">2 Baths</p>
+              <p className="font-semibold text-gray-600">{details.baths} Baths</p>
             </div>
             <div>
               <p className="font-semibold text-gray-600">Super Built-Up Area</p>
-              <p className="text-gray-700">750 sqft <span className="text-sm">₹17/sqft</span></p>
+              <p className="text-gray-700">{details.sqft} sqft </p>
             </div>
             <div>
               <p className="font-semibold text-gray-600">Status</p>
-              <p className="text-gray-700">Immediately</p>
+              <p className="text-gray-700">{details.Availability}</p>
             </div>
             <div>
-              <p className="font-semibold text-gray-600">Facing</p>
-              <p className="text-gray-700">South</p>
+              <p className="font-semibold text-gray-600">Owner Name</p>
+              <p className="text-gray-700">{details.ownername}</p>
             </div>
             <div>
               <p className="font-semibold text-gray-600">Furnished Status</p>
-              <p className="text-gray-700">Semi-Furnished</p>
+              <p className="text-gray-700">{details.furnishedStatus}</p>
             </div>
             <div>
               <p className="font-semibold text-gray-600">Age Of Construction</p>
-              <p className="text-gray-700">5 to 10 years</p>
+              <p className="text-gray-700">{details.ageOfConstruction}</p>
             </div>
           </div>
         </div>
