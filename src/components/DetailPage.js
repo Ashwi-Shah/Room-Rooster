@@ -78,6 +78,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { FaBed, FaBath, FaCouch } from "react-icons/fa"; // Importing icons
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -107,6 +108,8 @@ const DetailPage = () => {
     return <div className="p-4 text-center text-red-600">Property not found</div>;
   }
 
+  const extraImagesCount = property.images.length - 3; // Calculate how many extra images there are
+
   return (
     <div className="pt-[125px] px-4">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
@@ -125,20 +128,40 @@ const DetailPage = () => {
               className="w-full h-64 object-cover rounded-lg mb-2"
             />
             <div className="flex space-x-2">
-              {property.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Property Image ${index + 1}`}
-                  className={`w-1/4 h-24 object-cover rounded-lg cursor-pointer ${
-                    image === mainImage ? "border-2 border-blue-600" : ""
-                  }`}
-                  onClick={() => setMainImage(image)} // Update the main image when a thumbnail is clicked
-                />
+              {property.images.slice(0, 3).map((image, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={image}
+                    alt={`Property Image ${index + 1}`}
+                    className={`w-1/3 h-24 object-cover rounded-lg cursor-pointer ${
+                      image === mainImage ? "border-2 border-blue-600" : ""
+                    }`}
+                    onClick={() => setMainImage(image)} // Update the main image when a thumbnail is clicked
+                  />
+                  {index === 2 && extraImagesCount > 0 && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+                      <span className="text-white font-semibold">
+                        +{extraImagesCount} Photos
+                      </span>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
           <div>
+            <div className="mb-4 flex items-center space-x-4">
+              <FaBed className="text-gray-600" size={20} />
+              <span className="text-lg">{property.bed} Beds</span>
+            </div>
+            <div className="mb-4 flex items-center space-x-4">
+              <FaBath className="text-gray-600" size={20} />
+              <span className="text-lg">{property.bath} Baths</span>
+            </div>
+            <div className="mb-4 flex items-center space-x-4">
+              <FaCouch className="text-gray-600" size={20} />
+              <span className="text-lg">{property.FurnishedStatus}</span>
+            </div>
             <div className="mb-4">
               <p className="text-lg font-semibold">Super Built-Up Area</p>
               <p className="text-lg">{property.sqft} sqft</p>
@@ -150,10 +173,6 @@ const DetailPage = () => {
             <div className="mb-4">
               <p className="text-lg font-semibold">Facing</p>
               <p className="text-lg">{property.Facing}</p>
-            </div>
-            <div className="mb-4">
-              <p className="text-lg font-semibold">Furnished Status</p>
-              <p className="text-lg">{property.FurnishedStatus}</p>
             </div>
             <div className="mb-4">
               <p className="text-lg font-semibold">Age Of Construction</p>
