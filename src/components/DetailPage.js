@@ -360,7 +360,6 @@ const DetailPage = () => {
                 <p className="text-lg font-semibold text-gray-800">Full Address</p>
                 <p className="text-lg text-gray-600">{property.description}</p>
               </div>
-              {/* Additional Information */}
               <div>
                 <p className="text-lg font-semibold text-gray-800">Additional Information</p>
                 <p className="text-lg text-gray-600">{property.info}</p>
