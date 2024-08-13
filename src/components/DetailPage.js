@@ -113,13 +113,26 @@ const DetailPage = () => {
     <div className="pt-[125px] px-4">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
         {/* Header */}
-        <div className="mb-4 text-center">
+        {/* <div className="mb-4 text-center">
           <h2 className="text-4xl font-bold mb-4 text-gray-800">₹{property.price} /month</h2>
           <p className="text-xl text-gray-600">
             {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
             <span className="text-blue-600">{property.location}</span>
           </p>
-        </div>
+        </div> */}
+        <div className="flex justify-between items-center mb-4">
+  <div className="text-left">
+    <h2 className="text-4xl font-bold mb-2 text-gray-800">₹{property.price} /month</h2>
+    <p className="text-xl text-gray-600">
+      {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
+      <span className="text-blue-600">{property.location}</span>
+    </p>
+  </div>
+  <div className="text-right">
+    <h2 className="text-2xl font-bold text-gray-800">{property.name}</h2>
+  </div>
+</div>
+
 
         {/* Images Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-6">
