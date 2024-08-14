@@ -83,7 +83,7 @@ const AddProperty = ({ onAddProperty }) => {
     console.log('FormData:', formData); // Add this line to check the data
   
     try {
-      const response = await fetch("https://room-rooster.vercel.app/details", {
+      const response = await fetch("https://room-rooster.vercel.app/dd", {
         method: "POST",
         body: formData,
       });
