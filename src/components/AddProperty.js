@@ -139,20 +139,11 @@ const AddProperty = ({ onAddProperty }) => {
         }
         navigate("/"); // Redirect to home page after adding property
       } else {
-        const textResponse = await response.text();
-        console.error("Unexpected response format:", textResponse);
-        setError("Unexpected response format. Please try again later.");
+        const errorText = await response.text();
+        console.error("Server error:", errorText);
+        setError(`Error: ${response.status} - ${errorText}`);
       }
-    } else {
-      if (contentType && contentType.includes("application/json")) {
-        const errorData = await response.json();
-        setError(`Error: ${response.statusText} - ${errorData.message}`);
-      } else {
-        const textResponse = await response.text();
-        console.error("Server error:", textResponse);
-        setError(`Error: ${response.statusText} - ${textResponse}`);
-      }
-    }
+    } 
   } catch (error) {
     setError("An unexpected error occurred. Please try again later.");
     console.error("Error adding property:", error);
