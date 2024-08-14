@@ -107,58 +107,58 @@ const AddProperty = ({ onAddProperty }) => {
   // };
   
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData();
-    Object.keys(property).forEach((key) => {
-      if (key === "images") {
-        property.images.forEach((image, index) => {
-          formData.append(`image${index + 1}`, image);
-        });
-      } else {
-        formData.append(key, property[key]);
-      }
-    });
+  e.preventDefault();
   
-    setError(""); // Reset error message before submission
-  
-    try {
-      const response = await fetch("https://room-rooster.vercel.app/details", {
-        method: "POST",
-        body: formData,
+  const formData = new FormData();
+  Object.keys(property).forEach((key) => {
+    if (key === "images") {
+      property.images.forEach((image, index) => {
+        formData.append(`image${index + 1}`, image);
       });
-  
-      // Check if the response is JSON or HTML
-      const contentType = response.headers.get("content-type");
-      
-      if (response.ok) {
-        if (contentType && contentType.includes("application/json")) {
-          const newProperty = await response.json();
-          if (onAddProperty) {
-            onAddProperty(newProperty);
-          }
-          navigate("/"); // Redirect to home page after adding property
-        } else {
-          const textResponse = await response.text();
-          console.error("Unexpected response format:", textResponse);
-          setError("Unexpected response format. Please try again later.");
-        }
-      } else {
-        if (contentType && contentType.includes("application/json")) {
-          const errorData = await response.json();
-          setError(`Error: ${response.statusText} - ${errorData.message}`);
-        } else {
-          const textResponse = await response.text();
-          console.error("Server error:", textResponse);
-          setError(`Error: ${response.statusText} - ${textResponse}`);
-        }
-      }
-    } catch (error) {
-      setError("An unexpected error occurred. Please try again later.");
-      console.error("Error adding property:", error);
+    } else {
+      formData.append(key, property[key]);
     }
-  };
-  
+  });
+
+  setError(""); // Reset error message before submission
+
+  try {
+    const response = await fetch("https://backend-cyan-one.vercel.app/details", {
+      method: "POST",
+      body: formData,
+    });
+
+    // Check if the response is JSON or HTML
+    const contentType = response.headers.get("content-type");
+    
+    if (response.ok) {
+      if (contentType && contentType.includes("application/json")) {
+        const newProperty = await response.json();
+        if (onAddProperty) {
+          onAddProperty(newProperty);
+        }
+        navigate("/"); // Redirect to home page after adding property
+      } else {
+        const textResponse = await response.text();
+        console.error("Unexpected response format:", textResponse);
+        setError("Unexpected response format. Please try again later.");
+      }
+    } else {
+      if (contentType && contentType.includes("application/json")) {
+        const errorData = await response.json();
+        setError(`Error: ${response.statusText} - ${errorData.message}`);
+      } else {
+        const textResponse = await response.text();
+        console.error("Server error:", textResponse);
+        setError(`Error: ${response.statusText} - ${textResponse}`);
+      }
+    }
+  } catch (error) {
+    setError("An unexpected error occurred. Please try again later.");
+    console.error("Error adding property:", error);
+  }
+};
+
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10 transition-shadow duration-300 hover:shadow-2xl">
       <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add Property</h2>
