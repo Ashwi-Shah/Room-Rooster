@@ -380,7 +380,7 @@ const AddProperty = ({ onAddProperty }) => {
     }
     
     try {
-      const response = await fetch("https://backend-cyan-one.vercel.app/details", {
+      const response = await fetch("https://room-rooster.vercel.app/dd", {
         method: "POST",
         body: formData,
       });
