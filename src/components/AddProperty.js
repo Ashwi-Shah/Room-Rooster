@@ -292,6 +292,7 @@
 // };
 
 // export default AddProperty;
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
@@ -374,11 +375,6 @@ const AddProperty = ({ onAddProperty }) => {
       }
     });
   
-    // Debugging logs
-    for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
-    
     try {
       const response = await fetch("https://room-rooster.vercel.app/details", {
         method: "POST",
@@ -391,7 +387,7 @@ const AddProperty = ({ onAddProperty }) => {
         if (onAddProperty) {
           onAddProperty(newProperty);
         }
-        navigate("/"); // Redirect to home page after adding property
+        navigate("/property-listing"); // Redirect to the property listing page after adding the property
       } else {
         const errorData = await response.json();
         console.error("Server response error:", errorData);
