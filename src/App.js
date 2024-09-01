@@ -138,7 +138,7 @@ const App = () => {
                 ) : error ? (
                   <div className="text-center py-4 text-red-500">{error}</div>
                 ) : (
-                  <PropertyListing properties={properties} />
+                  <PropertyListing properties={properties} limit={6} />
                 )}
               </>
             } />
