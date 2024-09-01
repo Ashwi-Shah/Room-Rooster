@@ -6,7 +6,7 @@
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faLocationDot, faPhone, faBath, faBed, faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 
-// const PropertyListing = () => {
+// const PropertyListing = ({ limit }) => {
 //   const [properties, setProperties] = useState([]);
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState(null);
@@ -18,7 +18,11 @@
 //         const response = await fetch('https://room-rooster.vercel.app/details');
 //         if (response.ok) {
 //           const data = await response.json();
-//           setProperties(data);
+//           if (limit) {
+//             setProperties(data.slice(0, limit));
+//           } else {
+//             setProperties(data);
+//           }
 //         } else {
 //           console.error('Failed to fetch properties');
 //           setError('Failed to fetch properties');
@@ -32,7 +36,7 @@
 //     };
 
 //     fetchProperties();
-//   }, []);
+//   }, [limit]);
 
 //   const handleDetailsClick = (id) => {
 //     navigate(`/details/${id}`);
@@ -136,12 +140,16 @@ const PropertyListing = ({ limit }) => {
       try {
         const response = await fetch('https://room-rooster.vercel.app/details');
         if (response.ok) {
-          const data = await response.json();
+          let data = await response.json();
+
+          // Sort properties by the 'createdAt' or 'updatedAt' field in descending order
+          data = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+          // If limit is provided, slice the array to get the latest properties
           if (limit) {
-            setProperties(data.slice(0, limit));
-          } else {
-            setProperties(data);
+            data = data.slice(0, limit);
           }
+          setProperties(data);
         } else {
           console.error('Failed to fetch properties');
           setError('Failed to fetch properties');
