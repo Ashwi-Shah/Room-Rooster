@@ -92,6 +92,7 @@ import InfoPage from './components/InfoPage'; // Import the new component
 import DetailPage from './components/DetailPage'; // Import the DetailPage component
 import ResultsPage from './components/ResultsPage';
 import './tailwind.css';
+import PropertyPage from './components/PropertyPage';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -144,7 +145,7 @@ const App = () => {
             } />
             <Route path="/about" element={<InfoPage />} />
             <Route path="/contact" element={<InfoPage />} />
-            <Route path="/service" element={<InfoPage />} />
+            <Route path="/property" element={<PropertyPage />} />
             <Route path="/" element={<PropertyListing />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/add-property" element={<AddProperty />} />
