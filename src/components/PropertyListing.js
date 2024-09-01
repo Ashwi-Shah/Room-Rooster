@@ -142,7 +142,7 @@ const PropertyListing = ({ limit }) => {
         if (response.ok) {
           let data = await response.json();
 
-          // Sort properties by the 'createdAt' or 'updatedAt' field in descending order
+          // Assuming properties have a createdAt field, sort them by the latest created date
           data = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
           // If limit is provided, slice the array to get the latest properties
