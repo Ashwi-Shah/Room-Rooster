@@ -145,7 +145,7 @@ const App = () => {
             } />
             <Route path="/about" element={<InfoPage />} />
             <Route path="/contact" element={<InfoPage />} />
-            <Route path="/property" element={<PropertyPage />} />
+            <Route path="/property" element={<PropertyPage properties={properties} />} />
             <Route path="/" element={<PropertyListing />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/add-property" element={<AddProperty />} />
