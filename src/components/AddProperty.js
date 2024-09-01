@@ -82,7 +82,7 @@ const AddProperty = ({ onAddProperty }) => {
   
     try {
       const response = await fetch("https://room-rooster.vercel.app/details", {
-        method: "GET",
+        method: "POST",
         body: formData,
       });
   
