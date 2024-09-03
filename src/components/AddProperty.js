@@ -463,4 +463,4 @@ const AddPropertyForm = () => {
   );
 };
 
-export default AddPropertyForm;
+export default AddProperty;
