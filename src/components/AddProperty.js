@@ -422,6 +422,180 @@ const AddProperty = ({ onAddProperty }) => {
       {error && <div className="text-red-500 mb-4">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Add your existing input fields here */}
+        <div className="flex flex-col">
+//         <label className="font-semibold text-gray-600 mb-2">Property Type:</label>
+//           <select
+            name="name"
+            value={property.name}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          >
+            <option value="" disabled>Select Property Type</option>
+            {propertyTypes.map((type, index) => (
+              <option key={index} value={type}>{type}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Price (per month):</label>
+          <input
+            type="number"
+            name="price"
+            value={property.price}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Phone Number:</label>
+          <input
+            type="tel"
+            name="phoneNumber"
+            value={property.phoneNumber}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+        <label className="font-semibold text-gray-600 mb-2">Location:</label>
+          <select
+            name="location"
+            value={property.location}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          >
+            <option value="" disabled>Select Location</option>
+            {locations.map((loc, index) => (
+              <option key={index} value={loc}>{loc}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Address:</label>
+          <textarea
+            name="description"
+            value={property.description}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 resize-y"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Property Image:</label>
+          <input
+            type="file"
+            name="image"
+            multiple
+            onChange={handleImageChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Size (Sqft):</label>
+          <input
+            type="number"
+            name="sqft"
+            value={property.sqft}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Bedrooms:</label>
+          <input
+            type="number"
+            name="bed"
+            value={property.bed}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Bathrooms:</label>
+          <input
+            type="number"
+            name="bath"
+            value={property.bath}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Owner Name:</label>
+          <input
+            type="text"
+            name="ownername"
+            value={property.ownername}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Furnished Status:</label>
+          <input
+            type="text"
+            name="FurnishedStatus"
+            value={property.FurnishedStatus}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Preferred For:</label>
+          <input
+            type="text"
+            name="Perferredfor"
+            value={property.Perferredfor}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Age of Construction:</label>
+          <input
+            type="number"
+            name="ageofconstruction"
+            value={property.ageofconstruction}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Additional Info:</label>
+          <input
+            type="text"
+            name="info"
+            value={property.info}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+          </div>
+          <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Availability:</label>
+          <input
+            type="text"
+            name="Availability"
+            value={property.Availability}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+          </div>
+          <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">deposit:</label>
+          <input
+            type="number"
+            name="deposit"
+            value={property.deposit}
+            onChange={handleChange}
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+          </div>
+        
         <button
           type="submit"
           disabled={isLoading}
