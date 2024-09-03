@@ -350,7 +350,7 @@ const AddProperty = () => {
     }
   
     try {
-      const response = await fetch('https://room-rooster.vercel.app/dd', {
+      const response = await fetch('https://room-rooster.vercel.app/details', {
         method: 'POST',
         body: formDataToSend,
       });
