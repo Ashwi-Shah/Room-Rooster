@@ -295,297 +295,172 @@
 
 
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Resizer from "react-image-file-resizer";
 
-const propertyTypes = ["Villa", "Flat", "Apartment", "Cottage"];
-const locations = ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"];
+// src/components/AddPropertyForm.js
 
-const AddProperty = ({ onAddProperty }) => {
-  const [property, setProperty] = useState({
-    name: "",
-    price: "",
-    phoneNumber: "",
-    location: "",
-    description: "",
+import React, { useState } from 'react';
+
+const AddPropertyForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    description: '',
     images: [],
-    sqft: "",
-    bed: "",
-    bath: "",
-    ownername: "",
-    FurnishedStatus: "",
-    Perferredfor: "",
-    ageofconstruction: "",
-    info: "",
-    Availability: "",
-    deposit: ""
+    phoneNumber: '',
+    sqft: '',
+    bed: '',
+    bath: '',
+    info: '',
+    ownerName: '',
+    furnishedStatus: '',
+    preferredFor: '',
+    ageOfConstruction: '',
+    deposit: '',
+    availability: '',
+    location: ''
   });
-
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProperty({
-      ...property,
-      [name]: value,
+    setFormData({
+      ...formData,
+      [name]: value
     });
   };
 
   const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length > 5) {
-      alert("You can upload up to 5 images.");
-      return;
-    }
-    const resizedImages = [];
-
-    files.forEach(file => {
-      Resizer.imageFileResizer(
-        file,
-        800,
-        550,
-        "JPEG",
-        100,
-        0,
-        (uri) => {
-          resizedImages.push(uri);
-          if (resizedImages.length === files.length) {
-            setProperty({
-              ...property,
-              images: resizedImages
-            });
-          }
-        },
-        "blob"
-      );
+    setFormData({
+      ...formData,
+      images: e.target.files
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formDataToSend = new FormData();
 
-    const formData = new FormData();
-    Object.keys(property).forEach((key) => {
+    // Append form data to FormData object
+    for (const key in formData) {
       if (key === 'images') {
-        property.images.forEach((image, index) => {
-          formData.append(`image${index + 1}`, image, `image${index + 1}.jpeg`);
-        });
+        for (const file of formData.images) {
+          formDataToSend.append('images', file);
+        }
       } else {
-        formData.append(key, property[key]);
+        formDataToSend.append(key, formData[key]);
       }
-    });
+    }
 
     try {
-      const response = await fetch("https://room-rooster.vercel.app/dd", {
-        method: "POST",
-        body: formData,
+      const response = await fetch('https://room-rooster.vercel.app/dd', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          // 'Content-Type' is automatically set to 'multipart/form-data' when using FormData
+        }
       });
 
-      if (!response.ok) {
-        // Log non-200 responses and response text for debugging
-        const errorText = await response.text();
-        console.error("Server response error:", errorText);
-        setError(`Error: ${response.status} - ${response.statusText}`);
-        return;
+      if (response.ok) {
+        alert('Property added successfully!');
+      } else {
+        throw new Error('Failed to add property.');
       }
-
-      const newProperty = await response.json();
-      console.log("Property added successfully:", newProperty);
-      if (onAddProperty) {
-        onAddProperty(newProperty);
-      }
-      navigate("/property-listing");
     } catch (error) {
-      setError("An unexpected error occurred. Please try again later.");
-      console.error("Error adding property:", error);
+      console.error('Error submitting form:', error);
+      alert('There was an error adding the property. Please try again.');
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10 transition-shadow duration-300 hover:shadow-2xl">
-      <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add Property</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Property Type:</label>
-          <select
-            name="name"
-            value={property.name}
-            onChange={handleChange}
-            required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          >
-            <option value="" disabled>Select Property Type</option>
-            {propertyTypes.map((type, index) => (
-              <option key={index} value={type}>{type}</option>
-            ))}
-          </select>
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Price (per month):</label>
-          <input
-            type="number"
-            name="price"
-            value={property.price}
-            onChange={handleChange}
-            required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Phone Number:</label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={property.phoneNumber}
-            onChange={handleChange}
-            required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Location:</label>
-          <select
-            name="location"
-            value={property.location}
-            onChange={handleChange}
-            required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          >
-            <option value="" disabled>Select Location</option>
-            {locations.map((loc, index) => (
-              <option key={index} value={loc}>{loc}</option>
-            ))}
-          </select>
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Address:</label>
-          <textarea
-            name="description"
-            value={property.description}
-            onChange={handleChange}
-            required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 resize-y"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Property Image:</label>
-          <input
-            type="file"
-            name="image"
-            multiple
-            onChange={handleImageChange}
-            required
-            className="p-3 border border-gray-300 rounded-md focus:outline-none"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Size (Sqft):</label>
-          <input
-            type="number"
-            name="sqft"
-            value={property.sqft}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Bedrooms:</label>
-          <input
-            type="number"
-            name="bed"
-            value={property.bed}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Bathrooms:</label>
-          <input
-            type="number"
-            name="bath"
-            value={property.bath}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Owner Name:</label>
-          <input
-            type="text"
-            name="ownername"
-            value={property.ownername}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Furnished Status:</label>
-          <input
-            type="text"
-            name="FurnishedStatus"
-            value={property.FurnishedStatus}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Preferred For:</label>
-          <input
-            type="text"
-            name="Perferredfor"
-            value={property.Perferredfor}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Age of Construction:</label>
-          <input
-            type="number"
-            name="ageofconstruction"
-            value={property.ageofconstruction}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Additional Info:</label>
-          <textarea
-            name="info"
-            value={property.info}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 resize-y"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Availability:</label>
-          <input
-            type="text"
-            name="Availability"
-            value={property.Availability}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-semibold text-gray-600 mb-2">Deposit Amount:</label>
-          <input
-            type="number"
-            name="deposit"
-            value={property.deposit}
-            onChange={handleChange}
-            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
-          />
-        </div>
-        <button type="submit" className="mt-6 w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
-          Add Property
-        </button>
-      </form>
-      {error && <p className="text-red-500 mt-4">{error}</p>}
-    </div>
+    <form onSubmit={handleSubmit} className="max-w-xl mx-auto mt-10 p-8 bg-white rounded shadow-md">
+      <h1 className="text-2xl font-bold mb-6">Add Property</h1>
+      
+      <label className="block mb-4">
+        Name:
+        <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        Price:
+        <input type="text" name="name" value={formData.price} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        description:
+        <input type="text" name="name" value={formData.description} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        phoneNumber:
+        <input type="text" name="name" value={formData.phoneNumber} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        sqft:
+        <input type="text" name="name" value={formData.sqft} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        bed:
+        <input type="text" name="name" value={formData.bed} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        bath:
+        <input type="text" name="name" value={formData.bath} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        OwnerName:
+        <input type="text" name="name" value={formData.ownername} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        info:
+        <input type="text" name="name" value={formData.info} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        FurnishedStatus:
+        <input type="text" name="name" value={formData.FurnishedStatus} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        Perferredfor:
+        <input type="text" name="name" value={formData.Perferredfor} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        ageofconstruction:
+        <input type="text" name="name" value={formData.ageofconstruction} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        deposit:
+        <input type="text" name="name" value={formData.deposit} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        Availability:
+        <input type="text" name="name" value={formData.Availability} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      <label className="block mb-4">
+        location:
+        <input type="text" name="name" value={formData.location} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+      </label>
+
+      {/* Repeat similar fields for price, description, etc. */}
+
+      <label className="block mb-4">
+        Images:
+        <input type="file" name="images" onChange={handleImageChange} className="w-full p-2 border rounded mt-1" multiple />
+      </label>
+
+      <button type="submit" className="mt-4 w-full bg-blue-500 text-white p-2 rounded">
+        Submit
+      </button>
+    </form>
   );
 };
 
-export default AddProperty;
+export default AddPropertyForm;
