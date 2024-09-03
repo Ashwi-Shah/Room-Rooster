@@ -451,10 +451,17 @@ const AddPropertyForm = () => {
 
       {/* Repeat similar fields for price, description, etc. */}
 
-      <label className="block mb-4">
-        Images:
-        <input type="file" name="images" onChange={handleImageChange} className="w-full p-2 border rounded mt-1" multiple />
-      </label>
+      <div className="flex flex-col">
+           <label className="font-semibold text-gray-600 mb-2">Property Image:</label>
+           <input
+             type="file"
+             name="image"
+             multiple
+             onChange={handleImageChange}
+             required
+             className="p-3 border border-gray-300 rounded-md focus:outline-none"
+           />
+         </div>
 
       <button type="submit" className="mt-4 w-full bg-blue-500 text-white p-2 rounded">
         Submit
