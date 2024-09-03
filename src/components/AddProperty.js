@@ -297,10 +297,9 @@
 
 
 // src/components/AddPropertyForm.js
-
 import React, { useState } from 'react';
 
-const AddPropertyForm = () => {
+const AddProperty = () => {
   const [formData, setFormData] = useState({
     name: '',
     price: '',
@@ -375,93 +374,91 @@ const AddPropertyForm = () => {
       <h1 className="text-2xl font-bold mb-6">Add Property</h1>
       
       <label className="block mb-4">
-        name:
-        <input type="text" name="name" value={property.name} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Name:
+        <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        price:
-        <input type="text" name="price" value={property.price} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Price:
+        <input type="text" name="price" value={formData.price} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        description:
-        <input type="text" name="description" value={property.description} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Description:
+        <input type="text" name="description" value={formData.description} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        phoneNumber:
-        <input type="text" name="phoneNumber" value={property.phoneNumber} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Phone Number:
+        <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        sqft:
-        <input type="text" name="sqft" value={property.sqft} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Sqft:
+        <input type="text" name="sqft" value={formData.sqft} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        bed:
-        <input type="text" name="bed" value={property.bed} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Bed:
+        <input type="text" name="bed" value={formData.bed} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        bath:
-        <input type="text" name="bath" value={property.bath} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Bath:
+        <input type="text" name="bath" value={formData.bath} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        ownername:
-        <input type="text" name="ownername" value={property.ownername} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Owner Name:
+        <input type="text" name="ownerName" value={formData.ownerName} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        info:
-        <input type="text" name="info" value={property.info} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Info:
+        <input type="text" name="info" value={formData.info} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        FurnishedStatus:
-        <input type="text" name="FurnishedStatus" value={property.FurnishedStatus} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Furnished Status:
+        <input type="text" name="furnishedStatus" value={formData.furnishedStatus} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        Perferredfor:
-        <input type="text" name="Perferredfor" value={property.Perferredfor} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Preferred For:
+        <input type="text" name="preferredFor" value={formData.preferredFor} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        ageofconstruction:
-        <input type="text" name="ageofconstruction" value={property.ageofconstruction} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Age of Construction:
+        <input type="text" name="ageOfConstruction" value={formData.ageOfConstruction} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        deposit:
-        <input type="text" name="deposit" value={property.deposit} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Deposit:
+        <input type="text" name="deposit" value={formData.deposit} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
         Availability:
-        <input type="text" name="Availability" value={property.Availability} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        <input type="text" name="availability" value={formData.availability} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
       <label className="block mb-4">
-        location:
-        <input type="text" name="location" value={property.property} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+        Location:
+        <input type="text" name="location" value={formData.location} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
       </label>
 
-      {/* Repeat similar fields for price, description, etc. */}
-
-      <div className="flex flex-col">
-           <label className="font-semibold text-gray-600 mb-2">Property Image:</label>
-           <input
-             type="file"
-             name="image"
-             multiple
-             onChange={handleImageChange}
-             required
-             className="p-3 border border-gray-300 rounded-md focus:outline-none"
-           />
-         </div>
+      <label className="block mb-4">
+        Property Image:
+        <input
+          type="file"
+          name="images"
+          multiple
+          onChange={handleImageChange}
+          required
+          className="p-3 border border-gray-300 rounded-md focus:outline-none"
+        />
+      </label>
 
       <button type="submit" className="mt-4 w-full bg-blue-500 text-white p-2 rounded">
         Submit
