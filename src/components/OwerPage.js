@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { FaBed, FaBath, FaCouch, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { FaBed, FaBath, FaCouch } from "react-icons/fa";
 
-const OwerPage = () => {
+const DetailPage = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [property, setProperty] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -30,25 +29,6 @@ const OwerPage = () => {
 
     fetchProperty();
   }, [id]);
-
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this property?");
-    if (confirmDelete) {
-      try {
-        const response = await fetch(`https://room-rooster.vercel.app/details/${id}`, {
-          method: "DELETE",
-        });
-        if (response.ok) {
-          alert("Property deleted successfully");
-          navigate("/property-listing"); // Redirect after deletion
-        } else {
-          alert("Failed to delete the property");
-        }
-      } catch (error) {
-        alert("Error deleting the property");
-      }
-    }
-  };
 
   if (loading) {
     return <div className="p-4 text-center">Loading...</div>;
@@ -76,18 +56,8 @@ const OwerPage = () => {
               <span className="text-blue-600">{property.location}</span>
             </p>
           </div>
-          <div className="flex space-x-4">
-            {/* Edit and Delete Icons */}
-            <FaEdit
-              className="text-blue-600 cursor-pointer"
-              size={24}
-              onClick={() => navigate(`/edit-property/${id}`)} // Navigate to Edit Page
-            />
-            <FaTrashAlt
-              className="text-red-600 cursor-pointer"
-              size={24}
-              onClick={handleDelete}
-            />
+          <div className="text-right">
+            <h2 className="text-2xl font-bold text-gray-800">{property.name}</h2>
           </div>
         </div>
 
@@ -126,7 +96,55 @@ const OwerPage = () => {
 
           {/* Property Details */}
           <div className="space-y-4">
-            {/* Your property details remain unchanged */}
+            <div className="flex justify-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <FaBed className="text-gray-600" size={20} />
+                <span className="text-lg font-semibold text-gray-800">{property.bed} Beds</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <FaBath className="text-gray-600" size={20} />
+                <span className="text-lg font-semibold text-gray-800">{property.bath} Baths</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <FaCouch className="text-gray-600" size={20} />
+                <span className="text-lg font-semibold text-gray-800">{property.FurnishedStatus}</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Super Built-Up Area</p>
+                <p className="text-lg text-gray-600">{property.sqft} sqft</p>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Status</p>
+                <p className="text-lg text-gray-600">{property.Availability}</p>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Preferred for</p>
+                <p className="text-lg text-gray-600">{property.Perferredfor}</p>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Age Of Construction</p>
+                <p className="text-lg text-gray-600">{property.ageofconstruction} years</p>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Amount of Deposit</p>
+                <p className="text-lg text-gray-600">₹{property.deposit}</p>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Owner Name</p>
+                <p className="text-lg text-gray-600">{property.ownername}</p>
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-gray-800">Full Address</p>
+                <p className="text-lg text-gray-600">{property.description}</p>
+              </div>
+              <div className="col-span-2">
+                <p className="text-lg font-semibold text-gray-800">Additional Information</p>
+                <p className="text-lg text-gray-600">{property.info}</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -144,4 +162,4 @@ const OwerPage = () => {
   );
 };
 
-export default OwerPage;
+export default DetailPage;
