@@ -262,10 +262,10 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           />
         </label>
         <label className="block mb-2">
-          sqrt:
+        sqft:
           <input
             type="number"
-            value={sqrt}
+            value={sqft}
             onChange={(e) => setLocation(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
