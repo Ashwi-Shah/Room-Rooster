@@ -141,7 +141,7 @@ const OwerLogin = ({ setIsAuthenticated }) => {
 
       if (response.ok) {
         setIsAuthenticated(true);  // Update authentication state
-        navigate('/ower-page');    // Redirect to OwerPage
+        navigate('/ower-page/:id');    // Redirect to OwerPage
       } else {
         console.error('Error logging in:', response.statusText);
       }

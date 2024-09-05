@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import CustomNavbar from './components/Navbar';
 import ScrollingSection from './components/ScrollingSection';
 import AdvanceSearch from './components/AdvanceSearch';
@@ -23,6 +23,8 @@ const App = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = Navigate();
+
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -77,7 +79,7 @@ const App = () => {
             <Route path="/ower-login" element={<OwerLogin setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/details/:id" element={<DetailPage />} />
             <Route
-              path="/ower-page"
+              path="/ower-page/:id"
               element={isAuthenticated ? <OwerPage /> : <Navigate to="/ower-login" />}
             />
             {/* <Route path="*" element={<NotFound />} /> */}
