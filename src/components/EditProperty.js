@@ -134,8 +134,19 @@ const EditProperty = ({ propertyId, onSuccess }) => {
   const [property, setProperty] = useState(null);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [phoneNumber, setPhoneNumber]= useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
+  const [sqft, setSqft] = useState('');
+  const [bed, setBed] = useState('');
+  const [bath, setBath] = useState('');
+  const [ownername, setOwnerName] = useState('');
+  const [FurnishedStatus, setFurnishedStatus] = useState('');
+  const [Perferredfor, setPerferredfor] = useState('');
+  const [ageofconstruction, setAgeofconstruction] = useState('');
+  const [info, setInfo] = useState('');
+  const [Availability, setAvailability] = useState('');
+  const [deposit, setDeposit] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -148,8 +159,19 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           setProperty(data);
           setName(data.name);
           setPrice(data.price);
+          setPhoneNumber(data.phoneNumber);
           setLocation(data.location);
           setDescription(data.description);
+          setSqft(data.sqft);
+          setBed(data.bed);
+          setBath(data.bath);
+          setOwnerName(data.ownername);
+          setFurnishedStatus(data.FurnishedStatus);
+          setPerferredfor(data.Perferredfor);
+          setAgeofconstruction(data.ageofconstruction);
+          setInfo(data.info);
+          setAvailability(data.Availability);
+          setDeposit(data.deposit);
         } else {
           setError('Failed to fetch property details');
         }
@@ -207,8 +229,17 @@ const EditProperty = ({ propertyId, onSuccess }) => {
         <label className="block mb-2">
           Price:
           <input
-            type="text"
+            type="number"
             value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+          Phone Number:
+          <input
+            type="number"
+            value={phoneNumber}
             onChange={(e) => setPrice(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
@@ -227,6 +258,96 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+          sqrt:
+          <input
+            type="number"
+            value={sqrt}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+          Bed:
+          <input
+            type="number"
+            value={bed}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+          Bath:
+          <input
+            type="number"
+            value={bath}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+        Ownername:
+          <input
+            type="text"
+            value={ownername}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+        FurnishedStatus:
+          <input
+            type="text"
+            value={FurnishedStatus}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+        Perferredfor:
+          <input
+            type="text"
+            value={Perferredfor}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+        Ageofconstruction:
+          <input
+            type="number"
+            value={ageofconstruction}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+        Info:
+          <input
+            type="text"
+            value={info}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+        Availability:
+          <input
+            type="text"
+            value={Availability}
+            onChange={(e) => setLocation(e.target.value)}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+        Deposit:
+          <input
+            type="number"
+            value={deposit}
+            onChange={(e) => setLocation(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
