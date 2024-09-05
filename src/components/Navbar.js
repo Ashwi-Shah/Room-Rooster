@@ -78,7 +78,7 @@ const CustomNavbar = ({ isAuthenticated, setIsAuthenticated, name }) => {
                                     <div className="flex flex-col gap-2">
                                         <Link to="/signup" className="bg-transparent text-[#F0ECE3] font-semibold border border-[#596E79] px-4 py-2 rounded-lg text-center hover:bg-gray-600 transition duration-300">Sign Up</Link>
                                         <Link to="/login" className="bg-transparent text-[#F0ECE3] font-semibold border border-[#596E79] px-4 py-2 rounded-lg text-center hover:bg-gray-600 transition duration-300">Log In as Viewer</Link>
-                                        <Link to="/ower-login/:id" className="bg-transparent text-[#F0ECE3] font-semibold border border-[#596E79] px-4 py-2 rounded-lg text-center hover:bg-gray-600 transition duration-300">Log In as Ower</Link>
+                                        <Link to="/ower-login" className="bg-transparent text-[#F0ECE3] font-semibold border border-[#596E79] px-4 py-2 rounded-lg text-center hover:bg-gray-600 transition duration-300">Log In as Ower</Link>
                                     </div>
                                 </>
                             )}
