@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
-// import { FaBed, FaBath, FaCouch } from "react-icons/fa";
+// import { FaBed, FaBath, FaCouch, FaTrashAlt, FaEdit } from "react-icons/fa";
 
 // const OwerPage = () => {
 //   const { id } = useParams();
@@ -148,14 +148,18 @@
 //           </div>
 //         </div>
 
-//         {/* Action Buttons */}
-//         <div className="flex justify-between mt-6">
+//         {/* Action Buttons and Icons */}
+//         <div className="flex justify-between mt-6 items-center">
 //           <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
 //             Contact Owner
 //           </button>
-//           <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
-//             Make Offer
-//           </button>
+//           <div className="flex space-x-4 items-center">
+//             <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
+//               Make Offer
+//             </button>
+//             <FaEdit className="text-gray-600 cursor-pointer" size={24} title="Edit Property" />
+//             <FaTrashAlt className="text-red-600 cursor-pointer" size={24} title="Delete Property" />
+//           </div>
 //         </div>
 //       </div>
 //     </div>
@@ -165,7 +169,9 @@
 // export default OwerPage;
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { FaBed, FaBath, FaCouch, FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaBed, FaBath, FaCouch, FaEdit, FaTrash } from "react-icons/fa";
+import DeleteProperty from "./DeleteProperty";
+import EditProperty from "./EditProperty";
 
 const OwerPage = () => {
   const { id } = useParams();
@@ -173,6 +179,8 @@ const OwerPage = () => {
   const [mainImage, setMainImage] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -194,6 +202,16 @@ const OwerPage = () => {
 
     fetchProperty();
   }, [id]);
+
+  const handleDeleteSuccess = () => {
+    setShowDelete(false);
+    // Optionally, you can redirect or update state here
+  };
+
+  const handleEditSuccess = () => {
+    setShowEdit(false);
+    // Optionally, you can update state here to reflect the changes
+  };
 
   if (loading) {
     return <div className="p-4 text-center">Loading...</div>;
@@ -313,20 +331,38 @@ const OwerPage = () => {
           </div>
         </div>
 
-        {/* Action Buttons and Icons */}
-        <div className="flex justify-between mt-6 items-center">
+        {/* Action Buttons */}
+        <div className="flex justify-between mt-6">
           <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
             Contact Owner
           </button>
-          <div className="flex space-x-4 items-center">
-            <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
-              Make Offer
+          <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
+            Make Offer
+          </button>
+          <div className="flex space-x-4">
+            <button
+              onClick={() => setShowEdit(true)}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+            >
+              <FaEdit size={20} />
             </button>
-            <FaEdit className="text-gray-600 cursor-pointer" size={24} title="Edit Property" />
-            <FaTrashAlt className="text-red-600 cursor-pointer" size={24} title="Delete Property" />
+            <button
+              onClick={() => setShowDelete(true)}
+              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+            >
+              <FaTrash size={20} />
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Conditional Rendering for Edit and Delete */}
+      {showEdit && (
+        <EditProperty propertyId={id} onSuccess={handleEditSuccess} />
+      )}
+      {showDelete && (
+        <DeleteProperty propertyId={id} onSuccess={handleDeleteSuccess} />
+      )}
     </div>
   );
 };
