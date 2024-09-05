@@ -94,6 +94,7 @@ import ResultsPage from './components/ResultsPage';
 import './tailwind.css';
 import PropertyPage from './components/PropertyPage';
 import OwerPage from './components/OwerPage';
+import OwerLogin from './components/OwerLogin';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -152,8 +153,9 @@ const App = () => {
             <Route path="/add-property" element={<AddProperty />} />
             <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} setName={setName} />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/ower-login" element={<OwerPage />} />
+            <Route path="/ower-login" element={<OwerLogin />} />
             <Route path="/details/:id" element={<DetailPage />} />
+            <Route path="/ower-login/ower-page" element={<OwerPage />} />
             {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
           <Footer />
