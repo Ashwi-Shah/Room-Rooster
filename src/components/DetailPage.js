@@ -12,7 +12,7 @@ const DetailPage = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await fetch(`https://room-rooster.vercel.app/details/${id}`);
+        const response = await fetch(`https://room-rooster.vercel.app/get-data-idwise/details/${id}`);
         if (response.ok) {
           const data = await response.json();
           setProperty(data);

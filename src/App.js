@@ -106,7 +106,7 @@ const App = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch('https://room-rooster.vercel.app/details');
+        const response = await fetch('https://room-rooster.vercel.app/get-all-data/details');
         if (response.ok) {
           const data = await response.json();
           setProperties(data);

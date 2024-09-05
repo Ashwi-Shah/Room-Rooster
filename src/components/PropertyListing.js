@@ -138,7 +138,7 @@ const PropertyListing = ({ limit }) => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch('https://room-rooster.vercel.app/details');
+        const response = await fetch('https://room-rooster.vercel.app/get-all-data/details');
         if (response.ok) {
           let data = await response.json();
 
