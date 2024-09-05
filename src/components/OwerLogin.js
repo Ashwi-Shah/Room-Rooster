@@ -90,7 +90,7 @@ const OwerLogin = ({ setIsAuthenticated }) => {
           />
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
         </div>
-        <button type="submit" onClick={() => handleDetailsClick(_id)} className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
+        <button type="submit" onClick={() => handleDetailsClick(id)} className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
           Login
         </button>
       </form>
