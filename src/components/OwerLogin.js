@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const OwerLogin = ({ setIsAuthenticated }) => {
-    const { id } = useParams();
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [errors, setErrors] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -39,31 +40,43 @@ const OwerLogin = ({ setIsAuthenticated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-  
+
     try {
-      const response = await fetch('https://room-rooster.vercel.app/login', {
+      let apiUrl = '';
+      
+      // Check the email and password and assign the appropriate API URL
+      if (formData.email === 'divy@gmail.com' && formData.password === 'divybhai') {
+        apiUrl = 'https://room-rooster.vercel.app/login';
+      } else if (formData.email === 'ashwi@gmail.com' && formData.password === 'ashwi') {
+        apiUrl = 'https://room-rooster.vercel.app/get-data-idwise/details/66bb2d2b403610f55985431d';
+      } else {
+        setErrorMessage('Invalid email or password');
+        return;
+      }
+
+      // Fetch the data from the selected API
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-  
+
       if (response.ok) {
-        const data = await response.json(); // Assuming the response contains an `id`
-        setIsAuthenticated(true);  // Update authentication state
-  
-        // Navigate to OwerPage with the ID returned from the API
+        const data = await response.json();
+        setIsAuthenticated(true);
+
+        // Navigate based on the returned data (assuming data.id is part of the response)
         navigate(`/ower-page/${data.id}`);
       } else {
-        console.error('Error logging in:', response.statusText);
+        console.error('Error:', response.statusText);
+        setErrorMessage('Failed to login, please try again.');
       }
     } catch (error) {
       console.error('Error logging in:', error);
+      setErrorMessage('An error occurred, please try again later.');
     }
   };
-  const handleDetailsClick = (id) => {
-    navigate(`/ower-page/${id}`);
-  };
-  
+
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
       <h2 className="text-2xl font-bold mb-4">Ower-Login</h2>
@@ -90,7 +103,8 @@ const OwerLogin = ({ setIsAuthenticated }) => {
           />
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
         </div>
-        <button type="submit" onClick={() => handleDetailsClick(id)} className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
+        {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
+        <button type="submit" className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
           Login
         </button>
       </form>
