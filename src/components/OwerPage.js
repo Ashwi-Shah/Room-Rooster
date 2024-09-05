@@ -154,7 +154,7 @@ const OwerPage = () => {
             Contact Owner
           </button>
           <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
-            Make Offer
+            Make Offerrrrrrrrrr
           </button>
         </div>
       </div>
