@@ -88,8 +88,8 @@ import Footer from './components/Footer';
 import AddProperty from './components/AddProperty';
 import Signup from './components/Signup'; 
 import Login from './components/Login';
-import InfoPage from './components/InfoPage'; // Import the new component
-import DetailPage from './components/DetailPage'; // Import the DetailPage component
+import InfoPage from './components/InfoPage';
+import DetailPage from './components/DetailPage'; 
 import ResultsPage from './components/ResultsPage';
 import './tailwind.css';
 import PropertyPage from './components/PropertyPage';
