@@ -77,7 +77,7 @@ const App = () => {
             <Route path="/ower-login" element={<OwerLogin setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/details/:id" element={<DetailPage />} />
             <Route
-              path="/ower-page/:id"
+              path="/ower-page/details/:id"
               element={isAuthenticated ? <OwerPage /> : <OwerLogin/>}
             />
             {/* <Route path="*" element={<NotFound />} /> */}
