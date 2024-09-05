@@ -56,6 +56,10 @@ const OwerLogin = () => {
     }
   };
 
+  const handleDetailsClick = (id) => {
+    navigate(`/details/${id}`);
+  };
+
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
       <h2 className="text-2xl font-bold mb-4">Ower-Login</h2>
@@ -82,7 +86,7 @@ const OwerLogin = () => {
           />
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
         </div>
-        <button type="submit" className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
+        <button type="submit"  onClick={() => handleDetailsClick(detail._id)} className="w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
           Login
         </button>
       </form>
