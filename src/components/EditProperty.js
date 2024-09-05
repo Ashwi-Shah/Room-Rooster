@@ -130,7 +130,7 @@
 // export default EditProperty;
 import React, { useState, useEffect } from 'react';
 
-const EditProperty = ({ id, onSuccess }) => {
+const EditProperty = ({ id, propertyId, onSuccess }) => {
   const [property, setProperty] = useState(null);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -142,7 +142,7 @@ const EditProperty = ({ id, onSuccess }) => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await fetch(`https://room-rooster.vercel.app/get-data-idwise/details/${id}`);
+        const response = await fetch(`https://room-rooster.vercel.app/get-data-idwise/details/${propertyId}`);
         if (response.ok) {
           const data = await response.json();
           setProperty(data);
@@ -161,7 +161,7 @@ const EditProperty = ({ id, onSuccess }) => {
     };
 
     fetchProperty();
-  }, [id]);
+  }, [propertyId]);
 
   const handleSave = async () => {
     try {
