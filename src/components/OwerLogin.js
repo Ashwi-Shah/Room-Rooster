@@ -205,7 +205,7 @@ const OwerLogin = ({ setIsAuthenticated }) => {
   };
 
   const admin2 = {
-    email: 'ashwi@gamil.com',
+    email: 'ashwi@gmail.com',
     password: 'ashwi',
     id: '66b31ca03cbbbaa3c6142d83'
   };
