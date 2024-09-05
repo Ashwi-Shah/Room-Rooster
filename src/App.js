@@ -74,7 +74,7 @@ const App = () => {
             <Route path="/add-property" element={<AddProperty />} />
             <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} setName={setName} />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/ower-login/:id" element={<OwerLogin setIsAuthenticated={setIsAuthenticated} />} />
+            <Route path="/ower-login" element={<OwerLogin setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/details/:id" element={<DetailPage />} />
             <Route path="/ower-page/:id" element={<OwerPage />} />
 
