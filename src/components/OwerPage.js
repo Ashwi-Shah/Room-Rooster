@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaBed, FaBath, FaCouch } from "react-icons/fa";
 
-const DetailPage = () => {
+const OwerPage = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [mainImage, setMainImage] = useState("");
@@ -162,4 +162,4 @@ const DetailPage = () => {
   );
 };
 
-export default DetailPage;
+export default OwerPage;

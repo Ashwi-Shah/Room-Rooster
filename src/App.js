@@ -155,7 +155,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/ower-login" element={<OwerLogin />} />
             <Route path="/details/:id" element={<DetailPage />} />
-            <Route path="/ower-page/:id" element={<OwerPage />} />
+            <Route path="/details/:id" element={<OwerPage />} />
             {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
           <Footer />
