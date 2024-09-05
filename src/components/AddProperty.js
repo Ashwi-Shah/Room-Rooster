@@ -290,3 +290,181 @@ const AddProperty = ({ onAddProperty }) => {
 };
 
 export default AddProperty;
+
+
+
+
+
+
+// // src/components/AddPropertyForm.js
+// import React, { useState } from 'react';
+
+// const AddProperty = () => {
+//   const [formData, setFormData] = useState({
+//     name: '',
+//     price: '',
+//     description: '',
+//     images: [],
+//     phoneNumber: '',
+//     sqft: '',
+//     bed: '',
+//     bath: '',
+//     info: '',
+//     ownerName: '',
+//     furnishedStatus: '',
+//     preferredFor: '',
+//     ageOfConstruction: '',
+//     deposit: '',
+//     availability: '',
+//     location: ''
+//   });
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({
+//       ...formData,
+//       [name]: value
+//     });
+//   };
+
+//   const handleImageChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       images: e.target.files
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const formDataToSend = new FormData();
+  
+//     // Append form data to FormData object
+//     for (const key in formData) {
+//       if (key === 'images') {
+//         for (const file of formData.images) {
+//           formDataToSend.append('images', file);
+//         }
+//       } else {
+//         formDataToSend.append(key, formData[key]);
+//       }
+//     }
+  
+//     try {
+//       const response = await fetch('https://room-rooster.vercel.app/details', {
+//         method: 'POST',
+//         body: formDataToSend,
+//       });
+  
+//       if (response.ok) {
+//         alert('Property added successfully!');
+//       } else {
+//         const errorText = await response.text();
+//         console.error('Error submitting form:', errorText);
+//         alert('Failed to add property. Server responded with: ' + errorText);
+//       }
+//     } catch (error) {
+//       console.error('Error submitting form:', error);
+//       alert('There was an error adding the property. Please try again.');
+//     }
+//   };
+  
+
+//   return (
+//     <form onSubmit={handleSubmit} className="max-w-xl mx-auto mt-10 p-8 bg-white rounded shadow-md">
+//       <h1 className="text-2xl font-bold mb-6">Add Property</h1>
+      
+//       <label className="block mb-4">
+//         Name:
+//         <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Price:
+//         <input type="text" name="price" value={formData.price} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Description:
+//         <input type="text" name="description" value={formData.description} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Phone Number:
+//         <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Sqft:
+//         <input type="text" name="sqft" value={formData.sqft} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Bed:
+//         <input type="text" name="bed" value={formData.bed} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Bath:
+//         <input type="text" name="bath" value={formData.bath} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Owner Name:
+//         <input type="text" name="ownerName" value={formData.ownerName} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Info:
+//         <input type="text" name="info" value={formData.info} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Furnished Status:
+//         <input type="text" name="furnishedStatus" value={formData.furnishedStatus} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Preferred For:
+//         <input type="text" name="preferredFor" value={formData.preferredFor} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Age of Construction:
+//         <input type="text" name="ageOfConstruction" value={formData.ageOfConstruction} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Deposit:
+//         <input type="text" name="deposit" value={formData.deposit} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Availability:
+//         <input type="text" name="availability" value={formData.availability} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Location:
+//         <input type="text" name="location" value={formData.location} onChange={handleChange} className="w-full p-2 border rounded mt-1" required />
+//       </label>
+
+//       <label className="block mb-4">
+//         Property Image:
+//         <input
+//           type="file"
+//           name="images"
+//           multiple
+//           onChange={handleImageChange}
+//           required
+//           className="p-3 border border-gray-300 rounded-md focus:outline-none"
+//         />
+//       </label>
+
+//       <button type="submit" className="mt-4 w-full bg-blue-500 text-white p-2 rounded">
+//         Submit
+//       </button>
+//     </form>
+//   );
+// };
+
+// export default AddProperty;
