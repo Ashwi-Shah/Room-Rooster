@@ -130,7 +130,7 @@
 // export default EditProperty;
 import React, { useState, useEffect } from 'react';
 
-const EditProperty = ({ id, propertyId, onSuccess }) => {
+const EditProperty = ({ propertyId, onSuccess }) => {
   const [property, setProperty] = useState(null);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -165,7 +165,7 @@ const EditProperty = ({ id, propertyId, onSuccess }) => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch(`https://room-rooster.vercel.app/update/details/${id}`, {
+      const response = await fetch(`https://room-rooster.vercel.app/update/details/${propertyId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
