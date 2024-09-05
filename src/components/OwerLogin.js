@@ -92,9 +92,10 @@
 
 // export default OwerLogin;
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const OwerLogin = ({ setIsAuthenticated }) => {
+    const { id } = useParams();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -141,7 +142,7 @@ const OwerLogin = ({ setIsAuthenticated }) => {
 
       if (response.ok) {
         setIsAuthenticated(true);  // Update authentication state
-        navigate('/ower-page/:id');    // Redirect to OwerPage
+        navigate(`/ower-page/${id}`);    // Redirect to OwerPage
       } else {
         console.error('Error logging in:', response.statusText);
       }
