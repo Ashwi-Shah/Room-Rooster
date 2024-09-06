@@ -12,7 +12,9 @@ const DetailPage = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await fetch(`https://room-rooster.vercel.app/get-data-idwise/details/${id}`);
+        const response = await fetch(
+          `https://room-rooster.vercel.app/get-data-idwise/details/${id}`
+        );
         if (response.ok) {
           const data = await response.json();
           setProperty(data);
@@ -39,7 +41,9 @@ const DetailPage = () => {
   }
 
   if (!property) {
-    return <div className="p-4 text-center text-red-600">Property not found</div>;
+    return (
+      <div className="p-4 text-center text-red-600">Property not found</div>
+    );
   }
 
   const extraImagesCount = property.images.length - 5;
@@ -50,14 +54,18 @@ const DetailPage = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <div className="text-left">
-            <h2 className="text-4xl font-bold mb-2 text-gray-800">₹{property.price} /month</h2>
+            <h2 className="text-4xl font-bold mb-2 text-gray-800">
+              ₹{property.price} /month
+            </h2>
             <p className="text-xl text-gray-600">
               {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
               <span className="text-blue-600">{property.location}</span>
             </p>
           </div>
           <div className="text-right">
-            <h2 className="text-2xl font-bold text-gray-800">{property.name}</h2>
+            <h2 className="text-2xl font-bold text-gray-800">
+              {property.name}
+            </h2>
           </div>
         </div>
 
@@ -99,21 +107,29 @@ const DetailPage = () => {
             <div className="flex justify-center space-x-4">
               <div className="flex items-center space-x-2">
                 <FaBed className="text-gray-600" size={20} />
-                <span className="text-lg font-semibold text-gray-800">{property.bed} Beds</span>
+                <span className="text-lg font-semibold text-gray-800">
+                  {property.bed} Beds
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <FaBath className="text-gray-600" size={20} />
-                <span className="text-lg font-semibold text-gray-800">{property.bath} Baths</span>
+                <span className="text-lg font-semibold text-gray-800">
+                  {property.bath} Baths
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <FaCouch className="text-gray-600" size={20} />
-                <span className="text-lg font-semibold text-gray-800">{property.FurnishedStatus}</span>
+                <span className="text-lg font-semibold text-gray-800">
+                  {property.FurnishedStatus}
+                </span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <p className="text-lg font-semibold text-gray-800">Super Built-Up Area</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  Super Built-Up Area
+                </p>
                 <p className="text-lg text-gray-600">{property.sqft} sqft</p>
               </div>
               <div>
@@ -121,27 +137,41 @@ const DetailPage = () => {
                 <p className="text-lg text-gray-600">{property.Availability}</p>
               </div>
               <div>
-                <p className="text-lg font-semibold text-gray-800">Preferred for</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  Preferred for
+                </p>
                 <p className="text-lg text-gray-600">{property.Perferredfor}</p>
               </div>
               <div>
-                <p className="text-lg font-semibold text-gray-800">Age Of Construction</p>
-                <p className="text-lg text-gray-600">{property.ageofconstruction} years</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  Age Of Construction
+                </p>
+                <p className="text-lg text-gray-600">
+                  {property.ageofconstruction} years
+                </p>
               </div>
               <div>
-                <p className="text-lg font-semibold text-gray-800">Amount of Deposit</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  Amount of Deposit
+                </p>
                 <p className="text-lg text-gray-600">₹{property.deposit}</p>
               </div>
               <div>
-                <p className="text-lg font-semibold text-gray-800">Owner Name</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  Owner Name
+                </p>
                 <p className="text-lg text-gray-600">{property.ownername}</p>
               </div>
               <div>
-                <p className="text-lg font-semibold text-gray-800">Full Address</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  Full Address
+                </p>
                 <p className="text-lg text-gray-600">{property.description}</p>
               </div>
               <div className="col-span-2">
-                <p className="text-lg font-semibold text-gray-800">Additional Information</p>
+                <p className="text-lg font-semibold text-gray-800">
+                  Additional Information
+                </p>
                 <p className="text-lg text-gray-600">{property.info}</p>
               </div>
             </div>
@@ -150,12 +180,15 @@ const DetailPage = () => {
 
         {/* Action Buttons */}
         <div className="flex justify-between mt-6">
-          <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
-            Contact Owner
-          </button>
-          <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
-            Make Offer
-          </button>
+          <a
+            href="https://rzp.io/i/JAkqu3r5Tb"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+              Contact Owner
+            </button>
+          </a>
         </div>
       </div>
     </div>

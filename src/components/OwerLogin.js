@@ -66,7 +66,7 @@ const OwerLogin = ({ setIsAuthenticated }) => {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
-      <h2 className="text-2xl font-bold mb-4">Ower-Login</h2>
+      <h2 className="text-2xl font-bold mb-4">Owner-Login</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col">
           <label className="font-semibold text-gray-600 mb-2">Email:</label>
