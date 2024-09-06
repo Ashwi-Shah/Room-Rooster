@@ -190,7 +190,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
  
   const handleSave = async () => {
     try {
-      console.log(property.id);
+      console.log(property);
       const response = await fetch(`https://room-rooster.vercel.app/update/details/${property?.id}`, {
         method: 'PUT',
         headers: {
