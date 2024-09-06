@@ -52,7 +52,7 @@ const PropertyTypes = () => {
           Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.
         </p>
       </div>
-      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4">
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
         {propertyTypes.map((property, index) => (
           <div
             className="bg-[#e9e5db] p-4 rounded-lg shadow-md hover:scale-105 transition-transform duration-300 flex flex-col justify-between min-h-[275px] group animate__animated animate__backInUp animate__slow"

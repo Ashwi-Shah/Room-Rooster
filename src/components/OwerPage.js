@@ -236,11 +236,11 @@ const OwerPage = () => {
             <h2 className="text-4xl font-bold mb-2 text-gray-800">₹{property.price} /month</h2>
             <p className="text-xl text-gray-600">
               {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
-              <span className="text-blue-600">{property.location}</span>
+              <span className="text-gray-800 font-bold">{property.location}</span>
             </p>
           </div>
           <div className="text-right">
-            <h2 className="text-2xl font-bold text-gray-800">{property.name}</h2>
+            <h2 className="text-3xl font-bold text-gray-800">{property.name}</h2>
           </div>
         </div>
 
@@ -333,16 +333,13 @@ const OwerPage = () => {
 
         {/* Action Buttons */}
         <div className="flex justify-between mt-6">
-          <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+          <button className="bg-[#3a4850] text-[#F0ECE3] px-6 py-2 rounded-lg hover:bg-[#596E79] transition">
             Contact Owner
-          </button>
-          <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
-            Make Offer
           </button>
           <div className="flex space-x-4">
             <button
               onClick={() => setShowEdit(true)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+              className="bg-[#596E79] text-[#F0ECE3] px-4 py-2 rounded-lg hover:bg-[#475861] transition"
             >
               <FaEdit size={20} />
             </button>
