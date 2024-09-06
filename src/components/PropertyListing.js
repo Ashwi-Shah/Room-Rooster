@@ -98,7 +98,7 @@ const PropertyListing = ({ limit }) => {
                 <FontAwesomeIcon icon={faLocationDot} /> {detail.location}
               </p>
               <p className="text-gray-600 mb-2 flex items-center">
-                <FontAwesomeIcon icon={faHome} /> {detail.ownername}
+                <FontAwesomeIcon icon={faHome} /> {detail.location}
               </p>
               <button
                 className="bg-[#596E79] text-[#F0ECE3] py-2 px-4 rounded hover:border-2 hover:border-[#596E79] hover:text-[#596E79] hover:bg-transparent"
