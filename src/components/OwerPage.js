@@ -164,9 +164,6 @@ const OwerPage = () => {
 
         {/* Action Buttons */}
         <div className="flex justify-between mt-6">
-          <button className="bg-[#3a4850] text-[#F0ECE3] px-6 py-2 rounded-lg hover:bg-[#596E79] transition">
-            Contact Owner
-          </button>
           <div className="flex space-x-4">
             <button
               onClick={() => setShowEdit(true)}
@@ -174,12 +171,15 @@ const OwerPage = () => {
             >
               <FaEdit size={20} />
             </button>
-            <button
+            {/* <button
               onClick={() => setShowDelete(true)}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+              
+              // className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
             >
-              <FaTrash size={20} />
-            </button>
+              <FaTrash size={20}  onClick={() => setShowDelete(true)}
+               />
+            </button> */}
+            <FaTrash size={20}  onClick={() => setShowDelete(true)}/>
           </div>
         </div>
       </div>
