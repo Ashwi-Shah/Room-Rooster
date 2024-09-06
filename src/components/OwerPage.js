@@ -171,15 +171,12 @@ const OwerPage = () => {
             >
               <FaEdit size={20} />
             </button>
-            {/* <button
+            <button
               onClick={() => setShowDelete(true)}
-              
-              // className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
             >
-              <FaTrash size={20}  onClick={() => setShowDelete(true)}
-               />
-            </button> */}
-            <FaTrash size={20}  onClick={() => setShowDelete(true)}/>
+              <FaTrash size={20} />
+            </button>
           </div>
         </div>
       </div>
