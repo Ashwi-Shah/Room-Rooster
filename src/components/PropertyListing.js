@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faBath, faBed, faRulerCombined } from '@fortawesome/free-solid-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
+import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 
 const PropertyListing = ({ limit }) => {
   const [properties, setProperties] = useState([]);
@@ -98,7 +98,7 @@ const PropertyListing = ({ limit }) => {
                 <FontAwesomeIcon icon={faLocationDot} /> {detail.location}
               </p>
               <p className="text-gray-600 mb-2 flex items-center">
-                <FontAwesomeIcon icon={faHome} /> {detail.location}
+                <FontAwesomeIcon icon={faUser} /> {detail.ownername}
               </p>
               <button
                 className="bg-[#596E79] text-[#F0ECE3] py-2 px-4 rounded hover:border-2 hover:border-[#596E79] hover:text-[#596E79] hover:bg-transparent"
