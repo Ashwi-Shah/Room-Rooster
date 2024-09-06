@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faBars } from '@fortawesome/free-solid-svg-icons';
 import 'tailwindcss/tailwind.css'; // Ensure this line is here to import Tailwind CSS
 import logo from '../assets/img/logo.png';
+import userImg from '../assets/img/user-img.webp';
 
 const CustomNavbar = ({ isAuthenticated, setIsAuthenticated, name }) => {
     const [showDropdown, setShowDropdown] = useState(false);
@@ -68,7 +69,7 @@ const CustomNavbar = ({ isAuthenticated, setIsAuthenticated, name }) => {
                         <div ref={dropdownRef} className="absolute right-0 top-full mt-2 bg-black bg-opacity-65 text-[#F0ECE3] rounded-lg shadow-lg p-4 w-64">
                             {isAuthenticated ? (
                                 <>
-                                    <img src="/img/user-img.webp" alt="Profile" className="w-12 h-12 rounded-full mx-auto mb-2" />
+                                    <img src={userImg} alt="Profile" className="w-12 h-12 rounded-full mx-auto mb-2" />
                                     <div className="text-center mb-2 font-bold">Hi, {name}!</div>
                                     <button onClick={handleLogout} className="bg-transparent text-white border border-gray-600 px-4 py-2 rounded-lg w-full hover:bg-gray-600 transition duration-300">Logout</button>
                                 </>
