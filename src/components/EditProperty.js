@@ -129,8 +129,10 @@
 
 // export default EditProperty;
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const EditProperty = ({ propertyId, onSuccess }) => {
+  const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -153,7 +155,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await fetch(`https://room-rooster.vercel.app/get-data-idwise/details/${propertyId}`);
+        const response = await fetch(`https://room-rooster.vercel.app/get-data-idwise/details/${id}`);
         if (response.ok) {
           const data = await response.json();
           setProperty(data);
@@ -188,7 +190,8 @@ const EditProperty = ({ propertyId, onSuccess }) => {
  
   const handleSave = async () => {
     try {
-      const response = await fetch(`https://room-rooster.vercel.app/update/details/${propertyId}`, {
+      console.log(property.id);
+      const response = await fetch(`https://room-rooster.vercel.app/update/details/${property.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
