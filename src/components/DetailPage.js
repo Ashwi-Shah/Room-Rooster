@@ -59,11 +59,11 @@ const DetailPage = () => {
             </h2>
             <p className="text-xl text-gray-600">
               {property.bed} BHK {property.sqft} Sq-ft For Rent in{" "}
-              <span className="text-blue-600">{property.location}</span>
+              <span className="text-gray-800 font-bold">{property.location}</span>
             </p>
           </div>
           <div className="text-right">
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-3xl font-bold text-gray-800">
               {property.name}
             </h2>
           </div>
@@ -185,7 +185,7 @@ const DetailPage = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+            <button className="bg-[#3a4850] text-[#F0ECE3] px-6 py-2 rounded-lg hover:bg-[#596E79] transition">
               Contact Owner
             </button>
           </a>
