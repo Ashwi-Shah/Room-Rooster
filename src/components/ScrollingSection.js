@@ -61,7 +61,7 @@ const ScrollingSection = () => {
         className="relative flex flex-col justify-center h-full opacity-0"
         ref={contentRef}
       >
-        <h1 className="text-2xl font-serif sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-black text-[#F0ECE3]">Welcome to Room Roost</h1>
+        <h1 className="text-2xl font-serif sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-black text-[#F0ECE3]">Welcome to Room Rooster</h1>
         <p className="text-xl font-serif mt-3 sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-semibold text-[#F0ECE3]">{getPageName(location.pathname)}</p>
       </div>
     </section>
