@@ -185,6 +185,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
     fetchProperty();
   }, [propertyId]);
 
+ 
   const handleSave = async () => {
     try {
       const response = await fetch(`https://room-rooster.vercel.app/update/details/${propertyId}`, {
@@ -192,11 +193,27 @@ const EditProperty = ({ propertyId, onSuccess }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, price, location, description }),
+        body: JSON.stringify({
+          name,
+          price,
+          phoneNumber,
+          location,
+          description,
+          sqft,
+          bed,
+          bath,
+          ownername,
+          furnishedStatus,
+          preferredFor,
+          ageOfConstruction,
+          info,
+          availability,
+          deposit,
+        }),
       });
 
       if (response.ok) {
-        onSuccess(); // Notify OwerPage of the successful update
+        onSuccess(); // Notify of the successful update
       } else {
         setError('Failed to update property');
       }
@@ -214,9 +231,9 @@ const EditProperty = ({ propertyId, onSuccess }) => {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-xl font-bold mb-4">Edit Property</h2>
+    <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg h-screen overflow-y-auto">
+      <h2 className="text-xl font-bold mb-4">Edit Property</h2>
         <label className="block mb-2">
           Name:
           <input
@@ -240,7 +257,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="number"
             value={phoneNumber}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPhoneNumber(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -266,7 +283,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="number"
             value={sqft}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setSqft(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -275,7 +292,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="number"
             value={bed}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setBed(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -284,7 +301,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="number"
             value={bath}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setBath(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -293,7 +310,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="text"
             value={ownername}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setOwnerName(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -302,7 +319,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="text"
             value={FurnishedStatus}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setFurnishedStatus(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -311,7 +328,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="text"
             value={Perferredfor}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setPerferredfor(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -320,7 +337,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="number"
             value={ageofconstruction}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setAgeofconstruction(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -329,7 +346,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="text"
             value={info}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setInfo(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -338,7 +355,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="text"
             value={Availability}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setAvailability(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
@@ -347,7 +364,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           <input
             type="number"
             value={deposit}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => setDeposit(e.target.value)}
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
