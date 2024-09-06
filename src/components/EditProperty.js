@@ -133,6 +133,7 @@ import { useParams } from 'react-router-dom';
 
 const EditProperty = ({ propertyId, onSuccess }) => {
   const { id } = useParams();
+  const [data, setData] = useState();
   const [property, setProperty] = useState(null);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -190,9 +191,9 @@ const EditProperty = ({ propertyId, onSuccess }) => {
  
   const handleSave = async () => {
     try {
-      console.log(`https://room-rooster.vercel.app/update/details/${property?.id}`);
+      console.log(`https://room-rooster.vercel.app/update/details/${id}`);
 
-      const response = await fetch(`https://room-rooster.vercel.app/update/details/${property?.id}`, {
+      const response = await fetch(`https://room-rooster.vercel.app/update/details/${data?.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
