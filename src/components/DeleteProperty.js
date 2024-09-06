@@ -7,7 +7,7 @@ const DeleteProperty = ({ propertyId, onSuccess }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleDelete = async () => {
+  const handleDeleteSuccess = async () => {
     if (window.confirm("Are you sure you want to delete this property?")) {
       setIsLoading(true);
       try {
@@ -30,7 +30,7 @@ const DeleteProperty = ({ propertyId, onSuccess }) => {
   return (
     <div>
       <div
-        onClick={handleDelete}
+        onClick={handleDeleteSuccess}
         // className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
         disabled={isLoading}
       >
