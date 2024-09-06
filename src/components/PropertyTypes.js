@@ -38,10 +38,10 @@ const PropertyTypes = () => {
   }, []);
 
   const propertyTypes = [
-    { name: 'Villa', img: villaImg, count: 123 },
-    { name: 'Apartment', img: apartmentImg, count: 456 },
-    { name: 'Flat', img: flatImg, count: 789 },
-    { name: 'Cottage', img: cottageImg, count: 101 }
+    { name: 'Villa', img: villaImg, count: 6 },
+    { name: 'Apartment', img: apartmentImg, count: 9 },
+    { name: 'Flat', img: flatImg, count: 10 },
+    { name: 'Cottage', img: cottageImg, count: 5 }
   ];
 
   return (
@@ -49,8 +49,7 @@ const PropertyTypes = () => {
       <div className="text-center mb-8">
         <h1 className="text-[#596E79] font-bold text-4xl mb-6 animate__animated animate__backInUp animate__slow">Property Types</h1>
         <p className="text-[#596E79] font-semibold text-lg mb-8 animate__animated animate__backInUp animate__slow">
-          Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.
-        </p>
+        Find your next home with ease, choosing from a variety of property types that suit your style and needs        </p>
       </div>
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
         {propertyTypes.map((property, index) => (

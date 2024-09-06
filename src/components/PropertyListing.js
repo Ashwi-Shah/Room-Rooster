@@ -69,7 +69,7 @@ const PropertyListing = ({ limit }) => {
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-[#596E79]">Property Listing</h1>
         <p className="text-xl font-semibold text-[#596E79] mt-4">
-          Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.
+        Find the perfect rental home with our diverse selection of properties tailored to your needs
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-6">
