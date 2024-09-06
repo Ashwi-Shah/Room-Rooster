@@ -29,13 +29,13 @@ const DeleteProperty = ({ propertyId, onSuccess }) => {
 
   return (
     <div>
-      <button
+      <div
         onClick={handleDelete}
-        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+        // className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
         disabled={isLoading}
       >
         {isLoading ? "Deleting..." : "Delete Property"}
-      </button>
+      </div>
       {error && <p className="text-red-600">{error}</p>}
     </div>
   );

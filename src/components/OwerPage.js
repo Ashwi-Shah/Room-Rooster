@@ -185,9 +185,9 @@ const OwerPage = () => {
       {showEdit && (
         <EditProperty propertyId={id} onSuccess={handleEditSuccess} />
       )}
-      {/* {showDelete && (
+      {showDelete && (
         <DeleteProperty propertyId={id} onSuccess={handleDeleteSuccess} />
-      )} */}
+      )}
     </div>
   );
 };
