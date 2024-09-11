@@ -108,7 +108,7 @@ const AddProperty = ({ onAddProperty }) => {
       console.error("Error adding property:", error);
     } finally {
       // Always navigate to the property listing page, whether there's an error or not
-      navigate("/property-listing");
+      navigate("/property");
     }
   };    
   
