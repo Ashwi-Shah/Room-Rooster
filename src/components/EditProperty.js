@@ -102,7 +102,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
   }
 
   if (error) {
-    return <div className="p-4 text-center text-red-600">{error}</div>;
+    return <div className="p-4 text-center text-black text-xl">{error}</div>;
   }
 
   return (
