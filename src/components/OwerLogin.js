@@ -19,7 +19,7 @@ const OwerLogin = ({ setIsAuthenticated }) => {
   const admin2 = {
     email: 'ashwi@gmail.com',
     password: 'ashwi',
-    id: '66dab28151efe26a0f9618ad'
+    id: '66d6ed12d542061a7485aa9a'
   };
 
   const handleChange = (e) => {
