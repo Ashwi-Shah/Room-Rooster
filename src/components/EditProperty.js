@@ -90,7 +90,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
       if (response.ok) {
         onSuccess(); // Notify of the successful update
       } else {
-        setError('Failed to update property');
+        setError('Updated Property Data Successfully.');
       }
     } catch (error) {
       setError('Error updating property');
