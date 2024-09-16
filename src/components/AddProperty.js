@@ -84,33 +84,30 @@ const AddProperty = ({ onAddProperty }) => {
       const response = await fetch("https://room-rooster.vercel.app/post/details", {
         method: "POST",
         body: formData,
+        // Remove headers; fetch will automatically set the correct headers for FormData
       });
-    
+  
       if (response.ok) {
         const newProperty = await response.json();
         console.log("Property added successfully:", newProperty);
-    
-        // Call the onAddProperty function if it's provided
+  
         if (onAddProperty) {
           onAddProperty(newProperty);
         }
       } else {
-        // Handle non-successful response
         const errorData = await response.json();
         console.error("Server response error:", errorData);
-    
-        // Set an error message
         setError(`Error: ${response.status} - ${errorData.message || response.statusText}`);
       }
     } catch (error) {
-      // Handle any unexpected errors (network issues, etc.)
       setError("An unexpected error occurred. Please try again later.");
       console.error("Error adding property:", error);
     } finally {
-      // Always navigate to the property listing page, whether there's an error or not
       navigate("/property");
     }
-  };    
+  };
+  
+    
   
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10 transition-shadow duration-300 hover:shadow-2xl">
