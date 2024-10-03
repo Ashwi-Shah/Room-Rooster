@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-const DeleteProperty = ({ propertyId, onSuccess }) => {
-    const { id } = useParams();
-
+const DeleteProperty = ({ onSuccess }) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -16,6 +17,7 @@ const DeleteProperty = ({ propertyId, onSuccess }) => {
         });
         if (response.ok) {
           onSuccess();
+          navigate("/property");  // Navigate to home on success
         } else {
           setError("Failed to delete property");
         }
