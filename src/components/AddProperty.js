@@ -363,7 +363,7 @@ const AddProperty = ({ onAddProperty }) => {
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10 transition-shadow duration-300 hover:shadow-2xl">
       <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add Property</h2>
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col">
         <label className="font-semibold text-gray-600 mb-2">Property Type:</label>
           <select
