@@ -265,8 +265,10 @@
 
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-const EditProperty = ({ propertyId, onSuccess }) => {
+const EditProperty = ({ propertyId }) => {
+  const navigate = useNavigate();
   const [property, setProperty] = useState({
     name: "",
     price: "",
@@ -343,7 +345,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
       );
 
       if (response.ok) {
-        onSuccess(); // Trigger onSuccess to close the modal
+        navigate("/ower-page");
       } else {
         const errorData = await response.json();
         setError(errorData.message || "Error updating property");
