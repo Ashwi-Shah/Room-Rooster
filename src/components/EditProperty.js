@@ -312,7 +312,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+  
     try {
       const response = await fetch(
         `https://room-rooster.vercel.app/update/details/${propertyId}`,
@@ -341,8 +341,10 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           }),
         }
       );
-
+  
       if (response.ok) {
+        const updatedProperty = await response.json(); // Get response if needed
+        console.log("Updated Property:", updatedProperty); // You can log the updated property here if needed
         onSuccess(); // Trigger onSuccess to close the modal
       } else {
         const errorData = await response.json();
@@ -354,7 +356,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
       setLoading(false);
     }
   };
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProperty((prevProperty) => ({
