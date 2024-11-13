@@ -303,7 +303,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
 
     try {
       const response = await fetch(
-        `https://room-rooster.vercel.app/update-property/${propertyId}`, // Adjust endpoint as needed
+        `https://room-rooster.vercel.app/get-data-idwise/details/${propertyId}`, // Adjust endpoint as needed
         {
           method: "PUT", // or PATCH depending on your backend
           headers: {
