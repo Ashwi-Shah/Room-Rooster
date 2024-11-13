@@ -297,6 +297,7 @@
 // export default AddProperty;
 
 // import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 
 // const AddProperty = () => {
@@ -321,6 +322,7 @@
 
 //   const [message, setMessage] = useState('');
 //   const [loading, setLoading] = useState(false);
+//   const navigate = useNavigate(); // Initialize the navigate function
 
 //   const propertyTypes = ["Villa", "Flat", "Apartment", "Cottage"];
 //   const locations = ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"];
@@ -388,6 +390,7 @@
 //         Availability: '',
 //         deposit: ''
 //       });
+//       navigate('/property'); // Redirect to the /property route
 //     } catch (error) {
 //       setMessage('Error adding property. Please try again.');
 //     } finally {
@@ -484,6 +487,7 @@
 // };
 
 // export default AddProperty;
+
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -588,91 +592,127 @@ const AddProperty = () => {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Add Property</h2>
-      {message && <p className="mb-4">{message}</p>}
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        
-        {/* Name Dropdown */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Property Type</label>
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-28 mb-10 transition-shadow duration-300 hover:shadow-2xl">
+      <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add Property</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Property Type */}
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Property Type:</label>
           <select
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="border rounded px-3 py-2 w-full"
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
             <option value="" disabled>Select Property Type</option>
-            {propertyTypes.map((type) => (
-              <option key={type} value={type}>{type}</option>
+            {propertyTypes.map((type, index) => (
+              <option key={index} value={type}>{type}</option>
             ))}
           </select>
         </div>
-
-        {/* Location Dropdown */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Location</label>
+        
+        {/* Price */}
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Price (per month):</label>
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        
+        {/* Phone Number */}
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Phone Number:</label>
+          <input
+            type="tel"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+          />
+        </div>
+        
+        {/* Location */}
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Location:</label>
           <select
             name="location"
             value={formData.location}
             onChange={handleChange}
             required
-            className="border rounded px-3 py-2 w-full"
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           >
             <option value="" disabled>Select Location</option>
-            {locations.map((loc) => (
-              <option key={loc} value={loc}>{loc}</option>
+            {locations.map((loc, index) => (
+              <option key={index} value={loc}>{loc}</option>
             ))}
           </select>
         </div>
-
-        {/* Image Upload */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">Images (Max 5)</label>
+  
+        {/* Address */}
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Address:</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 resize-y"
+          />
+        </div>
+  
+        {/* Property Image */}
+        <div className="flex flex-col">
+          <label className="font-semibold text-gray-600 mb-2">Property Image:</label>
           <input
             type="file"
-            name="images"
-            accept="image/*"
+            name="image"
             multiple
             onChange={handleImageChange}
-            className="border rounded px-3 py-2 w-full"
+            required
+            className="p-3 border border-gray-300 rounded-md focus:outline-none"
           />
-          <p className="text-gray-500 text-sm mt-1">{formData.images.length} / 5 images uploaded</p>
         </div>
-
-        {/* Other Fields */}
-        {Object.keys(formData).map((field, index) => (
-          field !== 'name' && field !== 'location' && field !== 'images' && (
-            <div key={index} className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2">
-                {field}
-              </label>
-              <input
-                type={
-                  field === 'price' || field === 'sqft' || field === 'bed' ||
-                  field === 'bath' || field === 'phoneNumber' || field === 'deposit' ? 'number' : 'text'
-                }
-                name={field}
-                value={formData[field]}
-                onChange={handleChange}
-                required
-                className="border rounded px-3 py-2 w-full"
-              />
-            </div>
-          )
+  
+        {/* Additional Fields */}
+        {[
+          { label: 'Size (Sqft):', name: 'sqft', type: 'number' },
+          { label: 'Bedrooms:', name: 'bed', type: 'number' },
+          { label: 'Bathrooms:', name: 'bath', type: 'number' },
+          { label: 'Owner Name:', name: 'ownername', type: 'text' },
+          { label: 'Furnished Status:', name: 'FurnishedStatus', type: 'text' },
+          { label: 'Preferred For:', name: 'Perferredfor', type: 'text' },
+          { label: 'Age of Construction:', name: 'ageofconstruction', type: 'number' },
+          { label: 'Additional Info:', name: 'info', type: 'text' },
+          { label: 'Availability:', name: 'Availability', type: 'text' },
+          { label: 'Deposit:', name: 'deposit', type: 'number' },
+        ].map((field, index) => (
+          <div key={index} className="flex flex-col">
+            <label className="font-semibold text-gray-600 mb-2">{field.label}</label>
+            <input
+              type={field.type}
+              name={field.name}
+              value={formData[field.name]}
+              onChange={handleChange}
+              className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
+            />
+          </div>
         ))}
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          disabled={loading}
-        >
-          {loading ? 'Adding...' : 'Add Property'}
+  
+        {/* Submit Button */}
+        <button type="submit" className="mt-6 w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
+          Add Property
         </button>
       </form>
     </div>
   );
+  
 };
 
 export default AddProperty;
