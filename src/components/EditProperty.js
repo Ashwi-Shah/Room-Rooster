@@ -308,28 +308,11 @@ const EditProperty = ({ propertyId, onSuccess }) => {
     fetchProperty();
   }, [propertyId]);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-  
-    reader.onloadend = () => {
-      setProperty((prevProperty) => ({
-        ...prevProperty,
-        images: reader.result, // store the base64 string
-      }));
-    };
-  
-    if (file) {
-      reader.readAsDataURL(file); // Converts image to base64
-    }
-  };
-
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-  
+
     try {
       const response = await fetch(
         `https://room-rooster.vercel.app/update/details/${propertyId}`,
@@ -358,10 +341,8 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           }),
         }
       );
-  
+
       if (response.ok) {
-        const updatedProperty = await response.json(); // Get response if needed
-        console.log("Updated Property:", updatedProperty); // You can log the updated property here if needed
         onSuccess(); // Trigger onSuccess to close the modal
       } else {
         const errorData = await response.json();
@@ -373,7 +354,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
       setLoading(false);
     }
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProperty((prevProperty) => ({
@@ -473,11 +454,11 @@ const EditProperty = ({ propertyId, onSuccess }) => {
         <div className="mb-4">
           <label htmlFor="images" className="block text-gray-700">Images</label>
           <input
-            type="file"
+            type="text"
             id="images"
             name="images"
             value={property.images.join(", ")}
-            onChange={handleImageChange}
+            onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-lg"
           />
         </div>
