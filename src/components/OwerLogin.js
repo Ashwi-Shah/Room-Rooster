@@ -55,10 +55,10 @@ const OwerLogin = ({ setIsAuthenticated }) => {
     // Check if input email and password match one of the predefined admins
     if (formData.email === admin1.email && formData.password === admin1.password) {
       setIsAuthenticated(true);  // Update authentication state
-      navigate(`/ower-page/${admin1.id}`);  // Redirect to OwerPage with admin1's ID
+      navigate(`${admin1.id}`);  // Redirect to OwerPage with admin1's ID
     } else if (formData.email === admin2.email && formData.password === admin2.password) {
       setIsAuthenticated(true);  // Update authentication state
-      navigate(`/ower-page/${admin2.id}`);  // Redirect to OwerPage with admin2's ID
+      navigate(`${admin2.id}`);  // Redirect to OwerPage with admin2's ID
     } else {
       setErrors({ general: 'Invalid email or password' });
     }
