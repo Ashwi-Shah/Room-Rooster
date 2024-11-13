@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance with default settings
 const instance = axios.create({
-  baseURL: 'https://room-rooster-one.vercel.app', // Replace with your API base URL
+  baseURL: 'https://room-rooster.vercel.app', // Replace with your API base URL
   headers: {
     'Content-Type': 'application/json',
   },
