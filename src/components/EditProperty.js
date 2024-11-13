@@ -106,8 +106,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black bg-opacity-50">
-    <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg h-screen overflow-y-auto">
+    <>
       <h2 className="text-xl font-bold mb-4">Edit Property</h2>
         <label className="block mb-2">
           Name:
@@ -257,8 +256,8 @@ const EditProperty = ({ propertyId, onSuccess }) => {
             Cancel
           </button>
         </div>
-      </div>
-    </div>
+      </>
+   
   );
 };
 

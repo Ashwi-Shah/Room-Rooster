@@ -50,7 +50,7 @@ const DetailPage = () => {
 
   return (
     <div className="pt-[125px] px-4">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6 mb-4">
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <div className="text-left">
