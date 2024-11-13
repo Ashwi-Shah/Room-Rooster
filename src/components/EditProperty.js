@@ -308,11 +308,27 @@ const EditProperty = ({ propertyId, onSuccess }) => {
     fetchProperty();
   }, [propertyId]);
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onloadend = () => {
+      setProperty((prevProperty) => ({
+        ...prevProperty,
+        images: reader.result, // store the base64 string
+      }));
+    };
+  
+    if (file) {
+      reader.readAsDataURL(file); // Converts image to base64
+    }
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+  
     try {
       const response = await fetch(
         `https://room-rooster.vercel.app/update/details/${propertyId}`,
@@ -327,7 +343,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
             phoneNumber: property.phoneNumber,
             location: property.location,
             description: property.description,
-            images: property.images,
+            images: property.images, // send base64 or image URL
             sqft: property.sqft,
             bed: property.bed,
             bath: property.bath,
@@ -346,17 +362,15 @@ const EditProperty = ({ propertyId, onSuccess }) => {
         onSuccess();
       } else {
         const errorData = await response.json();
-        console.error("Error response from server:", errorData);  // Log the server's response message
         setError(errorData.message || "Error updating property");
       }
     } catch (error) {
-      console.error("Network error:", error);  // Log network issues
       setError("Network error while updating property");
     } finally {
       setLoading(false);
     }
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProperty((prevProperty) => ({
@@ -456,11 +470,11 @@ const EditProperty = ({ propertyId, onSuccess }) => {
         <div className="mb-4">
           <label htmlFor="images" className="block text-gray-700">Images</label>
           <input
-            type="text"
+            type="file"
             id="images"
             name="images"
             value={property.images.join(", ")}
-            onChange={handleChange}
+            onChange={handleImageChange}
             className="w-full p-2 border border-gray-300 rounded-lg"
           />
         </div>
