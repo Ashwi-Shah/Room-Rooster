@@ -298,7 +298,6 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import Resizer from "react-image-file-resizer";
 
 const propertyTypes = ["Villa", "Flat", "Apartment", "Cottage"];
 const locations = ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"];
@@ -308,7 +307,7 @@ const AddProperty = ({ onAddProperty }) => {
     name: "",
     price: "",
     phoneNumber: "",
-    location:"",
+    location: "",
     description: "",
     images: [],
     sqft: "",
@@ -352,17 +351,20 @@ const AddProperty = ({ onAddProperty }) => {
         // If the request is successful, navigate to the /property page
         navigate("/property");
       } else {
-        // Handle error if response is not OK
-        setError(result.message || "Failed to add property");
+        // If the response is not OK, set error with the server message
+        setError(result.message || "Failed to create new detail");
       }
     } catch (error) {
+      // If there's a network or fetch error, catch it here
       setError("Error adding property: " + error.message);
     }
   };
-   
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10 transition-shadow duration-300 hover:shadow-2xl">
       <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add Property</h2>
+      {error && (
+        <div className="text-red-600 text-center mb-4">{error}</div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col">
         <label className="font-semibold text-gray-600 mb-2">Property Type:</label>
@@ -536,7 +538,7 @@ const AddProperty = ({ onAddProperty }) => {
             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
           </div>
-        <button type="submit" className="mt-6 w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
+          <button type="submit" className="mt-6 w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
           Add Property
         </button>
       </form>
