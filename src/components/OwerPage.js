@@ -179,6 +179,15 @@ const OwerPage = () => {
             </button>
           </div>
         </div>
+
+          {/* Edit Property Modal */}
+          {showEdit && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg h-screen overflow-y-auto">
+              <EditProperty propertyId={id} onSuccess={handleEditSuccess} />
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Conditional Rendering for Edit and Delete */}
