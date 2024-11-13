@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://room-rooster.vercel.app',
+      target: 'https://room-rooster-one.vercel.app/',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     })
