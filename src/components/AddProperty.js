@@ -298,7 +298,7 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Resizer from "react-image-file-resizer";
+// import Resizer from "react-image-file-resizer";
 
 const propertyTypes = ["Villa", "Flat", "Apartment", "Cottage"];
 const locations = ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"];
@@ -334,78 +334,36 @@ const AddProperty = ({ onAddProperty }) => {
     });
   };
 
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length > 5) {
-      alert("You can upload up to 5 images.");
-      return;
-    }
-    const resizedImages = [];
-
-    files.forEach(file => {
-      Resizer.imageFileResizer(
-        file,
-        800,
-        550,
-        "JPEG",
-        100,
-        0,
-        (uri) => {
-          resizedImages.push(uri);
-          if (resizedImages.length === files.length) {
-            setProperty({
-              ...property,
-              images: resizedImages
-            });
-          }
-        },
-        "blob"
-      );
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const formData = new FormData();
-    Object.keys(property).forEach(key => {
-      if (key === 'images') {
-        property.images.forEach((image, index) => {
-          formData.append(`image${index + 1}`, image, `image${index + 1}.jpeg`);
-        });
-      } else {
-        formData.append(key, property[key]);
-      }
-    });
-
-    console.log([...formData]); 
-  
+    
     try {
-      const response = await fetch('https://room-rooster.vercel.app/post/details', {
-        method: 'POST',
-        body: formData,
+      const response = await fetch("https://room-rooster.vercel.app/post/details", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(property),
       });
-  
+
+      const result = await response.json();
+      
       if (response.ok) {
-        // Handle success
-        const data = await response.json();
-        console.log('Property added successfully', data);
+        // If the request is successful, navigate to the /property page
+        navigate("/property");
       } else {
-        // Handle error
-        const errorData = await response.json();
-        setError(errorData.message || 'An error occurred');
+        // Handle error if response is not OK
+        setError(result.message || "Failed to add property");
       }
     } catch (error) {
-      setError('Network error or API not reachable');
-      console.error(error);
+      setError("Error adding property: " + error.message);
     }
   };
-  
    
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10 transition-shadow duration-300 hover:shadow-2xl">
       <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add Property</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form className="space-y-4">
         <div className="flex flex-col">
         <label className="font-semibold text-gray-600 mb-2">Property Type:</label>
           <select
@@ -474,7 +432,6 @@ const AddProperty = ({ onAddProperty }) => {
             type="file"
             name="image"
             multiple
-            onChange={handleImageChange}
             required
             className="p-3 border border-gray-300 rounded-md focus:outline-none"
           />
