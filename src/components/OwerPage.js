@@ -193,10 +193,10 @@ const OwerPage = () => {
       {/* Conditional Rendering for Edit and Delete */}
       {/* {showEdit && (
         <EditProperty propertyId={id} onSuccess={handleEditSuccess} />
-      )}
+      )} */}
       {showDelete && (
         <DeleteProperty propertyId={id} onSuccess={handleDeleteSuccess} />
-      )} */}
+      )}
     </div>
   );
 };
