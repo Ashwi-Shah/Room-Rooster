@@ -66,7 +66,7 @@ const PropertyListing = ({ limit }) => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto py-12">
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-[#596E79]">Property Listing</h1>
         <p className="text-xl font-semibold text-[#596E79] mt-4">
