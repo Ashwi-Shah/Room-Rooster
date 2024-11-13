@@ -264,338 +264,296 @@
 // export default EditProperty;
 
 
- import React, { useState, useEffect } from "react";
-
-// const EditProperty = ({ propertyId, onSuccess }) => {
-//   const [property, setProperty] = useState({
-//     name: "",
-//     price: "",
-//     phoneNumber: "",
-//     location: "",
-//     description: "",
-//     images: [],
-//     sqft: "",
-//     bed: "",
-//     bath: "",
-//     ownername: "",
-//     FurnishedStatus: "",
-//     Perferredfor: "",
-//     ageofconstruction: "",
-//     info: "",
-//     Availability: "",
-//     deposit: ""
-//   });
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchProperty = async () => {
-//       try {
-//         const response = await fetch(
-//           `https://room-rooster.vercel.app/get-data-idwise/details/${propertyId}`
-//         );
-//         if (response.ok) {
-//           const data = await response.json();
-//           setProperty(data);
-//         } else {
-//           setError("Failed to fetch property details");
-//         }
-//       } catch (error) {
-//         setError("Error fetching property details");
-//       }
-//     };
-
-//     fetchProperty();
-//   }, [propertyId]);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError(null);
-
-//     try {
-//       const response = await fetch(
-//         `https://room-rooster.vercel.app/update/details/${propertyId}`,
-//         {
-//           method: "PUT", 
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({
-//             name: property.name,
-//             price: property.price,
-//             phoneNumber: property.phoneNumber,
-//             location: property.location,
-//             description: property.description,
-//             images: property.images,
-//             sqft: property.sqft,
-//             bed: property.bed,
-//             bath: property.bath,
-//             ownername: property.ownername,
-//             FurnishedStatus: property.FurnishedStatus,
-//             Perferredfor: property.Perferredfor,
-//             ageofconstruction: property.ageofconstruction,
-//             info: property.info,
-//             Availability: property.Availability,
-//             deposit: property.deposit,
-//           }),
-//         }
-//       );
-
-//       if (response.ok) {
-//         onSuccess(); // Trigger onSuccess to close the modal
-//       } else {
-//         const errorData = await response.json();
-//         setError(errorData.message || "Error updating property");
-//       }
-//     } catch (error) {
-//       setError("Network error while updating property");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setProperty((prevProperty) => ({
-//       ...prevProperty,
-//       [name]: value,
-//     }));
-//   };
-
-//   return (
-//     <div>
-//       <h2 className="text-2xl font-bold mb-4">Edit Property</h2>
-//       {error && <p className="text-red-600">{error}</p>}
-//       <form onSubmit={handleSubmit}>
-//         <div className="mb-4">
-//           <label htmlFor="name" className="block text-gray-700">Property Name</label>
-//           <input
-//             type="text"
-//             id="name"
-//             name="name"
-//             value={property.name}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="price" className="block text-gray-700">Price</label>
-//           <input
-//             type="number"
-//             id="price"
-//             name="price"
-//             value={property.price}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="location" className="block text-gray-700">Location</label>
-//           <input
-//             type="text"
-//             id="location"
-//             name="location"
-//             value={property.location}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="phoneNumber" className="block text-gray-700">Phone Number</label>
-//           <input
-//             type="text"
-//             id="phoneNumber"
-//             name="phoneNumber"
-//             value={property.phoneNumber}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="description" className="block text-gray-700">Description</label>
-//           <textarea
-//             id="description"
-//             name="description"
-//             value={property.description}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           ></textarea>
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="bed" className="block text-gray-700">Beds</label>
-//           <input
-//             type="number"
-//             id="bed"
-//             name="bed"
-//             value={property.bed}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="sqft" className="block text-gray-700">Square Feet</label>
-//           <input
-//             type="number"
-//             id="sqft"
-//             name="sqft"
-//             value={property.sqft}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="images" className="block text-gray-700">Images</label>
-//           <input
-//             type="text"
-//             id="images"
-//             name="images"
-//             value={property.images.join(", ")}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="ownername" className="block text-gray-700">Owner Name</label>
-//           <input
-//             type="text"
-//             id="ownername"
-//             name="ownername"
-//             value={property.ownername}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="FurnishedStatus" className="block text-gray-700">Furnished Status</label>
-//           <input
-//             type="text"
-//             id="FurnishedStatus"
-//             name="FurnishedStatus"
-//             value={property.FurnishedStatus}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="Perferredfor" className="block text-gray-700">Preferred For</label>
-//           <input
-//             type="text"
-//             id="Perferredfor"
-//             name="Perferredfor"
-//             value={property.Perferredfor}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="ageofconstruction" className="block text-gray-700">Age of Construction</label>
-//           <input
-//             type="number"
-//             id="ageofconstruction"
-//             name="ageofconstruction"
-//             value={property.ageofconstruction}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="info" className="block text-gray-700">Additional Info</label>
-//           <textarea
-//             id="info"
-//             name="info"
-//             value={property.info}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//           ></textarea>
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="Availability" className="block text-gray-700">Availability</label>
-//           <input
-//             type="text"
-//             id="Availability"
-//             name="Availability"
-//             value={property.Availability}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-//         <div className="mb-4">
-//           <label htmlFor="deposit" className="block text-gray-700">Deposit</label>
-//           <input
-//             type="number"
-//             id="deposit"
-//             name="deposit"
-//             value={property.deposit}
-//             onChange={handleChange}
-//             className="w-full p-2 border border-gray-300 rounded-lg"
-//             required
-//           />
-//         </div>
-
-//         <button
-//           type="submit"
-//           className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-//           disabled={loading}
-//         >
-//           {loading ? "Saving..." : "Save Changes"}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default EditProperty;
+import React, { useState, useEffect } from "react";
 
 const EditProperty = ({ propertyId, onSuccess }) => {
-  const [propertyData, setPropertyData] = useState(null);
-  
+  const [property, setProperty] = useState({
+    name: "",
+    price: "",
+    phoneNumber: "",
+    location: "",
+    description: "",
+    images: [],
+    sqft: "",
+    bed: "",
+    bath: "",
+    ownername: "",
+    FurnishedStatus: "",
+    Perferredfor: "",
+    ageofconstruction: "",
+    info: "",
+    Availability: "",
+    deposit: ""
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    // Fetch property details using the propertyId
-    fetch(`https://room-rooster.vercel.app/get-data-idwise/details/${propertyId}`)
-      .then(res => res.json())
-      .then(data => setPropertyData(data));
+    const fetchProperty = async () => {
+      try {
+        const response = await fetch(
+          `https://room-rooster.vercel.app/get-data-idwise/details/${propertyId}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setProperty(data);
+        } else {
+          setError("Failed to fetch property details");
+        }
+      } catch (error) {
+        setError("Error fetching property details");
+      }
+    };
+
+    fetchProperty();
   }, [propertyId]);
-  
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Update the property via PUT request
-    fetch(`https://room-rooster.vercel.app/update/details/${propertyId}`, {
-      method: 'PUT',
-      body: JSON.stringify(propertyData), // Assuming propertyData contains the updated info
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(response => response.json())
-    .then(() => onSuccess()) // Trigger the success callback
-    .catch(error => console.error('Error updating property:', error));
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        `https://room-rooster.vercel.app/update/details/${propertyId}`,
+        {
+          method: "PUT", 
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: property.name,
+            price: property.price,
+            phoneNumber: property.phoneNumber,
+            location: property.location,
+            description: property.description,
+            images: property.images,
+            sqft: property.sqft,
+            bed: property.bed,
+            bath: property.bath,
+            ownername: property.ownername,
+            FurnishedStatus: property.FurnishedStatus,
+            Perferredfor: property.Perferredfor,
+            ageofconstruction: property.ageofconstruction,
+            info: property.info,
+            Availability: property.Availability,
+            deposit: property.deposit,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        onSuccess(); // Trigger onSuccess to close the modal
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "Error updating property");
+      }
+    } catch (error) {
+      setError("Network error while updating property");
+    } finally {
+      setLoading(false);
+    }
   };
-  
-  if (!propertyData) {
-    return <div>Loading...</div>;
-  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProperty((prevProperty) => ({
+      ...prevProperty,
+      [name]: value,
+    }));
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Render form fields prefilled with propertyData */}
-      <input 
-        type="text" 
-        value={propertyData.name} 
-        onChange={(e) => setPropertyData({ ...propertyData, name: e.target.value })}
-      />
-      <button type="submit">Save</button>
-    </form>
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Edit Property</h2>
+      {error && <p className="text-red-600">{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-gray-700">Property Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={property.name}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="price" className="block text-gray-700">Price</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={property.price}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="location" className="block text-gray-700">Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            value={property.location}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="phoneNumber" className="block text-gray-700">Phone Number</label>
+          <input
+            type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={property.phoneNumber}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="description" className="block text-gray-700">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            value={property.description}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          ></textarea>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="bed" className="block text-gray-700">Beds</label>
+          <input
+            type="number"
+            id="bed"
+            name="bed"
+            value={property.bed}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="sqft" className="block text-gray-700">Square Feet</label>
+          <input
+            type="number"
+            id="sqft"
+            name="sqft"
+            value={property.sqft}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="images" className="block text-gray-700">Images</label>
+          <input
+            type="text"
+            id="images"
+            name="images"
+            value={property.images.join(", ")}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="ownername" className="block text-gray-700">Owner Name</label>
+          <input
+            type="text"
+            id="ownername"
+            name="ownername"
+            value={property.ownername}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="FurnishedStatus" className="block text-gray-700">Furnished Status</label>
+          <input
+            type="text"
+            id="FurnishedStatus"
+            name="FurnishedStatus"
+            value={property.FurnishedStatus}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="Perferredfor" className="block text-gray-700">Preferred For</label>
+          <input
+            type="text"
+            id="Perferredfor"
+            name="Perferredfor"
+            value={property.Perferredfor}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="ageofconstruction" className="block text-gray-700">Age of Construction</label>
+          <input
+            type="number"
+            id="ageofconstruction"
+            name="ageofconstruction"
+            value={property.ageofconstruction}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="info" className="block text-gray-700">Additional Info</label>
+          <textarea
+            id="info"
+            name="info"
+            value={property.info}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+          ></textarea>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="Availability" className="block text-gray-700">Availability</label>
+          <input
+            type="text"
+            id="Availability"
+            name="Availability"
+            value={property.Availability}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="deposit" className="block text-gray-700">Deposit</label>
+          <input
+            type="number"
+            id="deposit"
+            name="deposit"
+            value={property.deposit}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save Changes"}
+        </button>
+      </form>
+    </div>
   );
 };
 
