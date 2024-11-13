@@ -296,7 +296,197 @@
 
 // export default AddProperty;
 
+// import React, { useState } from 'react';
+// import axios from 'axios';
+
+// const AddProperty = () => {
+//   const [formData, setFormData] = useState({
+//     name: '',
+//     price: '',
+//     phoneNumber: '',
+//     location: '',
+//     description: '',
+//     images: [],
+//     sqft: '',
+//     bed: '',
+//     bath: '',
+//     ownername: '',
+//     FurnishedStatus: '',
+//     Perferredfor: '',
+//     ageofconstruction: '',
+//     info: '',
+//     Availability: '',
+//     deposit: ''
+//   });
+
+//   const [message, setMessage] = useState('');
+//   const [loading, setLoading] = useState(false);
+
+//   const propertyTypes = ["Villa", "Flat", "Apartment", "Cottage"];
+//   const locations = ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"];
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [name]: value
+//     }));
+//   };
+
+//   const handleImageChange = (e) => {
+//     const selectedFiles = Array.from(e.target.files);
+    
+//     if (selectedFiles.length + formData.images.length > 5) {
+//       setMessage('You can only upload a maximum of 5 images.');
+//       return;
+//     }
+
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       images: [...prevData.images, ...selectedFiles]
+//     }));
+//     setMessage('');
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     setMessage('');
+
+//     // Prepare form data for sending to the server
+//     const submitData = new FormData();
+//     Object.keys(formData).forEach((key) => {
+//       if (key === 'images') {
+//         formData.images.forEach((image) => submitData.append('images', image));
+//       } else {
+//         submitData.append(key, formData[key]);
+//       }
+//     });
+
+//     try {
+//       const response = await axios.post('https://room-rooster.vercel.app/post/details', submitData, {
+//         headers: {
+//           'Content-Type': 'multipart/form-data'
+//         }
+//       });
+//       setMessage(response.data.message || 'Property added successfully!');
+//       setFormData({
+//         name: '',
+//         price: '',
+//         phoneNumber: '',
+//         location: '',
+//         description: '',
+//         images: [],
+//         sqft: '',
+//         bed: '',
+//         bath: '',
+//         ownername: '',
+//         FurnishedStatus: '',
+//         Perferredfor: '',
+//         ageofconstruction: '',
+//         info: '',
+//         Availability: '',
+//         deposit: ''
+//       });
+//     } catch (error) {
+//       setMessage('Error adding property. Please try again.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="p-6 max-w-lg mx-auto">
+//       <h2 className="text-2xl font-bold mb-4">Add Property</h2>
+//       {message && <p className="mb-4">{message}</p>}
+//       <form onSubmit={handleSubmit} encType="multipart/form-data">
+        
+//         {/* Name Dropdown */}
+//         <div className="mb-4">
+//           <label className="block text-gray-700 font-semibold mb-2">Property Type</label>
+//           <select
+//             name="name"
+//             value={formData.name}
+//             onChange={handleChange}
+//             required
+//             className="border rounded px-3 py-2 w-full"
+//           >
+//             <option value="" disabled>Select Property Type</option>
+//             {propertyTypes.map((type) => (
+//               <option key={type} value={type}>{type}</option>
+//             ))}
+//           </select>
+//         </div>
+
+//         {/* Location Dropdown */}
+//         <div className="mb-4">
+//           <label className="block text-gray-700 font-semibold mb-2">Location</label>
+//           <select
+//             name="location"
+//             value={formData.location}
+//             onChange={handleChange}
+//             required
+//             className="border rounded px-3 py-2 w-full"
+//           >
+//             <option value="" disabled>Select Location</option>
+//             {locations.map((loc) => (
+//               <option key={loc} value={loc}>{loc}</option>
+//             ))}
+//           </select>
+//         </div>
+
+//         {/* Image Upload */}
+//         <div className="mb-4">
+//           <label className="block text-gray-700 font-semibold mb-2">Images (Max 5)</label>
+//           <input
+//             type="file"
+//             name="images"
+//             accept="image/*"
+//             multiple
+//             onChange={handleImageChange}
+//             className="border rounded px-3 py-2 w-full"
+//           />
+//           <p className="text-gray-500 text-sm mt-1">{formData.images.length} / 5 images uploaded</p>
+//         </div>
+
+//         {/* Other Fields */}
+//         {Object.keys(formData).map((field, index) => (
+//           field !== 'name' && field !== 'location' && field !== 'images' && (
+//             <div key={index} className="mb-4">
+//               <label className="block text-gray-700 font-semibold mb-2">
+//                 {field}
+//               </label>
+//               <input
+//                 type={
+//                   field === 'price' || field === 'sqft' || field === 'bed' ||
+//                   field === 'bath' || field === 'phoneNumber' || field === 'deposit' ? 'number' : 'text'
+//                 }
+//                 name={field}
+//                 value={formData[field]}
+//                 onChange={handleChange}
+//                 required
+//                 className="border rounded px-3 py-2 w-full"
+//               />
+//             </div>
+//           )
+//         ))}
+
+//         <button
+//           type="submit"
+//           className="bg-blue-500 text-white px-4 py-2 rounded"
+//           disabled={loading}
+//         >
+//           {loading ? 'Adding...' : 'Add Property'}
+//         </button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default AddProperty;
+
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddProperty = () => {
@@ -321,6 +511,7 @@ const AddProperty = () => {
 
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const propertyTypes = ["Villa", "Flat", "Apartment", "Cottage"];
   const locations = ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"];
@@ -388,6 +579,7 @@ const AddProperty = () => {
         Availability: '',
         deposit: ''
       });
+      navigate('/property'); // Redirect to the /property route
     } catch (error) {
       setMessage('Error adding property. Please try again.');
     } finally {
@@ -484,4 +676,3 @@ const AddProperty = () => {
 };
 
 export default AddProperty;
-
