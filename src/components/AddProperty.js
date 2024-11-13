@@ -306,7 +306,7 @@ const AddProperty = () => {
     phoneNumber: '',
     location: '',
     description: '',
-    images: '',
+    images: [],
     sqft: '',
     bed: '',
     bath: '',
@@ -333,13 +333,42 @@ const AddProperty = () => {
     }));
   };
 
+  const handleImageChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    
+    if (selectedFiles.length + formData.images.length > 5) {
+      setMessage('You can only upload a maximum of 5 images.');
+      return;
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      images: [...prevData.images, ...selectedFiles]
+    }));
+    setMessage('');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
 
+    // Prepare form data for sending to the server
+    const submitData = new FormData();
+    Object.keys(formData).forEach((key) => {
+      if (key === 'images') {
+        formData.images.forEach((image) => submitData.append('images', image));
+      } else {
+        submitData.append(key, formData[key]);
+      }
+    });
+
     try {
-      const response = await axios.post('https://room-rooster.vercel.app/post/details', formData);
+      const response = await axios.post('https://room-rooster.vercel.app/post/details', submitData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       setMessage(response.data.message || 'Property added successfully!');
       setFormData({
         name: '',
@@ -347,7 +376,7 @@ const AddProperty = () => {
         phoneNumber: '',
         location: '',
         description: '',
-        images: '',
+        images: [],
         sqft: '',
         bed: '',
         bath: '',
@@ -370,7 +399,7 @@ const AddProperty = () => {
     <div className="p-6 max-w-lg mx-auto">
       <h2 className="text-2xl font-bold mb-4">Add Property</h2>
       {message && <p className="mb-4">{message}</p>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         
         {/* Name Dropdown */}
         <div className="mb-4">
@@ -406,9 +435,23 @@ const AddProperty = () => {
           </select>
         </div>
 
+        {/* Image Upload */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-semibold mb-2">Images (Max 5)</label>
+          <input
+            type="file"
+            name="images"
+            accept="image/*"
+            multiple
+            onChange={handleImageChange}
+            className="border rounded px-3 py-2 w-full"
+          />
+          <p className="text-gray-500 text-sm mt-1">{formData.images.length} / 5 images uploaded</p>
+        </div>
+
         {/* Other Fields */}
         {Object.keys(formData).map((field, index) => (
-          field !== 'name' && field !== 'location' && (
+          field !== 'name' && field !== 'location' && field !== 'images' && (
             <div key={index} className="mb-4">
               <label className="block text-gray-700 font-semibold mb-2">
                 {field}
