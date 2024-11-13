@@ -5,7 +5,7 @@ import DeleteProperty from "./DeleteProperty";
 import EditProperty from "./EditProperty";
 
 const OwerPage = () => {
-  const { id, propertyId } = useParams();
+  const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [loading, setLoading] = useState(true);
@@ -184,7 +184,7 @@ const OwerPage = () => {
           {showEdit && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg h-screen overflow-y-auto">
-              <EditProperty propertyId={propertyId} onSuccess={handleEditSuccess} />
+              <EditProperty propertyId={id} onSuccess={handleEditSuccess} />
             </div>
           </div>
         )}
@@ -192,7 +192,7 @@ const OwerPage = () => {
 
       {/* Conditional Rendering for Edit and Delete */}
       {showEdit && (
-        <EditProperty propertyId={propertyId} onSuccess={handleEditSuccess} />
+        <EditProperty propertyId={id} onSuccess={handleEditSuccess} />
       )}
       {showDelete && (
         <DeleteProperty propertyId={id} onSuccess={handleDeleteSuccess} />
