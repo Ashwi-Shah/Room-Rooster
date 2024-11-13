@@ -262,16 +262,28 @@
 // };
 
 // export default EditProperty;
+
+
 import React, { useState, useEffect } from "react";
 
 const EditProperty = ({ propertyId, onSuccess }) => {
   const [property, setProperty] = useState({
     name: "",
     price: "",
+    phoneNumber: "",
     location: "",
-    bed: "",
-    sqft: "",
+    description: "",
     images: [],
+    sqft: "",
+    bed: "",
+    bath: "",
+    ownername: "",
+    FurnishedStatus: "",
+    Perferredfor: "",
+    ageofconstruction: "",
+    info: "",
+    Availability: "",
+    deposit: ""
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -303,19 +315,29 @@ const EditProperty = ({ propertyId, onSuccess }) => {
 
     try {
       const response = await fetch(
-        `https://room-rooster.vercel.app/get-data-idwise/details/${propertyId}`, // Adjust endpoint as needed
+        `https://room-rooster.vercel.app/update/details/${propertyId}`,
         {
-          method: "PUT", // or PATCH depending on your backend
+          method: "PUT", 
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             name: property.name,
             price: property.price,
+            phoneNumber: property.phoneNumber,
             location: property.location,
-            bed: property.bed,
-            sqft: property.sqft,
+            description: property.description,
             images: property.images,
+            sqft: property.sqft,
+            bed: property.bed,
+            bath: property.bath,
+            ownername: property.ownername,
+            FurnishedStatus: property.FurnishedStatus,
+            Perferredfor: property.Perferredfor,
+            ageofconstruction: property.ageofconstruction,
+            info: property.info,
+            Availability: property.Availability,
+            deposit: property.deposit,
           }),
         }
       );
@@ -383,6 +405,29 @@ const EditProperty = ({ propertyId, onSuccess }) => {
           />
         </div>
         <div className="mb-4">
+          <label htmlFor="phoneNumber" className="block text-gray-700">Phone Number</label>
+          <input
+            type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={property.phoneNumber}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="description" className="block text-gray-700">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            value={property.description}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          ></textarea>
+        </div>
+        <div className="mb-4">
           <label htmlFor="bed" className="block text-gray-700">Beds</label>
           <input
             type="number"
@@ -417,12 +462,95 @@ const EditProperty = ({ propertyId, onSuccess }) => {
             className="w-full p-2 border border-gray-300 rounded-lg"
           />
         </div>
+        <div className="mb-4">
+          <label htmlFor="ownername" className="block text-gray-700">Owner Name</label>
+          <input
+            type="text"
+            id="ownername"
+            name="ownername"
+            value={property.ownername}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="FurnishedStatus" className="block text-gray-700">Furnished Status</label>
+          <input
+            type="text"
+            id="FurnishedStatus"
+            name="FurnishedStatus"
+            value={property.FurnishedStatus}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="Perferredfor" className="block text-gray-700">Preferred For</label>
+          <input
+            type="text"
+            id="Perferredfor"
+            name="Perferredfor"
+            value={property.Perferredfor}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="ageofconstruction" className="block text-gray-700">Age of Construction</label>
+          <input
+            type="number"
+            id="ageofconstruction"
+            name="ageofconstruction"
+            value={property.ageofconstruction}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="info" className="block text-gray-700">Additional Info</label>
+          <textarea
+            id="info"
+            name="info"
+            value={property.info}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+          ></textarea>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="Availability" className="block text-gray-700">Availability</label>
+          <input
+            type="text"
+            id="Availability"
+            name="Availability"
+            value={property.Availability}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="deposit" className="block text-gray-700">Deposit</label>
+          <input
+            type="number"
+            id="deposit"
+            name="deposit"
+            value={property.deposit}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg"
+            required
+          />
+        </div>
+
         <button
           type="submit"
-          className="w-full p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg"
           disabled={loading}
         >
-          {loading ? "Updating..." : "Update Property"}
+          {loading ? "Saving..." : "Save Changes"}
         </button>
       </form>
     </div>
