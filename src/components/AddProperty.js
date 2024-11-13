@@ -335,30 +335,36 @@ const AddProperty = ({ onAddProperty }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    setError("");
+  
+    const formData = new FormData();
+    formData.append("name", property.name);
+    formData.append("price", property.price);
+    // Append other fields as needed
+    if (property.images.length > 0) {
+      property.images.forEach((file, index) => {
+        formData.append(`images[${index}]`, file);
+      });
+    }
+  
     try {
       const response = await fetch("https://room-rooster.vercel.app/post/details", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(property),
+        body: formData,
       });
-
+  
       const result = await response.json();
-      
+  
       if (response.ok) {
-        // If the request is successful, navigate to the /property page
         navigate("/property");
       } else {
-        // If the response is not OK, set error with the server message
         setError(result.message || "Failed to create new detail");
       }
     } catch (error) {
-      // If there's a network or fetch error, catch it here
       setError("Error adding property: " + error.message);
     }
   };
+  
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10 mb-10 transition-shadow duration-300 hover:shadow-2xl">
       <h2 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add Property</h2>
