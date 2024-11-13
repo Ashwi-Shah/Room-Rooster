@@ -564,7 +564,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
   
   useEffect(() => {
     // Fetch property details using the propertyId
-    fetch(`/api/properties/${propertyId}`)
+    fetch(`https://room-rooster.vercel.app/get-data-idwise/details/${propertyId}`)
       .then(res => res.json())
       .then(data => setPropertyData(data));
   }, [propertyId]);
@@ -572,7 +572,7 @@ const EditProperty = ({ propertyId, onSuccess }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Update the property via PUT request
-    fetch(`/api/properties/${propertyId}`, {
+    fetch(`https://room-rooster.vercel.app/update/details/${propertyId}`, {
       method: 'PUT',
       body: JSON.stringify(propertyData), // Assuming propertyData contains the updated info
       headers: { 'Content-Type': 'application/json' }
