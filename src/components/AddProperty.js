@@ -377,6 +377,8 @@ const AddProperty = ({ onAddProperty }) => {
         formData.append(key, property[key]);
       }
     });
+
+    console.log([...formData]); 
   
     try {
       const response = await fetch('https://room-rooster.vercel.app/post/details', {
