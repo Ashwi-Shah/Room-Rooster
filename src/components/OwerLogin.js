@@ -13,13 +13,13 @@ const OwerLogin = ({ setIsAuthenticated }) => {
   const admin1 = {
     email: 'divy@gmail.com',
     password: 'divy',
-    id: '66dab1e351efe26a0f9617bf'
+    id: '66fe424e2eac7fa89aa16335'
   };
 
   const admin2 = {
     email: 'ashwi@gmail.com',
     password: 'ashwi',
-    id: '66fe424e2eac7fa89aa16335'
+    id: '6734fc44ad636dd9570910bd'
   };
 
   const handleChange = (e) => {
