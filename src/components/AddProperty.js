@@ -379,7 +379,7 @@ const AddProperty = ({ onAddProperty }) => {
     });
   
     try {
-      const response = await fetch('YOUR_API_URL', {
+      const response = await fetch('https://room-rooster.vercel.app/post/details', {
         method: 'POST',
         body: formData,
       });
