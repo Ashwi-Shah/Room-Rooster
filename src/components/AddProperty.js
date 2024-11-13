@@ -392,7 +392,7 @@ const AddProperty = ({ onAddProperty }) => {
             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
         </div>
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <label className="font-semibold text-gray-600 mb-2">Phone Number:</label>
           <input
             type="tel"
@@ -537,7 +537,7 @@ const AddProperty = ({ onAddProperty }) => {
             onChange={handleChange}
             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"
           />
-          </div>
+          </div> */}
           <button type="submit" className="mt-6 w-full py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
           Add Property
         </button>
