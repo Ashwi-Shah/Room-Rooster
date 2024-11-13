@@ -312,14 +312,12 @@ const EditProperty = ({ propertyId, onSuccess }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    console.log("Submitting property data:", property);  // Log the property data being sent
-
-  
+    
     try {
       const response = await fetch(
         `https://room-rooster.vercel.app/update/details/${propertyId}`,
         {
-          method: "PUT", 
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -345,14 +343,14 @@ const EditProperty = ({ propertyId, onSuccess }) => {
       );
   
       if (response.ok) {
-        const updatedProperty = await response.json(); // Get response if needed
-        console.log("Updated Property:", updatedProperty); // You can log the updated property here if needed
-        onSuccess(); // Trigger onSuccess to close the modal
+        onSuccess();
       } else {
         const errorData = await response.json();
+        console.error("Error response from server:", errorData);  // Log the server's response message
         setError(errorData.message || "Error updating property");
       }
     } catch (error) {
+      console.error("Network error:", error);  // Log network issues
       setError("Network error while updating property");
     } finally {
       setLoading(false);
