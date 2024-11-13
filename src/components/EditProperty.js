@@ -312,6 +312,8 @@ const EditProperty = ({ propertyId, onSuccess }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    console.log("Submitting property data:", property);  // Log the property data being sent
+
   
     try {
       const response = await fetch(
